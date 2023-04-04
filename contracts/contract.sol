@@ -22,24 +22,92 @@ contract TokenMarshaPlus {
     event Approve(address indexed owner, address indexed spender, uint256 value);
 
 
-    address constant public community = 0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2;
-    address constant public marketing = 0x4B20993Bc481177ec7E8f571ceCaE8A9e22C02db;
-    address constant public advisor = 0x78731D3Ca6b7E34aC0F824c42a7cC18A495cabaB;
-    address constant public foundation = 0x617F2E2fD72FD9D5503197092aC168c91465E7f2;
-    address constant public developer = 0x17F6AD8Ef982297579C203069C1DbfFE4348c372;
 
+    constructor() {
+        token_name = "RandomToken"; // Sets the name of the token, i.e Ether
+        token_symbol = "RDT"; // Sets the symbol of the token, i.e ETH
+        decimals = 18; // Sets the number of decimal places
+        uint256 _initialSupply = 1000000000; // Holds an initial supply of coins
 
-    constructor(
-        // address developer, 
-        // address companion
-        ) {
-        balanceOf[community] = totalSupply/2;
-        balanceOf[marketing] = totalSupply/6;
-        balanceOf[advisor] = totalSupply/20;
-        balanceOf[foundation] = totalSupply/5;
-        balanceOf[developer] = totalSupply/10;
+        /* Sets the owner of the token to whoever deployed it */
+        owner = payable(msg.sender);
 
-        // emit Transfer(msg.sender, companion, totalSupply / 2);
-        // emit Transfer(msg.sender, developer, totalSupply / 10);
+        balanceOf[owner] = _initialSupply; // Transfers all tokens to owner
+        totalSupply = _initialSupply; // Sets the total supply of tokens
+
+        /* Whenever tokens are created, burnt, or transfered,
+            the Transfer event is fired */
+        emit Transfer(address(0), msg.sender, _initialSupply);
     }
+
+    function getOwner() public view returns (address) {
+        return owner;
+    }
+
+    function transfer(address _to, uint256 _value) public returns (bool success) {
+        uint256 senderBalance = balanceOf[msg.sender];
+        uint256 receiverBalance = balanceOf[_to];
+
+        require(_to != address(0), "Receiver address invalid");
+        require(_value >= 0, "Value must be greater or equal to 0");
+        require(senderBalance > _value, "Not enough balance");
+
+        balanceOf[msg.sender] = senderBalance - _value;
+        balanceOf[_to] = receiverBalance + _value;
+
+        emit Transfer(msg.sender, _to, _value);
+        return true;
+    }
+
+    function transferFrom(address _from, address _to, uint256 _value)
+      public returns (bool success) {
+        uint256 senderBalance = balanceOf[msg.sender];
+        uint256 fromAllowance = allowance[_from][msg.sender];
+        uint256 receiverBalance = balanceOf[_to];
+
+        require(_to != address(0), "Receiver address invalid");
+        require(_value >= 0, "Value must be greater or equal to 0");
+        require(senderBalance > _value, "Not enough balance");
+        require(fromAllowance >= _value, "Not enough allowance");
+
+        balanceOf[_from] = senderBalance - _value;
+        balanceOf[_to] = receiverBalance + _value;
+        allowance[_from][msg.sender] = fromAllowance - _value;
+
+        emit Transfer(_from, _to, _value);
+        return true;
+    }
+
+    function approve(address _spender, uint256 _value) public returns (bool success) {
+        require(_value > 0, "Value must be greater than 0");
+
+        allowance[msg.sender][_spender] = _value;
+
+        emit Approve(msg.sender, _spender, _value);
+        return true;
+    }
+
+    function mint(uint256 _amount) public returns (bool success) {
+        require(msg.sender == owner, "Operation unauthorised");
+
+        totalSupply += _amount;
+        balanceOf[msg.sender] += _amount;
+
+        emit Transfer(address(0), msg.sender, _amount);
+        return true;
+    }
+
+    function burn(uint256 _amount) public returns (bool success) {
+      require(msg.sender != address(0), "Invalid burn recipient");
+
+      uint256 accountBalance = balanceOf[msg.sender];
+      require(accountBalance > _amount, "Burn amount exceeds balance");
+
+      balanceOf[msg.sender] -= _amount;
+      totalSupply -= _amount;
+
+      emit Transfer(msg.sender, address(0), _amount);
+      return true;
+    }
+
 }
