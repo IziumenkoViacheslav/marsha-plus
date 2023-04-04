@@ -3,11 +3,11 @@ pragma solidity ^0.8.0; // compiler version
 
 
 contract TokenMarshaPlus {
-    string public token_name = "MARSHA+"; // token name - human - readable
-    string public token_symbol = "MRA";
+    string public token_name; // token name - human - readable
+    string public token_symbol;
     // uint256 public totalSupply = 8000000000; // 8 billion tokens
-    uint256 public totalSupply = 100; // for developing and testing, delete before deploy in prod
-    uint256 public decimals = 18; // will set the divisibility of your token
+    uint256 public totalSupply; // for developing and testing, delete before deploy in prod
+    uint256 public decimals; // will set the divisibility of your token
     address payable public owner; // Holds the owner of the token
 
 /* This creates a mapping with all balances */
@@ -24,8 +24,8 @@ contract TokenMarshaPlus {
 
 
     constructor() {
-        token_name = "RandomToken"; // Sets the name of the token, i.e Ether
-        token_symbol = "RDT"; // Sets the symbol of the token, i.e ETH
+        token_name = "MARSHA+"; // Sets the name of the token, i.e Ether
+        token_symbol = "MRA"; // Sets the symbol of the token, i.e ETH
         decimals = 18; // Sets the number of decimal places
         uint256 _initialSupply = 1000000000; // Holds an initial supply of coins
 
