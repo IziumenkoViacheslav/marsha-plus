@@ -10,6 +10,11 @@ contract TokenMarshaPlus {
     uint256 public decimals = 18; // will set the divisibility of your token
     address payable public owner; // Holds the owner of the token
 
+    uint256 deployDate;
+    uint256 lastTimeBurned;
+
+    uint32 private leaseTime = 365 days;
+
     mapping(address => uint256) public balanceOf;
 
     event Transfer(address indexed from, address indexed to, uint256 value);
@@ -30,6 +35,8 @@ contract TokenMarshaPlus {
     constructor() // address developer,
     // address companion
     {
+        deployDate = block.timestamp;
+        lastTimeBurned = block.timestamp;
         balanceOf[community] = (totalSupply * 35) / 100;
         balanceOf[foundation] = (totalSupply * 25) / 100;
         balanceOf[marketing] = (totalSupply * 8) / 100;
@@ -39,6 +46,12 @@ contract TokenMarshaPlus {
 
         // emit Transfer(msg.sender, companion, totalSupply / 2);
         // emit Transfer(msg.sender, developer, totalSupply / 10);
+    }
+
+    modifier oneYearExpire() {
+        if (block.timestamp >= leaseTime + deployDate) {
+            _;
+        }
     }
 
     function transfer(address _to, uint256 _value)
@@ -59,16 +72,18 @@ contract TokenMarshaPlus {
         return true;
     }
 
-    function burn(uint256 _amount) public returns (bool success) {
-      require(msg.sender != address(0), "Invalid burn recipient");
+    function burn() private oneYearExpire returns (bool success) {
+        require(
+            balanceOf[community] > (totalSupply * 3) / 100,
+            "Burn amount exceeds balance"
+        );
+        if (block.timestamp > lastTimeBurned + 365 days) {
+            emit Transfer(community, address(0), (totalSupply * 3) / 100);
+            lastTimeBurned = block.timestamp;
+        }
 
-      uint256 accountBalance = balanceOf[msg.sender];
-      require(accountBalance > _amount, "Burn amount exceeds balance");
+        balanceOf[community] = balanceOf[community] - (totalSupply * 3) / 100;
 
-      balanceOf[msg.sender] -= _amount;
-      totalSupply -= _amount;
-
-      emit Transfer(msg.sender, address(0), _amount);
-      return true;
+        return true;
     }
 }
