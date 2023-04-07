@@ -16,8 +16,7 @@ contract TokenMarshaPlus {
 
     event Transfer(address indexed from, address indexed to, uint256 value);
 
-    address public constant community =
-        0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2;
+    address public community;
     address public constant foundation =
         0x617F2E2fD72FD9D5503197092aC168c91465E7f2;
     address public constant marketing =
@@ -33,7 +32,9 @@ contract TokenMarshaPlus {
     // address companion
     {
         lastTimeBurned = block.timestamp;
+        community = msg.sender;
         balanceOf[community] = (totalSupply * 35) / 100;
+        emit Transfer(msg.sender, community, balanceOf[community]);
         balanceOf[foundation] = (totalSupply * 25) / 100;
         balanceOf[marketing] = (totalSupply * 8) / 100;
         balanceOf[advisor] = totalSupply / 20;
@@ -64,12 +65,11 @@ contract TokenMarshaPlus {
     }
 
     function burn() private returns (bool success) {
-        require(
-            balanceOf[community] > (totalSupply * 3) / 100,
-            "Burn amount exceeds balance"
-        );
-        if (block.timestamp > (lastTimeBurned + (10 seconds))) {
-            // if (block.timestamp > lastTimeBurned + 365 days) {
+        if (
+            // (block.timestamp > (lastTimeBurned + (365 days)) &&
+            (block.timestamp > (lastTimeBurned + (10 seconds)) &&
+                (balanceOf[community] > (totalSupply * 3) / 100))
+        ) {
             balanceOf[community] =
                 balanceOf[community] -
                 (totalSupply * 3) /
@@ -78,6 +78,7 @@ contract TokenMarshaPlus {
             emit Transfer(community, address(0), (totalSupply * 3) / 100);
             lastTimeBurned = block.timestamp;
         }
+
         return true;
     }
 }
