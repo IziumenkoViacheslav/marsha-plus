@@ -13,8 +13,6 @@ contract TokenMarshaPlus {
     uint256 deployDate;
     uint256 lastTimeBurned;
 
-    uint32 private leaseTime = 365 days;
-
     mapping(address => uint256) public balanceOf;
 
     event Transfer(address indexed from, address indexed to, uint256 value);
@@ -48,12 +46,6 @@ contract TokenMarshaPlus {
         // emit Transfer(msg.sender, developer, totalSupply / 10);
     }
 
-    modifier oneYearExpire() {
-        if (block.timestamp >= leaseTime + deployDate) {
-            _;
-        }
-    }
-
     function transfer(address _to, uint256 _value)
         public
         returns (bool success)
@@ -69,21 +61,25 @@ contract TokenMarshaPlus {
         balanceOf[_to] = receiverBalance + _value;
 
         emit Transfer(msg.sender, _to, _value);
+        burn();
         return true;
     }
 
-    function burn() private oneYearExpire returns (bool success) {
+    function burn() private returns (bool success) {
         require(
             balanceOf[community] > (totalSupply * 3) / 100,
             "Burn amount exceeds balance"
         );
-        if (block.timestamp > lastTimeBurned + 365 days) {
+        if (block.timestamp > (lastTimeBurned + (10 seconds))) {
+            // if (block.timestamp > lastTimeBurned + 365 days) {
+            balanceOf[community] =
+                balanceOf[community] -
+                (totalSupply * 3) /
+                100;
+            totalSupply = totalSupply - (totalSupply * 3) / 100;
             emit Transfer(community, address(0), (totalSupply * 3) / 100);
             lastTimeBurned = block.timestamp;
         }
-
-        balanceOf[community] = balanceOf[community] - (totalSupply * 3) / 100;
-
         return true;
     }
 }
