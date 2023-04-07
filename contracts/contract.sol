@@ -10,7 +10,6 @@ contract TokenMarshaPlus {
     uint256 public decimals = 18; // will set the divisibility of your token
     address payable public owner; // Holds the owner of the token
 
-    uint256 deployDate;
     uint256 lastTimeBurned;
 
     mapping(address => uint256) public balanceOf;
@@ -33,7 +32,6 @@ contract TokenMarshaPlus {
     constructor() // address developer,
     // address companion
     {
-        deployDate = block.timestamp;
         lastTimeBurned = block.timestamp;
         balanceOf[community] = (totalSupply * 35) / 100;
         balanceOf[foundation] = (totalSupply * 25) / 100;
