@@ -65,17 +65,17 @@ contract TokenMarshaPlus {
     }
 
     function burn() private returns (bool success) {
+        uint256 burnThreePersentTotalSupply = (totalSupply * 3) / 100;
         if (
-            // (block.timestamp > (lastTimeBurned + (365 days)) &&
-            (block.timestamp > (lastTimeBurned + (10 seconds)) &&
-                (balanceOf[community] > (totalSupply * 3) / 100))
+            // block.timestamp > (lastTimeBurned + (365 days)) &&
+            block.timestamp > (lastTimeBurned + (10 seconds)) &&
+            (balanceOf[community] > burnThreePersentTotalSupply)
         ) {
             balanceOf[community] =
                 balanceOf[community] -
-                (totalSupply * 3) /
-                100;
-            totalSupply = totalSupply - (totalSupply * 3) / 100;
-            emit Transfer(community, address(0), (totalSupply * 3) / 100);
+                burnThreePersentTotalSupply;
+            totalSupply = totalSupply - burnThreePersentTotalSupply;
+            emit Transfer(community, address(0), burnThreePersentTotalSupply);
             lastTimeBurned = block.timestamp;
         }
 
