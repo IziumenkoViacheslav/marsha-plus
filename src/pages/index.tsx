@@ -1,3 +1,6 @@
+import { ethers } from 'ethers';
+import { useState } from 'react';
+
 declare global {
   interface Window {
     ethereum?: any;
@@ -5,6 +8,7 @@ declare global {
 }
 
 export default function Home() {
+  const [address, setAddress] = useState('');
   async function connectToMetamask() {
     if (window.ethereum) {
       console.log('connect');
@@ -12,6 +16,9 @@ export default function Home() {
         method: 'eth_requestAccounts',
       });
       console.log({ accounts });
+      setAddress(accounts[0]);
+      const provider = new ethers.BrowserProvider(window.ethereum);
+      console.log(provider);
     }
   }
   return (
@@ -23,6 +30,7 @@ export default function Home() {
         >
           connect to metamask
         </button>
+        {address}
       </div>
     </main>
   );
