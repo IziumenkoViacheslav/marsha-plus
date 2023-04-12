@@ -1,5 +1,6 @@
 import { ethers } from 'ethers';
 import { useState } from 'react';
+import { toast } from 'react-hot-toast';
 
 declare global {
   interface Window {
@@ -12,13 +13,14 @@ export default function Home() {
   async function connectToMetamask() {
     if (window.ethereum) {
       console.log('connect');
+      toast('connected to metamask');
       const accounts = await window.ethereum.request({
         method: 'eth_requestAccounts',
       });
       console.log({ accounts });
       setAddress(accounts[0]);
       const provider = new ethers.BrowserProvider(window.ethereum);
-      console.log(provider);
+      console.log(await provider.getNetwork());
     }
   }
   return (
