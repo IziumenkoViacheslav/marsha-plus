@@ -19,7 +19,7 @@ export default function Home() {
       });
       console.log({ accounts });
       setAddress(accounts[0]);
-      const provider = new ethers.BrowserProvider(window.ethereum);
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
       console.log(await provider.getNetwork());
     }
   }
