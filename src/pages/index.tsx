@@ -1,6 +1,7 @@
 import { ethers } from 'ethers';
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
+import TokenMarshaPlus from '../../contracts/artifacts/TokenMarshaPlus.json';
 
 declare global {
   interface Window {
@@ -21,6 +22,15 @@ export default function Home() {
       setAddress(accounts[0]);
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       console.log(await provider.getNetwork());
+      const balance = await provider.getBalance(accounts[0]);
+      console.log({ balance });
+      const balanceInEther = ethers.utils.formatEther(balance);
+      console.log({ balanceInEther });
+      // const contract = new ethers.Contract(
+      //   '0x5fbdb2315678afecb367f032d93f642f64180aa3',
+      //   TokenMarshaPlus,
+      //   provider
+      // );
     }
   }
   return (
