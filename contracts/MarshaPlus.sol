@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0; // compiler version
 
-contract TokenMarshaPlus {
+contract MarshaPlus {
     // uint256 public totalSupply = 8000000000; // 8 billion tokens
     string public token_name = "MARSHA+"; // token name - human - readable
     string public token_symbol = "MRA";
