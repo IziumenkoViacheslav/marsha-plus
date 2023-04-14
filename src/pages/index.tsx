@@ -1,7 +1,7 @@
 import { ethers } from 'ethers';
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
-import TokenMarshaPlus from '../../contracts/artifacts/TokenMarshaPlus.json';
+import MarshaPlus from '../../artifacts/contracts/MarshaPlus.sol/MarshaPlus.json';
 
 declare global {
   interface Window {
@@ -26,11 +26,18 @@ export default function Home() {
       console.log({ balance });
       const balanceInEther = ethers.utils.formatEther(balance);
       console.log({ balanceInEther });
-      // const contract = new ethers.Contract(
-      //   '0x5fbdb2315678afecb367f032d93f642f64180aa3',
-      //   TokenMarshaPlus,
-      //   provider
-      // );
+      const contract = new ethers.Contract(
+        '0x5fbdb2315678afecb367f032d93f642f64180aa3',
+        MarshaPlus.abi,
+        provider
+      );
+      console.log({ contract });
+      console.log(await contract.address);
+      console.log(
+        Number(
+          await contract.balanceOf('0x17F6AD8Ef982297579C203069C1DbfFE4348c372')
+        )
+      );
     }
   }
   return (
