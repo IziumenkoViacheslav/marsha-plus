@@ -30,11 +30,10 @@ export default function Home() {
       return null;
     }
 
-    contract && (await contract.transfer(address, amount));
+    const transaction = contract && (await contract.transfer(address, amount));
   }
   async function connectToMetamask() {
     if (window.ethereum) {
-      toast('connected to metamask');
       const accounts = await window.ethereum.request({
         method: 'eth_requestAccounts',
       });
@@ -43,11 +42,14 @@ export default function Home() {
       const contract = new ethers.Contract(
         '0x5fbdb2315678afecb367f032d93f642f64180aa3',
         MarshaPlus.abi,
-        provider
+        provider.getSigner(0)
       );
       setContract(contract);
-      const signer = provider.getSigner();
+      const signer = provider.getSigner(accounts[0]);
+      console.log({ signer });
+
       setSigner(signer);
+      toast('connected to metamask');
     }
   }
   return (
