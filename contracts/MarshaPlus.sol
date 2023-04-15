@@ -16,23 +16,22 @@ contract MarshaPlus {
 
     event Transfer(address indexed from, address indexed to, uint256 value);
 
-    address public community;
+    address public constant community = 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266;
     address public constant foundation =
-        0x617F2E2fD72FD9D5503197092aC168c91465E7f2;
+        0x70997970C51812dc3A010C7d01b50e0d17dc79C8;
     address public constant marketing =
-        0x4B20993Bc481177ec7E8f571ceCaE8A9e22C02db;
+        0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC;
     address public constant advisor =
-        0x78731D3Ca6b7E34aC0F824c42a7cC18A495cabaB;
+        0x90F79bf6EB2c4f870365E785982E1f101E93b906;
     address public constant developer =
-        0x17F6AD8Ef982297579C203069C1DbfFE4348c372;
+        0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65;
     address public constant technical =
-        0xdD870fA1b7C4700F2BD7f44238821C26f7392148;
+        0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc;
 
-    constructor() // address developer,
-    // address companion
+    constructor()    
     {
         lastTimeBurned = block.timestamp;
-        community = msg.sender;
+        // community = msg.sender;
         balanceOf[community] = (totalSupply * 35) / 100;
         emit Transfer(msg.sender, community, balanceOf[community]);
         balanceOf[foundation] = (totalSupply * 25) / 100;
