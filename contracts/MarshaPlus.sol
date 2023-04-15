@@ -16,7 +16,8 @@ contract MarshaPlus {
 
     event Transfer(address indexed from, address indexed to, uint256 value);
 
-    address public constant community = 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266;
+    address public constant community =
+        0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266;
     address public constant foundation =
         0x70997970C51812dc3A010C7d01b50e0d17dc79C8;
     address public constant marketing =
@@ -28,8 +29,7 @@ contract MarshaPlus {
     address public constant technical =
         0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc;
 
-    constructor()    
-    {
+    constructor() {
         lastTimeBurned = block.timestamp;
         // community = msg.sender;
         balanceOf[community] = (totalSupply * 35) / 100;
@@ -44,10 +44,10 @@ contract MarshaPlus {
         // emit Transfer(msg.sender, developer, totalSupply / 10);
     }
 
-    function transfer(address _to, uint256 _value)
-        public
-        returns (bool success)
-    {
+    function transfer(
+        address _to,
+        uint256 _value
+    ) public returns (bool success) {
         uint256 senderBalance = balanceOf[msg.sender];
         uint256 receiverBalance = balanceOf[_to];
 
