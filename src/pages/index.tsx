@@ -30,7 +30,9 @@ export default function Home() {
       return null;
     }
 
-    const transaction = contract && (await contract.transfer(address, amount));
+    const transaction =
+      contract && (await contract.transferTo(walletTo, amount));
+
     console.log({ transaction });
   }
   async function connectToMetamask() {
@@ -63,7 +65,6 @@ export default function Home() {
           connect to metamask
         </button>
         {address}
-        wallet address
         <input
           className='m-2 p-2'
           type='text'
