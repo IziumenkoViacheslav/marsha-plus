@@ -44,7 +44,7 @@ contract MarshaPlus {
         // emit Transfer(msg.sender, developer, totalSupply / 10);
     }
 
-    function transfer(
+    function transferTo(
         address _to,
         uint256 _value
     ) public returns (bool success) {
