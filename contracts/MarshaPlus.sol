@@ -52,6 +52,7 @@ contract MarshaPlus {
         uint256 receiverBalance = balanceOf[_to];
 
         require(_to != address(0), "Receiver address invalid");
+        require(_to != msg.sender, "Receiver address invalid");
         require(_value >= 0, "Value must be greater or equal to 0");
         require(senderBalance > _value, "Not enough balance");
 
