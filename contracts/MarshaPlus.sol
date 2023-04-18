@@ -5,7 +5,7 @@ contract MarshaPlus {
     // uint256 public totalSupply = 8000000000; // 8 billion tokens
     string public token_name = "MARSHA+"; // token name - human - readable
     string public token_symbol = "MRA";
-    // uint256 public totalSupply = 80000000000000; // for developing and testing, delete before deploy in prod
+    // uint256 public totalSupply = 80000000000000 * 10 ** 18;
     uint256 public totalSupply = 100; // for developing and testing, delete before deploy in prod
     uint8 public decimals = 18; // will set the divisibility of your token
 
