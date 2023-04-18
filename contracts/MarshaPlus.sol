@@ -7,7 +7,8 @@ contract MarshaPlus {
     string public token_symbol = "MRA";
     // uint256 public totalSupply = 80000000000000; // for developing and testing, delete before deploy in prod
     uint256 public totalSupply = 100; // for developing and testing, delete before deploy in prod
-    uint256 public decimals = 18; // will set the divisibility of your token
+    uint8 public decimals = 18; // will set the divisibility of your token
+
     address payable public owner; // Holds the owner of the token
 
     uint256 lastTimeBurned;
