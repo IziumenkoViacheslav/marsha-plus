@@ -34,6 +34,8 @@ export default function Home() {
       contract && (await contract.transferTo(walletTo, amount));
 
     console.log({ transaction });
+    const res = await transaction.wait();
+    console.log({ res });
   }
   async function connectToMetamask() {
     if (window.ethereum) {
