@@ -54,7 +54,7 @@ export default function Home() {
       console.log({ signer });
 
       setSigner(signer);
-      toast('connected to metamask');
+      toast('connected to metamask', { style: { color: 'blue' } });
     }
   }
   return (
