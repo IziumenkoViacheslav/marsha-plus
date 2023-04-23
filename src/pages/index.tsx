@@ -12,7 +12,7 @@ declare global {
 export default function Home() {
   const [contract, setContract] = useState<ethers.Contract>();
   const [address, setAddress] = useState('');
-  const [balance, setBalance] = useState('');
+  const [balance, setBalance] = useState<Number>();
   const [walletTo, setWalletTo] = useState('');
   const [amount, setAmount] = useState<Number>();
   const [wallet, setWallet] = useState('');
@@ -35,6 +35,7 @@ export default function Home() {
     console.log({ transaction });
     const res = await transaction.wait();
     console.log({ res });
+    setBalance(Number(await contract?.balanceOf(wallet)));
   }
   async function connectToMetamask() {
     if (window.ethereum) {
@@ -53,7 +54,7 @@ export default function Home() {
       console.log({ signer });
 
       setSigner(signer);
-      setBalance(Number(await contract?.balanceOf(accounts[0])).toString());
+      setBalance(Number(await contract?.balanceOf(accounts[0])));
 
       toast('connected to metamask', { style: { color: 'blue' } });
     }
@@ -71,7 +72,9 @@ export default function Home() {
         ) : (
           <>
             <div className='mt-24'>Your wallet address is: {address}</div>
-            <div className='m-4'>with balance {balance} MRSH tokens</div>
+            <div className='m-4'>
+              with balance {balance?.toString()} MRSH tokens
+            </div>
             Transfer to another wallet
             <input
               className='m-2 p-2 rounded-lg'
