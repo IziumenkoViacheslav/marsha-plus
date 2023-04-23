@@ -71,13 +71,13 @@ export default function Home() {
           <>
             <div className='mt-24'>{address}</div>
             <input
-              className='m-2 p-2'
+              className='m-2 p-2 rounded-lg'
               type='text'
               onChange={(e) => setWalletTo(e.target.value)}
             />
             amount of tokens
             <input
-              className='m-2 p-2'
+              className='m-2 p-2 rounded-lg'
               type='text'
               onChange={(e) => setAmount(Number(e.target.value))}
             />
@@ -89,7 +89,7 @@ export default function Home() {
             </button>
             balance of wallet
             <input
-              className='m-2 p-2'
+              className='m-2 p-2 rounded-lg'
               type='text'
               onChange={(e) => setWallet(e.target.value)}
             />
