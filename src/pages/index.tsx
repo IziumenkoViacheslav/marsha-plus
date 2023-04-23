@@ -12,16 +12,17 @@ declare global {
 export default function Home() {
   const [contract, setContract] = useState<ethers.Contract>();
   const [address, setAddress] = useState('');
+  const [balance, setBalance] = useState('');
   const [walletTo, setWalletTo] = useState('');
   const [amount, setAmount] = useState<Number>();
   const [wallet, setWallet] = useState('');
-  const [balance, setBalance] = useState('');
+  const [balanceAnotherAccount, setBalanceAnotherAccount] = useState('');
   const [signer, setSigner] = useState<ethers.Signer>();
 
   async function balanceOfWallet(wallet: string) {
     const result = await contract?.balanceOf(wallet);
     console.log({ result: Number(result) });
-    setBalance(Number(result).toString());
+    setBalanceAnotherAccount(Number(result).toString());
 
     return Number(result);
   }
@@ -29,10 +30,8 @@ export default function Home() {
     if (!contract) {
       return null;
     }
-
     const transaction =
       contract && (await contract.transferTo(walletTo, amount));
-
     console.log({ transaction });
     const res = await transaction.wait();
     console.log({ res });
@@ -54,6 +53,8 @@ export default function Home() {
       console.log({ signer });
 
       setSigner(signer);
+      setBalance(Number(await contract?.balanceOf(accounts[0])).toString());
+
       toast('connected to metamask', { style: { color: 'blue' } });
     }
   }
@@ -69,7 +70,9 @@ export default function Home() {
           </button>
         ) : (
           <>
-            <div className='mt-24'>{address}</div>
+            <div className='mt-24'>Your wallet address is: {address}</div>
+            <div className='m-4'>with balance {balance} MRSH tokens</div>
+            Transfer to another wallet
             <input
               className='m-2 p-2 rounded-lg'
               type='text'
@@ -97,9 +100,9 @@ export default function Home() {
               className='bg-blue-700 text-white p-2 rounded-lg'
               onClick={() => balanceOfWallet(wallet)}
             >
-              checkBalance
+              check balance
             </button>
-            {balance}
+            {balanceAnotherAccount}
           </>
         )}
       </div>
