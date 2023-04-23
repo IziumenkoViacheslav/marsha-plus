@@ -16,13 +16,13 @@ export default function Home() {
   const [walletTo, setWalletTo] = useState('');
   const [amount, setAmount] = useState<Number>();
   const [wallet, setWallet] = useState('');
-  const [balanceAnotherAccount, setBalanceAnotherAccount] = useState('');
+  const [balanceAnotherAccount, setBalanceAnotherAccount] = useState<Number>();
   const [signer, setSigner] = useState<ethers.Signer>();
 
   async function balanceOfWallet(wallet: string) {
     const result = await contract?.balanceOf(wallet);
     console.log({ result: Number(result) });
-    setBalanceAnotherAccount(Number(result).toString());
+    setBalanceAnotherAccount(Number(result));
 
     return Number(result);
   }
@@ -105,7 +105,7 @@ export default function Home() {
             >
               check balance
             </button>
-            {balanceAnotherAccount}
+            {balanceAnotherAccount?.toString()}
           </>
         )}
       </div>
