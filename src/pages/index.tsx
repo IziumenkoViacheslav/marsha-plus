@@ -60,43 +60,48 @@ export default function Home() {
   return (
     <div className='flex min-h-screen flex-col items-center justify-between p-4'>
       <div className='flex flex-col w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex'>
-        <button
-          className='border-black border-2 rounded-lg p-2'
-          onClick={connectToMetamask}
-        >
-          connect to metamask
-        </button>
-        {address}
-        <input
-          className='m-2 p-2'
-          type='text'
-          onChange={(e) => setWalletTo(e.target.value)}
-        />
-        amount of tokens
-        <input
-          className='m-2 p-2'
-          type='text'
-          onChange={(e) => setAmount(Number(e.target.value))}
-        />
-        <button
-          className='bg-blue-700 text-white rounded-lg p-2 m-2'
-          onClick={transferToWallet}
-        >
-          transfer
-        </button>
-        balance of wallet
-        <input
-          className='m-2 p-2'
-          type='text'
-          onChange={(e) => setWallet(e.target.value)}
-        />
-        <button
-          className='bg-blue-700 text-white p-2 rounded-lg'
-          onClick={() => balanceOfWallet(wallet)}
-        >
-          checkBalance
-        </button>
-        {balance}
+        {!address ? (
+          <button
+            className='border-black border-2 rounded-lg p-2'
+            onClick={connectToMetamask}
+          >
+            connect to metamask
+          </button>
+        ) : (
+          <>
+            <div className='mt-24'>{address}</div>
+            <input
+              className='m-2 p-2'
+              type='text'
+              onChange={(e) => setWalletTo(e.target.value)}
+            />
+            amount of tokens
+            <input
+              className='m-2 p-2'
+              type='text'
+              onChange={(e) => setAmount(Number(e.target.value))}
+            />
+            <button
+              className='bg-blue-700 text-white rounded-lg p-2 m-2'
+              onClick={transferToWallet}
+            >
+              transfer
+            </button>
+            balance of wallet
+            <input
+              className='m-2 p-2'
+              type='text'
+              onChange={(e) => setWallet(e.target.value)}
+            />
+            <button
+              className='bg-blue-700 text-white p-2 rounded-lg'
+              onClick={() => balanceOfWallet(wallet)}
+            >
+              checkBalance
+            </button>
+            {balance}
+          </>
+        )}
       </div>
     </div>
   );
