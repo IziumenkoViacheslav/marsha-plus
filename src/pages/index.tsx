@@ -35,7 +35,7 @@ export default function Home() {
     console.log({ transaction });
     const res = await transaction.wait();
     console.log({ res });
-    setBalance(Number(await contract?.balanceOf(wallet)));
+    setBalance(Number(await contract?.balanceOf(address)));
   }
   async function connectToMetamask() {
     if (window.ethereum) {
