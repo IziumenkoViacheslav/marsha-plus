@@ -72,7 +72,8 @@ export default function Home() {
         ) : (
           <>
             <div className='mt-24'>
-              Your wallet address is: <p className='inline'>{address}</p>
+              Your wallet address is:{' '}
+              <p className='inline text-lg font-bold'>{address}</p>
             </div>
             <div className='m-4'>
               with balance{' '}
