@@ -60,20 +60,24 @@ export default function Home() {
     }
   }
   return (
-    <div className='flex min-h-screen flex-col items-center justify-between p-4'>
+    <div className='flex min-h-screen flex-col items-center justify-between p-4 bg-gradient-to-br from-indigo-400 via-purple-400 to-pink-400'>
       <div className='flex flex-col w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex'>
         {!address ? (
           <button
-            className='border-black border-2 rounded-lg p-2'
+            className=' rounded-lg p-2 bg-blue-700 text-white'
             onClick={connectToMetamask}
           >
             connect to metamask
           </button>
         ) : (
           <>
-            <div className='mt-24'>Your wallet address is: {address}</div>
+            <div className='mt-24'>
+              Your wallet address is: <p className='inline'>{address}</p>
+            </div>
             <div className='m-4'>
-              with balance {balance?.toString()} MRSH tokens
+              with balance{' '}
+              <p className='font-bold inline text-lg'>{balance?.toString()}</p>{' '}
+              MRA tokens
             </div>
             Transfer to another wallet
             <input
