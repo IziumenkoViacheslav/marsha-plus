@@ -1,119 +1,76 @@
-import { ethers } from 'ethers';
-import { useState } from 'react';
-import { toast } from 'react-hot-toast';
-import MarshaPlus from '../../artifacts/contracts/MarshaPlus.sol/MarshaPlus.json';
+import Head from 'next/head'
+import Image from 'next/image'
+import { useRouter } from 'next/router'
+import React, { ReactElement } from 'react'
+import CardBox from '../components/CardBox'
+import LayoutGuest from '../layouts/Guest'
+import SectionMain from '../components/SectionMain'
+import { StyleKey } from '../interfaces'
+import { gradientBgPurplePink } from '../colors'
+import { appTitle } from '../config'
+import { useAppDispatch } from '../stores/hooks'
+import { setDarkMode, setStyle } from '../stores/styleSlice'
 
-declare global {
-  interface Window {
-    ethereum?: any;
+const StyleSelect = () => {
+  const dispatch = useAppDispatch()
+
+  dispatch(setDarkMode(false))
+
+  const styles: StyleKey[] = ['white', 'basic']
+
+  const router = useRouter()
+
+  const handleStylePick = (e: React.MouseEvent, style: StyleKey) => {
+    e.preventDefault()
+
+    dispatch(setStyle(style))
+
+    router.push('/dashboard')
   }
-}
 
-export default function Home() {
-  const [contract, setContract] = useState<ethers.Contract>();
-  const [address, setAddress] = useState('');
-  const [balance, setBalance] = useState<Number>();
-  const [walletTo, setWalletTo] = useState('');
-  const [amount, setAmount] = useState<Number>();
-  const [wallet, setWallet] = useState('');
-  const [balanceAnotherAccount, setBalanceAnotherAccount] = useState<Number>();
-  const [signer, setSigner] = useState<ethers.Signer>();
-
-  async function balanceOfWallet(wallet: string) {
-    const result = await contract?.balanceOf(wallet);
-    console.log({ result: Number(result) });
-    setBalanceAnotherAccount(Number(result));
-
-    return Number(result);
-  }
-  async function transferToWallet() {
-    if (!contract) {
-      return null;
-    }
-    const transaction =
-      contract && (await contract.transferTo(walletTo, amount));
-    console.log({ transaction });
-    const res = await transaction.wait();
-    console.log({ res });
-    setBalance(Number(await contract?.balanceOf(address)));
-  }
-  async function connectToMetamask() {
-    if (window.ethereum) {
-      const accounts = await window.ethereum.request({
-        method: 'eth_requestAccounts',
-      });
-      setAddress(accounts[0]);
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const contract = new ethers.Contract(
-        '0x5fbdb2315678afecb367f032d93f642f64180aa3',
-        MarshaPlus.abi,
-        provider.getSigner(0)
-      );
-      setContract(contract);
-      const signer = provider.getSigner(accounts[0]);
-      console.log({ signer });
-
-      setSigner(signer);
-      setBalance(Number(await contract?.balanceOf(accounts[0])));
-
-      toast('connected to metamask', { style: { color: 'blue' } });
-    }
-  }
   return (
-    <div className='flex min-h-screen flex-col items-center justify-between p-4 bg-gradient-to-br from-indigo-400 via-purple-400 to-pink-400'>
-      <div className='flex flex-col w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex'>
-        {!address ? (
-          <button
-            className=' rounded-lg p-2 bg-blue-700 text-white'
-            onClick={connectToMetamask}
-          >
-            connect to metamask
-          </button>
-        ) : (
-          <>
-            <div className='mt-24'>
-              Your wallet address is:{' '}
-              <p className='inline text-lg font-bold'>{address}</p>
-            </div>
-            <div className='m-4'>
-              with balance{' '}
-              <p className='font-bold inline text-lg'>{balance?.toString()}</p>{' '}
-              MRA tokens
-            </div>
-            Transfer to another wallet
-            <input
-              className='m-2 p-2 rounded-lg'
-              type='text'
-              onChange={(e) => setWalletTo(e.target.value)}
-            />
-            amount of tokens
-            <input
-              className='m-2 p-2 rounded-lg'
-              type='text'
-              onChange={(e) => setAmount(Number(e.target.value))}
-            />
-            <button
-              className='bg-blue-700 text-white rounded-lg p-2 m-2'
-              onClick={transferToWallet}
-            >
-              transfer
-            </button>
-            balance of wallet
-            <input
-              className='m-2 p-2 rounded-lg'
-              type='text'
-              onChange={(e) => setWallet(e.target.value)}
-            />
-            <button
-              className='bg-blue-700 text-white p-2 rounded-lg'
-              onClick={() => balanceOfWallet(wallet)}
-            >
-              check balance
-            </button>
-            {balanceAnotherAccount?.toString()}
-          </>
-        )}
+    <>
+      <Head>
+        <title>{appTitle}</title>
+      </Head>
+      <div className={`flex min-h-screen items-center justify-center ${gradientBgPurplePink}`}>
+        <SectionMain>
+          <h1 className="text-4xl md:text-5xl text-center text-white font-bold mt-12 mb-3 lg:mt-0">
+            Pick a style&hellip;
+          </h1>
+          <h2 className="text-xl md:text-xl text-center text-white mb-12">
+            Style switching with a single{' '}
+            <code className="px-1.5 py-0.5 rounded bg-white bg-opacity-20">action()</code>
+          </h2>
+          <div className="grid gap-6 grid-cols-1 lg:grid-cols-2 px-6 max-w-6xl mx-auto">
+            {styles.map((style) => (
+              <CardBox
+                key={style}
+                className="cursor-pointer bg-gray-50"
+                isHoverable
+                onClick={(e) => handleStylePick(e, style)}
+              >
+                <div className="mb-3 md:mb-6">
+                  <Image
+                    src={`https://static.justboil.me/templates/one/small/${style}-v3.png`}
+                    width={1280}
+                    height={720}
+                    alt={style}
+                  />
+                </div>
+                <h1 className="text-xl md:text-2xl font-black capitalize">{style}</h1>
+                <h2 className="text-lg md:text-xl">& Dark mode</h2>
+              </CardBox>
+            ))}
+          </div>
+        </SectionMain>
       </div>
-    </div>
-  );
+    </>
+  )
 }
+
+StyleSelect.getLayout = function getLayout(page: ReactElement) {
+  return <LayoutGuest>{page}</LayoutGuest>
+}
+
+export default StyleSelect
