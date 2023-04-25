@@ -52,8 +52,6 @@ export const styleSlice = createSlice({
     },
 
     setStyle: (state, action: PayloadAction<StyleKey>) => {
-      console.log({ state })
-
       if (!styles[action.payload]) {
         return
       }
