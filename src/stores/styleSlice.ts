@@ -28,7 +28,7 @@ const initialState: StyleState = {
   navBarItemLabelHoverStyle: styles.basic.navBarItemLabelHover,
   navBarItemLabelActiveColorStyle: styles.basic.navBarItemLabelActiveColor,
   overlayStyle: styles.basic.overlay,
-  darkMode: false,
+  darkMode: true,
 }
 
 export const styleSlice = createSlice({
