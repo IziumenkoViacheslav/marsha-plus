@@ -37,6 +37,7 @@ export interface MarshaPlusInterface extends utils.Interface {
     "foundation()": FunctionFragment;
     "marketing()": FunctionFragment;
     "owner()": FunctionFragment;
+    "stack()": FunctionFragment;
     "technical()": FunctionFragment;
     "token_name()": FunctionFragment;
     "token_symbol()": FunctionFragment;
@@ -54,6 +55,7 @@ export interface MarshaPlusInterface extends utils.Interface {
       | "foundation"
       | "marketing"
       | "owner"
+      | "stack"
       | "technical"
       | "token_name"
       | "token_symbol"
@@ -75,6 +77,7 @@ export interface MarshaPlusInterface extends utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "marketing", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
+  encodeFunctionData(functionFragment: "stack", values?: undefined): string;
   encodeFunctionData(functionFragment: "technical", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "token_name",
@@ -101,6 +104,7 @@ export interface MarshaPlusInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "foundation", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "marketing", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "stack", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "technical", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "token_name", data: BytesLike): Result;
   decodeFunctionResult(
@@ -178,6 +182,10 @@ export interface MarshaPlus extends BaseContract {
 
     owner(overrides?: CallOverrides): Promise<[string]>;
 
+    stack(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     technical(overrides?: CallOverrides): Promise<[string]>;
 
     token_name(overrides?: CallOverrides): Promise<[string]>;
@@ -212,6 +220,10 @@ export interface MarshaPlus extends BaseContract {
 
   owner(overrides?: CallOverrides): Promise<string>;
 
+  stack(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   technical(overrides?: CallOverrides): Promise<string>;
 
   token_name(overrides?: CallOverrides): Promise<string>;
@@ -245,6 +257,8 @@ export interface MarshaPlus extends BaseContract {
     marketing(overrides?: CallOverrides): Promise<string>;
 
     owner(overrides?: CallOverrides): Promise<string>;
+
+    stack(overrides?: CallOverrides): Promise<boolean>;
 
     technical(overrides?: CallOverrides): Promise<string>;
 
@@ -294,6 +308,10 @@ export interface MarshaPlus extends BaseContract {
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
+    stack(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     technical(overrides?: CallOverrides): Promise<BigNumber>;
 
     token_name(overrides?: CallOverrides): Promise<BigNumber>;
@@ -328,6 +346,10 @@ export interface MarshaPlus extends BaseContract {
     marketing(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    stack(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
 
     technical(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
