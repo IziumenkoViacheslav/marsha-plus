@@ -91,6 +91,8 @@ contract MarshaPlus {
 
   function depositTokenToStacking(uint _tokens) public returns (bool) {
     if (
+      // TODO unkoment before prod!!!
+      // (block.timestamp > stackingFromWalletDate[msg.sender].date.add(365 days)) &&
       (block.timestamp > stackingFromWalletDate[msg.sender].date.add(10 seconds)) &&
       (balanceOf[msg.sender] > _tokens)
     ) {
