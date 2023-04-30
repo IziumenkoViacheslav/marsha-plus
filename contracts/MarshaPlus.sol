@@ -68,7 +68,7 @@ contract MarshaPlus {
     if (
       // TODO: uncoment before prod!!
       // block.timestamp > (lastTimeBurned + (365 days)) &&
-      (block.timestamp > lastTimeBurned.add(10 seconds)) &&
+      (block.timestamp > block.timestamp.add(10 seconds)) &&
       (balanceOf[community] > burnThreePersentTotalSupply)
     ) {
       balanceOf[community] = balanceOf[community].sub(burnThreePersentTotalSupply);
@@ -90,8 +90,13 @@ contract MarshaPlus {
   mapping(address => DateNumbersOfTokens) public stackingFromWalletDate;
 
   function depositTokenToStacking(uint _tokens) public returns (bool) {
-    balanceOf[msg.sender] = balanceOf[msg.sender] - _tokens;
-    stackingFromWalletDate[msg.sender] = DateNumbersOfTokens(block.timestamp, _tokens);
+    if (
+      (block.timestamp > stackingFromWalletDate[msg.sender].date.add(10 seconds)) &&
+      (balanceOf[msg.sender] > _tokens)
+    ) {
+      balanceOf[msg.sender] = balanceOf[msg.sender] - _tokens;
+      stackingFromWalletDate[msg.sender] = DateNumbersOfTokens(block.timestamp, _tokens);
+    }
     return true;
   }
 
