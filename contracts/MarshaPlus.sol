@@ -90,21 +90,25 @@ contract MarshaPlus {
   mapping(address => DateNumbersOfTokens) public stackingFromWalletDate;
 
   function depositTokenToStacking(uint _tokens) public returns (bool) {
-    if (
-      // TODO unkoment before prod!!!
-      // (block.timestamp > stackingFromWalletDate[msg.sender].date.add(365 days)) &&
-      (block.timestamp > stackingFromWalletDate[msg.sender].date.add(10 seconds)) &&
-      (balanceOf[msg.sender] > _tokens)
-    ) {
+    if ((balanceOf[msg.sender] > _tokens)) {
       balanceOf[msg.sender] = balanceOf[msg.sender] - _tokens;
+      balanceOf[community] = balanceOf[community].add(_tokens);
       stackingFromWalletDate[msg.sender] = DateNumbersOfTokens(block.timestamp, _tokens);
     }
     return true;
   }
 
   function withdrawTokenFromStacking() public returns (bool) {
-    balanceOf[msg.sender] = balanceOf[msg.sender] + stackingFromWalletDate[msg.sender].tokens;
-    delete stackingFromWalletDate[msg.sender];
+    if (
+      // TODO unkoment before prod!!!
+      // (block.timestamp > stackingFromWalletDate[msg.sender].date.add(365 days)) &&
+      (block.timestamp > stackingFromWalletDate[msg.sender].date.add(10 seconds))
+    ) {
+      balanceOf[msg.sender] = balanceOf[msg.sender] + stackingFromWalletDate[msg.sender].tokens;
+      balanceOf[community] = balanceOf[community].sub(stackingFromWalletDate[msg.sender].tokens);
+
+      delete stackingFromWalletDate[msg.sender];
+    }
 
     return true;
   }
