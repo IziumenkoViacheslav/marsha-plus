@@ -90,7 +90,7 @@ contract MarshaPlus {
   mapping(address => DateNumbersOfTokens) public stackingFromWalletDate;
 
   function depositTokenToStacking(uint _tokens) public returns (bool) {
-    require(balanceOf[msg.sender] > _tokens, 'You have not enough tokens');
+    require(balanceOf[msg.sender] >= _tokens, 'You have not enough tokens');
     require(!(stackingFromWalletDate[msg.sender].tokens > 0), 'You already have stacking');
     balanceOf[msg.sender] = balanceOf[msg.sender].sub(_tokens);
     stackingFromWalletDate[msg.sender] = DateNumbersOfTokens(block.timestamp, _tokens);
