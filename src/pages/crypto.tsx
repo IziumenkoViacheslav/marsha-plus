@@ -59,7 +59,7 @@ export default function Crypto() {
     }
   }
   return (
-    <div className="flex min-h-screen flex-col items-center justify-between p-4 bg-gradient-to-br from-indigo-400 via-purple-400 to-pink-400">
+    <div className="flex min-h-screen flex-col items-center justify-between p-4 bg-gradient-to-br from-indigo-400 via-purple-400 to-pink-400 bg-[size:400%] animate-dynamic-gradient">
       <div className="flex flex-col w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
         {!address ? (
           <button className=" rounded-lg p-2 bg-blue-700 text-white" onClick={connectToMetamask}>

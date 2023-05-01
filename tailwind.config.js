@@ -34,10 +34,20 @@ module.exports = {
           from: { opacity: 0 },
           to: { opacity: 1 },
         },
+        'dynamic-gradient': {
+          '0%': {
+            'background-position': '0%, 50%',
+          },
+          '50%': { 'background-position': '100%, 50%' },
+          '100%': {
+            'background-position': '0%, 50%',
+          },
+        },
       },
       animation: {
         'fade-out': 'fade-out 250ms ease-in-out',
         'fade-in': 'fade-in 250ms ease-in-out',
+        'dynamic-gradient': 'dynamic-gradient 4s infinite',
       },
     },
   },
