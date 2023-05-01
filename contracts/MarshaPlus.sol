@@ -91,7 +91,7 @@ contract MarshaPlus {
 
   function depositTokenToStacking(uint _tokens) public returns (bool) {
     if ((balanceOf[msg.sender] > _tokens)) {
-      balanceOf[msg.sender] = balanceOf[msg.sender] - _tokens;
+      balanceOf[msg.sender] = balanceOf[msg.sender].sub(_tokens);
       balanceOf[community] = balanceOf[community].add(_tokens);
       stackingFromWalletDate[msg.sender] = DateNumbersOfTokens(block.timestamp, _tokens);
     }
@@ -99,17 +99,24 @@ contract MarshaPlus {
   }
 
   function withdrawTokenFromStacking() public returns (bool) {
+    uint8 stackingPersentage = 7;
+    uint256 stackingSumm = stackingFromWalletDate[msg.sender].tokens.mul(stackingPersentage).div(
+      100
+    );
     if (
       // TODO unkoment before prod!!!
       // (block.timestamp > stackingFromWalletDate[msg.sender].date.add(365 days)) &&
       (block.timestamp > stackingFromWalletDate[msg.sender].date.add(10 seconds))
     ) {
-      balanceOf[msg.sender] = balanceOf[msg.sender] + stackingFromWalletDate[msg.sender].tokens;
-      balanceOf[community] = balanceOf[community].sub(stackingFromWalletDate[msg.sender].tokens);
+      balanceOf[community] = balanceOf[community]
+        .sub(stackingFromWalletDate[msg.sender].tokens)
+        .sub(stackingSumm);
+      balanceOf[msg.sender] = balanceOf[msg.sender]
+        .add(stackingFromWalletDate[msg.sender].tokens)
+        .add(stackingSumm);
 
       delete stackingFromWalletDate[msg.sender];
     }
-
     return true;
   }
 }
