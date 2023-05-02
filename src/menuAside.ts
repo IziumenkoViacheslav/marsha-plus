@@ -11,6 +11,7 @@ import {
   mdiResponsive,
   mdiPalette,
   mdiVuejs,
+  mdiEthereum,
 } from '@mdi/js'
 import { MenuAsideItem } from './interfaces'
 
@@ -83,6 +84,11 @@ const menuAside: MenuAsideItem[] = [
     label: 'Vue version',
     icon: mdiVuejs,
     target: '_blank',
+  },
+  {
+    href: '/crypto',
+    label: 'Crypto',
+    icon: mdiEthereum,
   },
 ]
 
