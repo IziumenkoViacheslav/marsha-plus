@@ -1,113 +1,168 @@
-import { ethers } from 'ethers'
-import { useState } from 'react'
-import { toast } from 'react-hot-toast'
-import MarshaPlus from '../../artifacts/contracts/MarshaPlus.sol/MarshaPlus.json'
+import {
+  mdiAccountMultiple,
+  mdiCartOutline,
+  mdiChartPie,
+  mdiChartTimelineVariant,
+  mdiEthereum,
+  mdiGithub,
+  mdiMonitorCellphone,
+  mdiReload,
+} from '@mdi/js'
+import Head from 'next/head'
+import React, { useState } from 'react'
+import type { ReactElement } from 'react'
+import BaseButton from '../components/BaseButton'
+import LayoutAuthenticated from '../layouts/Authenticated'
+import SectionMain from '../components/SectionMain'
+import SectionTitleLineWithButton from '../components/SectionTitleLineWithButton'
+import CardBoxWidget from '../components/CardBoxWidget'
+import { useSampleClients, useSampleTransactions } from '../hooks/sampleData'
+import CardBoxTransaction from '../components/CardBoxTransaction'
+import { Client, Transaction } from '../interfaces'
+import CardBoxClient from '../components/CardBoxClient'
+import SectionBannerStarOnGitHub from '../components/SectionBannerStarOnGitHub'
+import CardBox from '../components/CardBox'
+import { sampleChartData } from '../components/ChartLineSample/config'
+import ChartLineSample from '../components/ChartLineSample'
+import NotificationBar from '../components/NotificationBar'
+import TableSampleClients from '../components/TableSampleClients'
+import { getPageTitle } from '../config'
 
-declare global {
-  interface Window {
-    ethereum?: any
+const Crypto = () => {
+  const { clients } = useSampleClients()
+  const { transactions } = useSampleTransactions()
+
+  const clientsListed = clients.slice(0, 4)
+
+  const [chartData, setChartData] = useState(sampleChartData())
+
+  const fillChartData = (e: React.MouseEvent) => {
+    e.preventDefault()
+
+    setChartData(sampleChartData())
   }
-}
 
-export default function Crypto() {
-  const [contract, setContract] = useState<ethers.Contract>()
-  const [address, setAddress] = useState('')
-  const [balance, setBalance] = useState<number>()
-  const [walletTo, setWalletTo] = useState('')
-  const [amount, setAmount] = useState<number>()
-  const [wallet, setWallet] = useState('')
-  const [balanceAnotherAccount, setBalanceAnotherAccount] = useState<number>()
-  const [signer, setSigner] = useState<ethers.Signer>()
-
-  async function balanceOfWallet(wallet: string) {
-    const result = await contract?.balanceOf(wallet)
-    console.log({ result: Number(result) })
-    setBalanceAnotherAccount(Number(result))
-
-    return Number(result)
-  }
-  async function transferToWallet() {
-    if (!contract) {
-      return null
-    }
-    const transaction = contract && (await contract.transferTo(walletTo, amount))
-    console.log({ transaction })
-    const res = await transaction.wait()
-    console.log({ res })
-    setBalance(Number(await contract?.balanceOf(address)))
-  }
-  async function connectToMetamask() {
-    if (window.ethereum) {
-      const accounts = await window.ethereum.request({
-        method: 'eth_requestAccounts',
-      })
-      setAddress(accounts[0])
-      const provider = new ethers.providers.Web3Provider(window.ethereum)
-      const contract = new ethers.Contract(
-        '0x5fbdb2315678afecb367f032d93f642f64180aa3',
-        MarshaPlus.abi,
-        provider.getSigner(0)
-      )
-      setContract(contract)
-      const signer = provider.getSigner(accounts[0])
-      console.log({ signer })
-
-      setSigner(signer)
-      setBalance(Number(await contract?.balanceOf(accounts[0])))
-
-      toast('connected to metamask', { style: { color: 'blue' } })
-    }
-  }
   return (
-    <div className="flex min-h-screen flex-col items-center justify-between p-4 bg-gradient-to-br from-indigo-400 via-purple-400 to-pink-400 bg-[size:400%] animate-dynamic-gradient">
-      <div className="flex flex-col w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        {!address ? (
-          <button className=" rounded-lg p-2 bg-blue-700 text-white" onClick={connectToMetamask}>
-            connect to metamask
-          </button>
-        ) : (
-          <>
-            <div className="mt-24">
-              Your wallet address is: <p className="inline text-lg font-bold">{address}</p>
-            </div>
-            <div className="m-4">
-              with balance <p className="font-bold inline text-lg">{balance?.toString()}</p> MRA
-              tokens
-            </div>
-            Transfer to another wallet
-            <input
-              className="m-2 p-2 rounded-lg"
-              type="text"
-              onChange={(e) => setWalletTo(e.target.value)}
-            />
-            amount of tokens
-            <input
-              className="m-2 p-2 rounded-lg"
-              type="text"
-              onChange={(e) => setAmount(Number(e.target.value))}
-            />
-            <button
-              className="bg-blue-700 text-white rounded-lg p-2 m-2"
-              onClick={transferToWallet}
-            >
-              transfer
-            </button>
-            balance of wallet
-            <input
-              className="m-2 p-2 rounded-lg"
-              type="text"
-              onChange={(e) => setWallet(e.target.value)}
-            />
-            <button
-              className="bg-blue-700 text-white p-2 rounded-lg"
-              onClick={() => balanceOfWallet(wallet)}
-            >
-              check balance
-            </button>
-            {balanceAnotherAccount?.toString()}
-          </>
-        )}
-      </div>
-    </div>
+    <>
+      <Head>
+        <title>{getPageTitle('Crypto')}</title>
+      </Head>
+      <SectionMain>
+        <SectionTitleLineWithButton icon={mdiChartTimelineVariant} title="Overview" main>
+          <BaseButton
+            href="https://github.com/justboil/admin-one-react-tailwind"
+            target="_blank"
+            icon={mdiGithub}
+            label="Star on GitHub"
+            color="contrast"
+            roundedFull
+            small
+          />
+        </SectionTitleLineWithButton>
+
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 mb-6">
+          <CardBoxWidget
+            trendLabel="12%"
+            trendType="up"
+            trendColor="success"
+            icon={mdiAccountMultiple}
+            iconColor="success"
+            number={512}
+            label="Clients"
+          />
+          <CardBoxWidget
+            trendLabel="16%"
+            trendType="down"
+            trendColor="danger"
+            icon={mdiCartOutline}
+            iconColor="info"
+            number={7770}
+            numberPrefix="$"
+            label="Sales"
+          />
+          <CardBoxWidget
+            trendLabel="Overflow"
+            trendType="warning"
+            trendColor="warning"
+            icon={mdiChartTimelineVariant}
+            iconColor="danger"
+            number={256}
+            numberSuffix="%"
+            label="Performance"
+          />
+        </div>
+
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 mb-6">
+          <CardBoxWidget
+            trendLabel="12%"
+            trendType="up"
+            trendColor="success"
+            icon={mdiEthereum}
+            iconColor="success"
+            number={12}
+            label="Tokens"
+          />
+          <CardBoxWidget
+            trendLabel="16%"
+            trendType="down"
+            trendColor="danger"
+            icon={mdiCartOutline}
+            iconColor="info"
+            number={7770}
+            numberPrefix="$"
+            label="Sales"
+          />
+          <CardBoxWidget
+            trendLabel="Overflow"
+            trendType="warning"
+            trendColor="warning"
+            icon={mdiChartTimelineVariant}
+            iconColor="danger"
+            number={256}
+            numberSuffix="%"
+            label="Performance"
+          />
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+          <div className="flex flex-col justify-between">
+            {transactions.map((transaction: Transaction) => (
+              <CardBoxTransaction key={transaction.id} transaction={transaction} />
+            ))}
+          </div>
+          <div className="flex flex-col justify-between">
+            {clientsListed.map((client: Client) => (
+              <CardBoxClient key={client.id} client={client} />
+            ))}
+          </div>
+        </div>
+
+        <div className="my-6">
+          <SectionBannerStarOnGitHub />
+        </div>
+
+        <SectionTitleLineWithButton icon={mdiChartPie} title="Trends overview">
+          <BaseButton icon={mdiReload} color="whiteDark" onClick={fillChartData} />
+        </SectionTitleLineWithButton>
+
+        <CardBox className="mb-6">{chartData && <ChartLineSample data={chartData} />}</CardBox>
+
+        <SectionTitleLineWithButton icon={mdiAccountMultiple} title="Clients" />
+
+        <NotificationBar color="info" icon={mdiMonitorCellphone}>
+          <b>Responsive table.</b> Collapses on mobile
+        </NotificationBar>
+
+        <CardBox hasTable>
+          <TableSampleClients />
+        </CardBox>
+      </SectionMain>
+    </>
   )
 }
+
+Crypto.getLayout = function getLayout(page: ReactElement) {
+  return <LayoutAuthenticated>{page}</LayoutAuthenticated>
+}
+
+export default Crypto
