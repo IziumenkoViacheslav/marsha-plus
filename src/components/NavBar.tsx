@@ -5,6 +5,8 @@ import BaseIcon from './BaseIcon'
 import NavBarItemPlain from './NavBarItemPlain'
 import NavBarMenuList from './NavBarMenuList'
 import { MenuNavBarItem } from '../interfaces'
+import Image from 'next/image'
+import { useRouter } from 'next/router'
 
 type Props = {
   menu: MenuNavBarItem[]
@@ -14,9 +16,13 @@ type Props = {
 
 export default function NavBar({ menu, className = '', children }: Props) {
   const [isMenuNavBarActive, setIsMenuNavBarActive] = useState(false)
+  const router = useRouter()
 
   const handleMenuNavBarToggleClick = () => {
     setIsMenuNavBarActive(!isMenuNavBarActive)
+  }
+  const handleMetamaskClick = () => {
+    router.push('/old_crypto')
   }
 
   return (
@@ -36,6 +42,14 @@ export default function NavBar({ menu, className = '', children }: Props) {
           } max-h-screen-menu overflow-y-auto lg:overflow-visible absolute w-screen top-14 left-0 bg-gray-50 shadow-lg lg:w-auto lg:flex lg:static lg:shadow-none dark:bg-slate-800`}
         >
           <NavBarMenuList menu={menu} />
+          <Image
+            alt={'metamask'}
+            width={77}
+            height={22}
+            src={'./images/metamask_logo.png'}
+            onClick={handleMetamaskClick}
+            className="cursor-pointer"
+          />
         </div>
       </div>
     </nav>
