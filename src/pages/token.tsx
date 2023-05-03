@@ -1,34 +1,46 @@
-import {
-  mdiAccountMultiple,
-  mdiCartOutline,
-  mdiChartTimelineVariant,
-  mdiEthereum,
-  mdiGithub,
-  mdiMonitorCellphone,
-} from '@mdi/js'
+import { mdiAccount, mdiMail } from '@mdi/js'
 import Head from 'next/head'
-import React, { useState } from 'react'
+import React from 'react'
 import type { ReactElement } from 'react'
 import BaseButton from '../components/BaseButton'
 import LayoutAuthenticated from '../layouts/Authenticated'
 import SectionMain from '../components/SectionMain'
-import SectionTitleLineWithButton from '../components/SectionTitleLineWithButton'
-import CardBoxWidget from '../components/CardBoxWidget'
 import { useSampleClients, useSampleTransactions } from '../hooks/sampleData'
 import CardBoxTransaction from '../components/CardBoxTransaction'
 import { Client, Transaction } from '../interfaces'
 import CardBoxClient from '../components/CardBoxClient'
 import CardBox from '../components/CardBox'
-import { sampleChartData } from '../components/ChartLineSample/config'
-import NotificationBar from '../components/NotificationBar'
-import TableSampleClients from '../components/TableSampleClients'
 import { getPageTitle } from '../config'
+import { Formik, Form, Field } from 'formik'
+import BaseButtons from '../components/BaseButtons'
+import BaseDivider from '../components/BaseDivider'
+import FormField from '../components/FormField'
+import { toast } from 'react-hot-toast'
+import { useAppSelector } from '../stores/hooks'
 
-const Crypto = () => {
+const Token = () => {
   const { clients } = useSampleClients()
   const { transactions } = useSampleTransactions()
 
+  const contract = useAppSelector((state) => state.crypto.contract)
+
   const clientsListed = clients.slice(0, 4)
+
+  async function transferToWallet(contract, walletTo: string, amount: number) {
+    if (!contract) {
+      toast('Connect to metamask first and try again', { style: { color: 'red' } })
+      return null
+    }
+    if (!amount) {
+      toast('amount must be greather then 0!', { style: { color: 'red' } })
+      return null
+    }
+    const transaction = contract && (await contract.transferTo(walletTo, amount))
+    const res = await transaction.wait()
+    toast(`Congratulation, you successfuly transfered ${amount} Marsha+ tokens!`, {
+      style: { color: 'green', width: '3xl' },
+    })
+  }
 
   return (
     <>
@@ -36,50 +48,6 @@ const Crypto = () => {
         <title>{getPageTitle('Crypto')}</title>
       </Head>
       <SectionMain>
-        <SectionTitleLineWithButton icon={mdiChartTimelineVariant} title="Overview" main>
-          <BaseButton
-            href="https://github.com/justboil/admin-one-react-tailwind"
-            target="_blank"
-            icon={mdiGithub}
-            label="Star on GitHub"
-            color="contrast"
-            roundedFull
-            small
-          />
-        </SectionTitleLineWithButton>
-
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 mb-6">
-          <CardBoxWidget
-            trendLabel="12%"
-            trendType="up"
-            trendColor="success"
-            icon={mdiEthereum}
-            iconColor="success"
-            number={12}
-            label="You have Marsha+ tokens"
-          />
-          <CardBoxWidget
-            trendLabel="16%"
-            trendType="down"
-            trendColor="danger"
-            icon={mdiCartOutline}
-            iconColor="info"
-            number={7770}
-            numberPrefix="$"
-            label="Sales"
-          />
-          <CardBoxWidget
-            trendLabel="Overflow"
-            trendType="warning"
-            trendColor="warning"
-            icon={mdiChartTimelineVariant}
-            iconColor="danger"
-            number={256}
-            numberSuffix="%"
-            label="Performance"
-          />
-        </div>
-
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           <div className="flex flex-col justify-between">
             {transactions.map((transaction: Transaction) => (
@@ -93,32 +61,55 @@ const Crypto = () => {
           </div>
         </div>
 
-        {/* <div className="my-6">
-          <SectionBannerStarOnGitHub />
-        </div> */}
+        <CardBox>
+          <Formik
+            initialValues={{
+              wolletTo: '',
+              amount: '',
+            }}
+            onSubmit={(values) =>
+              transferToWallet(contract, values.wolletTo, Number(values.amount))
+            }
+          >
+            <Form>
+              <FormField label="Transfer" icons={[mdiAccount, mdiMail]}>
+                <Field name="wolletTo" placeholder="to wallet" />
+                <Field name="amount" placeholder="amount" />
+              </FormField>
+              <BaseButtons>
+                <BaseButton type="submit" color="info" label="Send" />
+              </BaseButtons>
+            </Form>
+          </Formik>
+          <BaseDivider />
 
-        {/* <SectionTitleLineWithButton icon={mdiChartPie} title="Trends overview">
-          <BaseButton icon={mdiReload} color="whiteDark" onClick={fillChartData} />
-        </SectionTitleLineWithButton> */}
-
-        {/* <CardBox className="mb-6">{chartData && <ChartLineSample data={chartData} />}</CardBox> */}
-
-        <SectionTitleLineWithButton icon={mdiAccountMultiple} title="Clients" />
-
-        <NotificationBar color="info" icon={mdiMonitorCellphone}>
-          <b>Responsive table.</b> Collapses on mobile
-        </NotificationBar>
-
-        <CardBox hasTable>
-          <TableSampleClients />
+          <Formik
+            initialValues={{
+              stackTokens: '',
+              amount: '',
+              phone: '',
+              color: 'green',
+              textarea: 'Hello',
+            }}
+            onSubmit={(values) => alert(JSON.stringify(values, null, 2))}
+          >
+            <Form>
+              <FormField label="Stack for one year" icons={[mdiAccount, mdiMail]}>
+                <Field name="stackTokens" placeholder="amount" />
+              </FormField>
+              <BaseButtons>
+                <BaseButton type="submit" color="info" label="Stack" />
+              </BaseButtons>
+            </Form>
+          </Formik>
         </CardBox>
       </SectionMain>
     </>
   )
 }
 
-Crypto.getLayout = function getLayout(page: ReactElement) {
+Token.getLayout = function getLayout(page: ReactElement) {
   return <LayoutAuthenticated>{page}</LayoutAuthenticated>
 }
 
-export default Crypto
+export default Token
