@@ -87,36 +87,34 @@ contract MarshaPlus {
   }
   DateNumbersOfTokens dateNumbersOfTokens;
 
-  mapping(address => DateNumbersOfTokens) public stackingFromWalletDate;
+  mapping(address => DateNumbersOfTokens) public stakingFromWalletDate;
 
-  function depositTokenToStacking(uint _tokens) public returns (bool) {
+  function depositTokenToStaking(uint _tokens) public returns (bool) {
     require(balanceOf[msg.sender] >= _tokens, 'You have not enough tokens');
-    require(!(stackingFromWalletDate[msg.sender].tokens > 0), 'You already have stacking');
+    require(!(stakingFromWalletDate[msg.sender].tokens > 0), 'You already have staking');
     balanceOf[msg.sender] = balanceOf[msg.sender].sub(_tokens);
-    stackingFromWalletDate[msg.sender] = DateNumbersOfTokens(block.timestamp, _tokens);
+    stakingFromWalletDate[msg.sender] = DateNumbersOfTokens(block.timestamp, _tokens);
     balanceOf[community] = balanceOf[community].add(_tokens);
     return true;
   }
 
-  function withdrawTokenFromStacking() public returns (bool) {
-    uint8 stackingPersentage = 7;
-    uint256 stackingSumm = stackingFromWalletDate[msg.sender].tokens.mul(stackingPersentage).div(
-      100
-    );
+  function withdrawTokenFromStaking() public returns (bool) {
+    uint8 stakingPersentage = 7;
+    uint256 stakingSumm = stakingFromWalletDate[msg.sender].tokens.mul(stakingPersentage).div(100);
     // TODO unkoment before prod!!!
-    // require((block.timestamp > stackingFromWalletDate[msg.sender].date.add(365 days), 'Not enough time pass for withdraw stacking');
+    // require((block.timestamp > stakingFromWalletDate[msg.sender].date.add(365 days), 'Not enough time pass for withdraw staking');
     require(
-      block.timestamp > stackingFromWalletDate[msg.sender].date.add(10 seconds),
-      'Not enough time pass for withdraw stacking'
+      block.timestamp > stakingFromWalletDate[msg.sender].date.add(10 seconds),
+      'Not enough time pass for withdraw staking'
     );
-    balanceOf[community] = balanceOf[community].sub(stackingFromWalletDate[msg.sender].tokens).sub(
-      stackingSumm
+    balanceOf[community] = balanceOf[community].sub(stakingFromWalletDate[msg.sender].tokens).sub(
+      stakingSumm
     );
-    balanceOf[msg.sender] = balanceOf[msg.sender]
-      .add(stackingFromWalletDate[msg.sender].tokens)
-      .add(stackingSumm);
+    balanceOf[msg.sender] = balanceOf[msg.sender].add(stakingFromWalletDate[msg.sender].tokens).add(
+      stakingSumm
+    );
 
-    delete stackingFromWalletDate[msg.sender];
+    delete stakingFromWalletDate[msg.sender];
     return true;
   }
 }
