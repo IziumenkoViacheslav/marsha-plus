@@ -17,14 +17,13 @@ import BaseDivider from '../components/BaseDivider'
 import FormField from '../components/FormField'
 import { toast } from 'react-hot-toast'
 import { useAppSelector } from '../stores/hooks'
+import { MarshaPlus } from '../../typechain-types/MarshaPlus'
 
 const Token = () => {
   const { clients } = useSampleClients()
   const { transactions } = useSampleTransactions()
-
-  const contract = useAppSelector((state) => state.crypto.contract)
-
   const clientsListed = clients.slice(0, 4)
+  const contract: MarshaPlus = useAppSelector((state) => state.crypto.contract)
 
   async function transferToWallet(contract, walletTo: string, amount: number) {
     if (!contract) {
@@ -40,6 +39,13 @@ const Token = () => {
     toast(`Congratulation, you successfuly transfered ${amount} Marsha+ tokens!`, {
       style: { color: 'green', width: '3xl' },
     })
+  }
+
+  async function staking(tokens: number) {
+    const stakedTokens = await contract.depositTokenToStaking(tokens)
+  }
+  async function withdraw() {
+    const result = await contract.withdrawTokenFromStaking()
   }
 
   return (
@@ -81,27 +87,30 @@ const Token = () => {
               </BaseButtons>
             </Form>
           </Formik>
+
           <BaseDivider />
 
           <Formik
             initialValues={{
-              stackTokens: '',
-              amount: '',
-              phone: '',
-              color: 'green',
-              textarea: 'Hello',
+              tokens: '',
             }}
-            onSubmit={(values) => alert(JSON.stringify(values, null, 2))}
+            onSubmit={(values) => staking(Number(values.tokens))}
           >
             <Form>
-              <FormField label="Stack for one year" icons={[mdiAccount, mdiMail]}>
-                <Field name="stackTokens" placeholder="amount" />
+              <FormField label="Stack for one year" icons={[mdiAccount]}>
+                <Field name="stakTokens" placeholder="amount" />
               </FormField>
               <BaseButtons>
                 <BaseButton type="submit" color="info" label="Stack" />
               </BaseButtons>
             </Form>
           </Formik>
+
+          <BaseDivider />
+
+          <BaseButtons>
+            <BaseButton onClick={withdraw} color="info" label="Withdraw" />
+          </BaseButtons>
         </CardBox>
       </SectionMain>
     </>
