@@ -7,6 +7,11 @@ import NavBarMenuList from './NavBarMenuList'
 import { MenuNavBarItem } from '../interfaces'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
+import { toast } from 'react-hot-toast'
+import { ethers } from 'ethers'
+import MarshaPlus from '../../artifacts/contracts/MarshaPlus.sol/MarshaPlus.json'
+import { useAppDispatch } from '../stores/hooks'
+import { setContract } from '../stores/cryptoSlice'
 
 type Props = {
   menu: MenuNavBarItem[]
@@ -15,14 +20,31 @@ type Props = {
 }
 
 export default function NavBar({ menu, className = '', children }: Props) {
+  const dispatch = useAppDispatch()
   const [isMenuNavBarActive, setIsMenuNavBarActive] = useState(false)
   const router = useRouter()
 
   const handleMenuNavBarToggleClick = () => {
     setIsMenuNavBarActive(!isMenuNavBarActive)
   }
-  const handleMetamaskClick = () => {
-    router.push('/old_crypto')
+  async function connectToMetamask() {
+    if (!window.ethereum) {
+      toast('Install metamask!', { style: { color: 'red' } })
+    }
+    if (window.ethereum) {
+      const accounts = await window.ethereum.request({
+        method: 'eth_requestAccounts',
+      })
+      const provider = new ethers.providers.Web3Provider(window.ethereum)
+      const contract = new ethers.Contract(
+        '0x5fbdb2315678afecb367f032d93f642f64180aa3',
+        MarshaPlus.abi,
+        provider.getSigner(0)
+      )
+      dispatch(setContract(contract))
+      toast('connected to metamask', { style: { color: 'blue' } })
+      router.push('/token')
+    }
   }
 
   return (
@@ -47,7 +69,7 @@ export default function NavBar({ menu, className = '', children }: Props) {
             width={77}
             height={22}
             src={'./images/metamask_logo.png'}
-            onClick={handleMetamaskClick}
+            onClick={connectToMetamask}
             className="cursor-pointer"
           />
         </div>
