@@ -37,7 +37,7 @@ export default function Crypto() {
     setBalance(Number(await contract?.balanceOf(address)))
   }
   async function connectToMetamask() {
-    if (!window?.ethereum) {
+    if (!window.ethereum) {
       toast('Install metamask!', { style: { color: 'red' } })
     }
     if (window.ethereum) {
