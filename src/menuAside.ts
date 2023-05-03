@@ -86,8 +86,8 @@ const menuAside: MenuAsideItem[] = [
     target: '_blank',
   },
   {
-    href: '/crypto',
-    label: 'Crypto',
+    href: '/token',
+    label: 'Token',
     icon: mdiEthereum,
   },
 ]
