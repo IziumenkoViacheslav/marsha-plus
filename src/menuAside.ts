@@ -13,13 +13,23 @@ const menuAside: MenuAsideItem[] = [
     icon: mdiEthereum,
   },
   {
-    href: '/token',
+    href: '/transfer',
+    label: 'Transfer',
+    icon: mdiEthereum,
+  },
+  {
+    href: '/staking',
     label: 'Staking',
     icon: mdiEthereum,
   },
   {
-    href: '/token',
+    href: '/nfts',
     label: 'NFTs',
+    icon: mdiEthereum,
+  },
+  {
+    href: '/token',
+    label: 'Charity',
     icon: mdiEthereum,
   },
 ]
