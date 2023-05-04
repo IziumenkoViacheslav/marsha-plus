@@ -104,8 +104,6 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="my-6">{/* <SectionBannerStarOnGitHub /> */}</div>
-
         <SectionTitleLineWithButton icon={mdiChartPie} title="Trends overview">
           <BaseButton icon={mdiReload} color="whiteDark" onClick={fillChartData} />
         </SectionTitleLineWithButton>
