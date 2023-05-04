@@ -28,7 +28,7 @@ const menuAside: MenuAsideItem[] = [
     icon: mdiEthereum,
   },
   {
-    href: '/token',
+    href: '/charity',
     label: 'Charity',
     icon: mdiEthereum,
   },
