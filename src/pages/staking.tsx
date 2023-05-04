@@ -1,4 +1,4 @@
-import { mdiAccount, mdiMail } from '@mdi/js'
+import { mdiAccount } from '@mdi/js'
 import Head from 'next/head'
 import React from 'react'
 import type { ReactElement } from 'react'
