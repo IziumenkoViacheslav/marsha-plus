@@ -18,6 +18,7 @@ import FormField from '../components/FormField'
 import { toast } from 'react-hot-toast'
 import { useAppSelector } from '../stores/hooks'
 import { MarshaPlus } from '../../typechain-types/MarshaPlus'
+import Image from 'next/image'
 
 const Stacking = () => {
   const { clients } = useSampleClients()
@@ -53,6 +54,12 @@ const Stacking = () => {
       <Head>
         <title>{getPageTitle('Crypto')}</title>
       </Head>
+      <Image
+        src="./images/Black Gradient Minimalist Corporate Business Personal Profile New LinkedIn Banner-2.png"
+        width={900}
+        height={250}
+        alt="image"
+      />
       <SectionMain>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           <div className="flex flex-col justify-between">
