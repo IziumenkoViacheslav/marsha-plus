@@ -62,9 +62,9 @@ export default function AsideMenuLayer({ menu, className = '', ...props }: Props
           />
           <AsideMenuList menu={menu} />
         </div>
-        <ul>
+        {/* <ul>
           <AsideMenuItem item={logoutItem} />
-        </ul>
+        </ul> */}
       </div>
     </aside>
   )
