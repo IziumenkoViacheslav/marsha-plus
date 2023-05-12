@@ -5,6 +5,7 @@ import AsideMenuItem from './AsideMenuItem'
 import AsideMenuList from './AsideMenuList'
 import { MenuAsideItem } from '../interfaces'
 import { useAppSelector } from '../stores/hooks'
+import Image from 'next/image'
 
 type Props = {
   menu: MenuAsideItem[]
@@ -40,9 +41,7 @@ export default function AsideMenuLayer({ menu, className = '', ...props }: Props
         <div
           className={`flex flex-row h-14 items-center justify-between dark:bg-slate-900 ${asideBrandStyle}`}
         >
-          <div className="text-center flex-1 lg:text-left lg:pl-6 xl:text-center xl:pl-0">
-            <b className="font-black">MARSHA+ PLATFORM</b>
-          </div>
+          <div className="text-center flex-1 lg:text-left lg:pl-6 xl:text-center xl:pl-0"></div>
           <button
             className="hidden lg:inline-block xl:hidden p-3"
             onClick={handleAsideLgCloseClick}
@@ -55,6 +54,12 @@ export default function AsideMenuLayer({ menu, className = '', ...props }: Props
             darkMode ? 'aside-scrollbars-[slate]' : asideScrollbarsStyle
           }`}
         >
+          <Image
+            src="./images/FullLogo_Transparent_NoBuffer.png"
+            width={200}
+            height={50}
+            alt="image"
+          />
           <AsideMenuList menu={menu} />
         </div>
         <ul>

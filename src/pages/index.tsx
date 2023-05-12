@@ -26,6 +26,7 @@ import ChartLineSample from '../components/ChartLineSample'
 import NotificationBar from '../components/NotificationBar'
 import TableSampleClients from '../components/TableSampleClients'
 import { getPageTitle } from '../config'
+import Image from 'next/image'
 
 const Dashboard = () => {
   const { clients } = useSampleClients()
@@ -47,18 +48,12 @@ const Dashboard = () => {
         <title>{getPageTitle('Home')}</title>
       </Head>
       <SectionMain>
-        {/* <SectionTitleLineWithButton icon={mdiChartTimelineVariant} title="Overview" main>
-          <BaseButton
-            href="https://github.com/justboil/admin-one-react-tailwind"
-            target="_blank"
-            icon={mdiGithub}
-            label="Star on GitHub"
-            color="contrast"
-            roundedFull
-            small
-          />
-        </SectionTitleLineWithButton> */}
-
+        <Image
+          src="./images/White Minimal with Textured Background NFT Twitter Header.png"
+          width={1100}
+          height={250}
+          alt="image"
+        />
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 mb-6">
           <CardBoxWidget
             trendLabel="12%"
@@ -109,16 +104,6 @@ const Dashboard = () => {
         </SectionTitleLineWithButton>
 
         <CardBox className="mb-6">{chartData && <ChartLineSample data={chartData} />}</CardBox>
-
-        {/* <SectionTitleLineWithButton icon={mdiAccountMultiple} title="Clients" /> */}
-
-        {/* <NotificationBar color="info" icon={mdiMonitorCellphone}>
-          <b>Responsive table.</b> Collapses on mobile
-        </NotificationBar> */}
-
-        {/* <CardBox hasTable>
-          <TableSampleClients />
-        </CardBox> */}
       </SectionMain>
     </>
   )
