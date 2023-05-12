@@ -3,8 +3,6 @@ import {
   mdiCartOutline,
   mdiChartPie,
   mdiChartTimelineVariant,
-  mdiGithub,
-  mdiMonitorCellphone,
   mdiReload,
 } from '@mdi/js'
 import Head from 'next/head'
@@ -19,12 +17,9 @@ import { useSampleClients, useSampleTransactions } from '../hooks/sampleData'
 import CardBoxTransaction from '../components/CardBoxTransaction'
 import { Client, Transaction } from '../interfaces'
 import CardBoxClient from '../components/CardBoxClient'
-import SectionBannerStarOnGitHub from '../components/SectionBannerStarOnGitHub'
 import CardBox from '../components/CardBox'
 import { sampleChartData } from '../components/ChartLineSample/config'
 import ChartLineSample from '../components/ChartLineSample'
-import NotificationBar from '../components/NotificationBar'
-import TableSampleClients from '../components/TableSampleClients'
 import { getPageTitle } from '../config'
 import Image from 'next/image'
 
@@ -48,12 +43,15 @@ const Dashboard = () => {
         <title>{getPageTitle('Home')}</title>
       </Head>
       <SectionMain>
-        <Image
-          src="./images/White Minimal with Textured Background NFT Twitter Header.png"
-          width={1100}
-          height={250}
-          alt="image"
-        />
+        <div className="text-center w-full m-4">
+          <Image
+            className="ml-14"
+            src="./images/White Minimal with Textured Background NFT Twitter Header.png"
+            width={800}
+            height={250}
+            alt="image"
+          />
+        </div>
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 mb-6">
           <CardBoxWidget
             trendLabel="12%"
