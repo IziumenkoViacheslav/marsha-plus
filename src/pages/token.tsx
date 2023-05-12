@@ -54,13 +54,14 @@ const Token = () => {
       <Head>
         <title>{getPageTitle('Crypto')}</title>
       </Head>
-      <Image
-        src="./images/Black Gradient Minimalist Corporate Business Personal Profile New LinkedIn Banner-3.png"
-        width={900}
-        height={250}
-        alt="image"
-      />
+
       <SectionMain>
+        <Image
+          src="./images/Black Gradient Minimalist Corporate Business Personal Profile New LinkedIn Banner-3.png"
+          width={900}
+          height={250}
+          alt="image"
+        />
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           <div className="flex flex-col justify-between">
             {transactions.map((transaction: Transaction) => (
