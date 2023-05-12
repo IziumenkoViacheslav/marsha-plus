@@ -13,6 +13,7 @@ import { useAppDispatch, useAppSelector } from '../stores/hooks'
 import FormField from '../components/FormField'
 import { Field, Form, Formik } from 'formik'
 import { useRouter } from 'next/router'
+import Image from 'next/image'
 
 type Props = {
   children: ReactNode
@@ -79,20 +80,12 @@ export default function LayoutAuthenticated({ children }: Props) {
           >
             <BaseIcon path={mdiMenu} size="24" />
           </NavBarItemPlain>
-          {/* <NavBarItemPlain useMargin>
-            <Formik
-              initialValues={{
-                search: '',
-              }}
-              onSubmit={(values) => alert(JSON.stringify(values, null, 2))}
-            >
-              <Form>
-                <FormField isBorderless isTransparent>
-                  <Field name="search" placeholder="Search" />
-                </FormField>
-              </Form>
-            </Formik>
-          </NavBarItemPlain> */}
+          <Image
+            src="./images/Black Gradient Minimalist Corporate Business Personal Profile New LinkedIn Banner-3.png"
+            width={900}
+            height={250}
+            alt="image"
+          />
         </NavBar>
         <AsideMenu
           isAsideMobileExpanded={isAsideMobileExpanded}
