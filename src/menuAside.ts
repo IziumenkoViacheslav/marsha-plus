@@ -9,7 +9,7 @@ const menuAside: MenuAsideItem[] = [
   },
   {
     href: '/token',
-    label: 'Token',
+    label: 'Marsha swap',
     icon: mdiEthereum,
   },
   {
