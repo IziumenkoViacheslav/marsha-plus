@@ -109,16 +109,6 @@ const Dashboard = () => {
         </SectionTitleLineWithButton>
 
         <CardBox className="mb-6">{chartData && <ChartLineSample data={chartData} />}</CardBox>
-
-        <SectionTitleLineWithButton icon={mdiAccountMultiple} title="Clients" />
-
-        <NotificationBar color="info" icon={mdiMonitorCellphone}>
-          <b>Responsive table.</b> Collapses on mobile
-        </NotificationBar>
-
-        {/* <CardBox hasTable>
-          <TableSampleClients />
-        </CardBox> */}
       </SectionMain>
     </>
   )
