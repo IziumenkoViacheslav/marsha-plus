@@ -49,7 +49,7 @@ export default function Error() {
 
               <BaseButtons>
                 <BaseButton type="submit" label="Login" color="info" />
-                <BaseButton href="/dashboard" label="Home" color="info" outline />
+                <BaseButton href="/" label="Home" color="info" outline />
               </BaseButtons>
             </Form>
           </Formik>
