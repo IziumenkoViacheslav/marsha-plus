@@ -116,9 +116,9 @@ const Dashboard = () => {
           <b>Responsive table.</b> Collapses on mobile
         </NotificationBar>
 
-        <CardBox hasTable>
+        {/* <CardBox hasTable>
           <TableSampleClients />
-        </CardBox>
+        </CardBox> */}
       </SectionMain>
     </>
   )
