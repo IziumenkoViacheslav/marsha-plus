@@ -19,6 +19,7 @@ import { toast } from 'react-hot-toast'
 import { useAppSelector } from '../stores/hooks'
 import { MarshaPlus } from '../../typechain-types/MarshaPlus'
 import Image from 'next/image'
+import CardBoxComponentEmpty from '../components/CardBoxComponentEmpty'
 
 const Token = () => {
   const { clients } = useSampleClients()
@@ -74,52 +75,7 @@ const Token = () => {
             ))}
           </div>
         </div>
-
-        <CardBox>
-          <Formik
-            initialValues={{
-              wolletTo: '',
-              amount: '',
-            }}
-            onSubmit={(values) =>
-              transferToWallet(contract, values.wolletTo, Number(values.amount))
-            }
-          >
-            <Form>
-              <FormField label="Transfer" icons={[mdiAccount, mdiMail]}>
-                <Field name="wolletTo" placeholder="to wallet" />
-                <Field name="amount" placeholder="amount" />
-              </FormField>
-              <BaseButtons>
-                <BaseButton type="submit" color="info" label="Send" />
-              </BaseButtons>
-            </Form>
-          </Formik>
-
-          <BaseDivider />
-
-          <Formik
-            initialValues={{
-              tokens: '',
-            }}
-            onSubmit={(values) => staking(Number(values.tokens))}
-          >
-            {/* <Form>
-              <FormField label="Stack for one year" icons={[mdiAccount]}>
-                <Field name="stakTokens" placeholder="amount" />
-              </FormField>
-              <BaseButtons>
-                <BaseButton type="submit" color="info" label="Stack" />
-              </BaseButtons>
-            </Form> */}
-          </Formik>
-
-          <BaseDivider />
-
-          <BaseButtons>
-            <BaseButton onClick={withdraw} color="info" label="Withdraw" />
-          </BaseButtons>
-        </CardBox>
+        <CardBoxComponentEmpty />
       </SectionMain>
     </>
   )
