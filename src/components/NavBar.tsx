@@ -22,6 +22,7 @@ type Props = {
 export default function NavBar({ menu, className = '', children }: Props) {
   const dispatch = useAppDispatch()
   const [isMenuNavBarActive, setIsMenuNavBarActive] = useState(false)
+  const [connectedToMetamask, setConnectedToMetamask] = useState(false)
   const router = useRouter()
 
   const handleMenuNavBarToggleClick = () => {
@@ -43,6 +44,7 @@ export default function NavBar({ menu, className = '', children }: Props) {
       )
       dispatch(setContract(contract))
       toast('connected to metamask', { style: { color: 'blue' } })
+      setConnectedToMetamask(true)
       router.push('/token')
     }
   }
@@ -64,6 +66,12 @@ export default function NavBar({ menu, className = '', children }: Props) {
           } max-h-screen-menu overflow-y-auto lg:overflow-visible absolute w-screen top-14 left-0 bg-gray-50 shadow-lg lg:w-auto lg:flex lg:static lg:shadow-none dark:bg-slate-800`}
         >
           {/* <NavBarMenuList menu={menu} /> */}
+
+          {!connectedToMetamask ? (
+            <p className="p-4">Connect to metamask </p>
+          ) : (
+            <p className="p-4"> You already connected to metamask! :)</p>
+          )}
           <Image
             alt={'metamask'}
             width={77}
