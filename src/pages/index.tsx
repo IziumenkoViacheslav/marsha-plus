@@ -45,9 +45,9 @@ const Dashboard = () => {
       <SectionMain>
         <div className="text-center w-full m-4">
           <Image
-            className="ml-14"
+            className="m-auto"
             src="./images/White Minimal with Textured Background NFT Twitter Header.png"
-            width={800}
+            width={600}
             height={250}
             alt="image"
           />
