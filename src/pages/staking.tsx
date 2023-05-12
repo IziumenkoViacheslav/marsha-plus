@@ -75,7 +75,7 @@ const Stacking = () => {
           </div>
         </div>
 
-        <div className="flex  xl:w-70">
+        <div className="flex sm:flex-row flex-col">
           <CardBox className="m-2">
             <Formik
               initialValues={{
