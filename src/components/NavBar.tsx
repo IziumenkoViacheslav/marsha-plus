@@ -66,7 +66,6 @@ export default function NavBar({ menu, className = '', children }: Props) {
           } max-h-screen-menu overflow-y-auto lg:overflow-visible absolute w-screen top-14 left-0 bg-gray-50 shadow-lg lg:w-auto lg:flex lg:static lg:shadow-none dark:bg-slate-800`}
         >
           {/* <NavBarMenuList menu={menu} /> */}
-
           {!connectedToMetamask ? (
             <p className="p-4">Connect to metamask </p>
           ) : (
@@ -74,9 +73,9 @@ export default function NavBar({ menu, className = '', children }: Props) {
           )}
           <Image
             alt={'metamask'}
-            width={77}
+            width={44}
             height={22}
-            src={'./images/metamask_logo.png'}
+            src={'./images/MetaMask_Fox.svg'}
             onClick={connectToMetamask}
             className="cursor-pointer"
           />
