@@ -96,14 +96,14 @@ const Token = () => {
             }}
             onSubmit={(values) => staking(Number(values.tokens))}
           >
-            <Form>
+            {/* <Form>
               <FormField label="Stack for one year" icons={[mdiAccount]}>
                 <Field name="stakTokens" placeholder="amount" />
               </FormField>
               <BaseButtons>
                 <BaseButton type="submit" color="info" label="Stack" />
               </BaseButtons>
-            </Form>
+            </Form> */}
           </Formik>
 
           <BaseDivider />
