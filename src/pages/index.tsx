@@ -22,6 +22,7 @@ import { sampleChartData } from '../components/ChartLineSample/config'
 import ChartLineSample from '../components/ChartLineSample'
 import { getPageTitle } from '../config'
 import Image from 'next/image'
+import BitcoinChartYear from '../components/BitcoinChartLineYear'
 
 const Dashboard = () => {
   const { clients } = useSampleClients()
@@ -101,7 +102,7 @@ const Dashboard = () => {
           <BaseButton icon={mdiReload} color="whiteDark" onClick={fillChartData} />
         </SectionTitleLineWithButton>
 
-        <CardBox className="mb-6">{chartData && <ChartLineSample data={chartData} />}</CardBox>
+        <CardBox className="mb-6">{chartData && <BitcoinChartYear />}</CardBox>
       </SectionMain>
     </>
   )

@@ -3,8 +3,6 @@ import {
   mdiCartOutline,
   mdiChartPie,
   mdiChartTimelineVariant,
-  mdiGithub,
-  mdiMonitorCellphone,
   mdiReload,
 } from '@mdi/js'
 import Head from 'next/head'
@@ -19,12 +17,9 @@ import { useSampleClients, useSampleTransactions } from '../hooks/sampleData'
 import CardBoxTransaction from '../components/CardBoxTransaction'
 import { Client, Transaction } from '../interfaces'
 import CardBoxClient from '../components/CardBoxClient'
-import SectionBannerStarOnGitHub from '../components/SectionBannerStarOnGitHub'
 import CardBox from '../components/CardBox'
 import { sampleChartData } from '../components/ChartLineSample/config'
 import ChartLineSample from '../components/ChartLineSample'
-import NotificationBar from '../components/NotificationBar'
-import TableSampleClients from '../components/TableSampleClients'
 import { getPageTitle } from '../config'
 
 const Dashboard = () => {
