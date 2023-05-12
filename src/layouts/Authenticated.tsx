@@ -79,7 +79,7 @@ export default function LayoutAuthenticated({ children }: Props) {
           >
             <BaseIcon path={mdiMenu} size="24" />
           </NavBarItemPlain>
-          <NavBarItemPlain useMargin>
+          {/* <NavBarItemPlain useMargin>
             <Formik
               initialValues={{
                 search: '',
@@ -92,7 +92,7 @@ export default function LayoutAuthenticated({ children }: Props) {
                 </FormField>
               </Form>
             </Formik>
-          </NavBarItemPlain>
+          </NavBarItemPlain> */}
         </NavBar>
         <AsideMenu
           isAsideMobileExpanded={isAsideMobileExpanded}

@@ -47,7 +47,7 @@ const Dashboard = () => {
         <title>{getPageTitle('Dashboard')}</title>
       </Head>
       <SectionMain>
-        <SectionTitleLineWithButton icon={mdiChartTimelineVariant} title="Overview" main>
+        {/* <SectionTitleLineWithButton icon={mdiChartTimelineVariant} title="Overview" main>
           <BaseButton
             href="https://github.com/justboil/admin-one-react-tailwind"
             target="_blank"
@@ -57,7 +57,7 @@ const Dashboard = () => {
             roundedFull
             small
           />
-        </SectionTitleLineWithButton>
+        </SectionTitleLineWithButton> */}
 
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 mb-6">
           <CardBoxWidget
