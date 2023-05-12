@@ -58,7 +58,7 @@ const Token = () => {
       <SectionMain>
         <Image
           src="./images/Black Gradient Minimalist Corporate Business Personal Profile New LinkedIn Banner-3.png"
-          width={900}
+          width={1100}
           height={250}
           alt="image"
         />
