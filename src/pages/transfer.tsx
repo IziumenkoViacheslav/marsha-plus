@@ -55,12 +55,7 @@ const Transfer = () => {
         <title>{getPageTitle('Crypto')}</title>
       </Head>
       <SectionMain>
-        <Image
-          src="./images/Black Gradient Minimalist Corporate Business Personal Profile New LinkedIn Banner-4.png"
-          width={1100}
-          height={250}
-          alt="image"
-        />
+        <Image src="./images/Wallet Transfer.png" width={1100} height={250} alt="image" />
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           <div className="flex flex-col justify-between">
             {transactions.map((transaction: Transaction) => (

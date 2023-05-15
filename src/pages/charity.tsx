@@ -14,12 +14,7 @@ const Charity = () => {
         <title>{getPageTitle('Charity')}</title>
       </Head>
       <SectionMain>
-        <Image
-          src="./images/Black Gradient Minimalist Corporate Business Personal Profile New LinkedIn Banner.png"
-          width={1100}
-          height={250}
-          alt="image"
-        />
+        <Image src="./images/Charity.png" width={1100} height={250} alt="image" />
         <CardBoxComponentEmpty />
       </SectionMain>
     </>

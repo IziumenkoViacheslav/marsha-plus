@@ -45,13 +45,7 @@ const Dashboard = () => {
       </Head>
       <SectionMain>
         <div className="text-center w-full m-4">
-          <Image
-            className="m-auto"
-            src="./images/White Minimal with Textured Background NFT Twitter Header.png"
-            width={600}
-            height={250}
-            alt="image"
-          />
+          <Image className="m-auto" src="./images/Home.png" width={1100} height={250} alt="image" />
         </div>
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 mb-6">
           <CardBoxWidget
@@ -98,7 +92,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <SectionTitleLineWithButton icon={mdiChartPie} title="Trends overview">
+        <SectionTitleLineWithButton icon={mdiChartPie} title="Prices">
           <BaseButton icon={mdiReload} color="whiteDark" onClick={fillChartData} />
         </SectionTitleLineWithButton>
 

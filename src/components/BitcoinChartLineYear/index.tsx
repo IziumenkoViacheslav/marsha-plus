@@ -7,6 +7,7 @@ import {
   LinearScale,
   CategoryScale,
   Tooltip,
+  ChartOptions,
 } from 'chart.js'
 import { Line } from 'react-chartjs-2'
 import { datasetObject } from '../ChartLineSample/config'
@@ -28,12 +29,17 @@ const BitcoinChartYear = () => {
         display: false,
       },
       x: {
-        display: false,
+        display: true,
       },
     },
     plugins: {
       legend: {
-        display: false,
+        display: true,
+        position: 'top' as const,
+        align: 'center' as const,
+        labels: {
+          color: 'white',
+        },
       },
     },
   }
@@ -44,8 +50,11 @@ const BitcoinChartYear = () => {
     )
       .then((res) => res.json())
       .then((data) => {
-        const dataset = datasetObject('info', data.prices.length)
+        const dataset: any = datasetObject('info', data.prices.length)
+        dataset.label = 'Bitcoin'
         dataset.data = data.prices.map((p) => Math.round(p[1]))
+        console.log({ dataset })
+
         setChartData({ labels, datasets: [dataset] })
       })
   }, [])
