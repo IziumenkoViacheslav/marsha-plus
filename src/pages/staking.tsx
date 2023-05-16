@@ -79,11 +79,27 @@ const Stacking = () => {
               onSubmit={(values) => staking(Number(values.tokens))}
             >
               <Form>
-                <FormField label="18 months staking" icons={[mdiAccount]}>
+                <table>
+                  <tr>
+                    <th>Token</th>
+                    <th>Type</th>
+                    <th>Month</th>
+                    <th>APY</th>
+                  </tr>
+                  <tr>
+                    <td>MRA</td>
+                    <td>Hard</td>
+                    <td>12</td>
+                    <td className="text-green-400">5%</td>
+                  </tr>
+                </table>
+
+                {/* <FormField label="MRA 18 Months Staking" icons={[mdiAccount]}> */}
+                <FormField label="" icons={[mdiAccount]}>
                   <Field name="stakTokens" placeholder="amount" />
                 </FormField>
                 <BaseButtons>
-                  <BaseButton type="submit" color="info" label="Stack" />
+                  <BaseButton type="submit" color="info" label="Approve" />
                 </BaseButtons>
               </Form>
             </Formik>
@@ -91,7 +107,7 @@ const Stacking = () => {
             <BaseDivider />
 
             <BaseButtons>
-              <BaseButton onClick={withdraw} color="info" label="Withdraw" />
+              <BaseButton onClick={withdraw} color="info" label="Unlock" />
             </BaseButtons>
           </CardBox>
           <CardBox className="m-2">
@@ -102,11 +118,27 @@ const Stacking = () => {
               onSubmit={(values) => staking(Number(values.tokens))}
             >
               <Form>
-                <FormField label="12 months staking" icons={[mdiAccount]}>
+                <table>
+                  <tr>
+                    <th>Token</th>
+                    <th>Type</th>
+                    <th>Month</th>
+                    <th>APY</th>
+                  </tr>
+                  <tr>
+                    <td>MRA</td>
+                    <td>Hard</td>
+                    <td>18</td>
+                    <td className="text-green-400">8%</td>
+                  </tr>
+                </table>
+
+                {/* <FormField label="MRA 18 Months Staking" icons={[mdiAccount]}> */}
+                <FormField label="" icons={[mdiAccount]}>
                   <Field name="stakTokens" placeholder="amount" />
                 </FormField>
                 <BaseButtons>
-                  <BaseButton type="submit" color="info" label="Stack" />
+                  <BaseButton type="submit" color="info" label="Approve" />
                 </BaseButtons>
               </Form>
             </Formik>
@@ -114,7 +146,7 @@ const Stacking = () => {
             <BaseDivider />
 
             <BaseButtons>
-              <BaseButton onClick={withdraw} color="info" label="Withdraw" />
+              <BaseButton onClick={withdraw} color="info" label="Unlock" />
             </BaseButtons>
           </CardBox>
           <CardBox className="m-2">
@@ -125,11 +157,27 @@ const Stacking = () => {
               onSubmit={(values) => staking(Number(values.tokens))}
             >
               <Form>
-                <FormField label="6 months staking" icons={[mdiAccount]}>
+                <table>
+                  <tr>
+                    <th>Token</th>
+                    <th>Type</th>
+                    <th>Month</th>
+                    <th>APY</th>
+                  </tr>
+                  <tr>
+                    <td>MRA</td>
+                    <td>Soft</td>
+                    <td>6</td>
+                    <td className="text-green-400">3%</td>
+                  </tr>
+                </table>
+
+                {/* <FormField label="MRA 18 Months Staking" icons={[mdiAccount]}> */}
+                <FormField label="" icons={[mdiAccount]}>
                   <Field name="stakTokens" placeholder="amount" />
                 </FormField>
                 <BaseButtons>
-                  <BaseButton type="submit" color="info" label="Stack" />
+                  <BaseButton type="submit" color="info" label="Approve" />
                 </BaseButtons>
               </Form>
             </Formik>
@@ -137,7 +185,7 @@ const Stacking = () => {
             <BaseDivider />
 
             <BaseButtons>
-              <BaseButton onClick={withdraw} color="info" label="Withdraw" />
+              <BaseButton onClick={withdraw} color="info" label="Unlock" />
             </BaseButtons>
           </CardBox>
         </div>
