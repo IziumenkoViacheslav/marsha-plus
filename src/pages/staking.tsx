@@ -133,7 +133,6 @@ const Stacking = () => {
                   </tr>
                 </table>
 
-                {/* <FormField label="MRA 18 Months Staking" icons={[mdiAccount]}> */}
                 <FormField label="" icons={[mdiAccount]}>
                   <Field name="stakTokens" placeholder="amount" />
                 </FormField>
