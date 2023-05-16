@@ -106,6 +106,12 @@ const Stacking = () => {
                     <BaseButton onClick={withdraw} color="info" label="Unlock" />
                   </BaseButtons>
                 </div>
+                <div className="text-sm mt-4">
+                  <p>. Lock-up period: 18 months</p>
+                  <p>. Staking deposit withdrawal: 365 days after</p>
+                  <p>. Staking is made Reward withdrawal: Any time</p>
+                  <p>. Reward level: 5% APY</p>
+                </div>
               </Form>
             </Formik>
           </CardBox>
@@ -142,6 +148,12 @@ const Stacking = () => {
                   <BaseButtons>
                     <BaseButton onClick={withdraw} color="info" label="Unlock" />
                   </BaseButtons>
+                </div>
+                <div className="text-sm mt-4">
+                  <p>. Lock-up period: 18 months</p>
+                  <p>. Staking deposit withdrawal: 180 days after</p>
+                  <p>. Staking is made Reward withdrawal: Any time</p>
+                  <p>. Reward level: 3% APY</p>
                 </div>
               </Form>
             </Formik>
@@ -180,6 +192,12 @@ const Stacking = () => {
                   <BaseButtons>
                     <BaseButton onClick={withdraw} color="info" label="Unlock" />
                   </BaseButtons>
+                </div>
+                <div className="text-sm mt-4">
+                  <p>. Lock-up period: No Lock-up period</p>
+                  <p>. Staking deposit withdrawal: 548 days after</p>
+                  <p>. Staking is made Reward withdrawal: Any time</p>
+                  <p>. Reward level: 8% APY</p>
                 </div>
               </Form>
             </Formik>
