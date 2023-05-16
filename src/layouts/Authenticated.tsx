@@ -85,7 +85,8 @@ export default function LayoutAuthenticated({ children }: Props) {
           onAsideLgClose={() => setIsAsideLgActive(false)}
         />
         {children}
-        <FooterBar>MARSHA+ Foundation. All rights reserved.</FooterBar>
+        {/* <FooterBar>MARSHA+ Foundation. All rights reserved.</FooterBar> */}
+        <div className="text-right text-sm mr-40">2023 MARSHA+ Foundation. All rights reserved</div>
       </div>
     </div>
   )
