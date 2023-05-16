@@ -1,9 +1,9 @@
 import {
   mdiAccountMultiple,
   mdiCartOutline,
-  mdiChartPie,
   mdiChartTimelineVariant,
   mdiReload,
+  mdiCurrencyBtc,
 } from '@mdi/js'
 import Head from 'next/head'
 import React, { useState } from 'react'
@@ -19,7 +19,6 @@ import { Client, Transaction } from '../interfaces'
 import CardBoxClient from '../components/CardBoxClient'
 import CardBox from '../components/CardBox'
 import { sampleChartData } from '../components/ChartLineSample/config'
-import ChartLineSample from '../components/ChartLineSample'
 import { getPageTitle } from '../config'
 import Image from 'next/image'
 import BitcoinChartYear from '../components/BitcoinChartLineYear'
@@ -92,7 +91,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <SectionTitleLineWithButton icon={mdiChartPie} title="Prices">
+        <SectionTitleLineWithButton icon={mdiCurrencyBtc} title="Bitcoin">
           <BaseButton icon={mdiReload} color="whiteDark" onClick={fillChartData} />
         </SectionTitleLineWithButton>
 
