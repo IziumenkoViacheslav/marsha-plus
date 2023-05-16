@@ -88,9 +88,9 @@ const Stacking = () => {
                   </tr>
                   <tr>
                     <td className="text-center">MRA</td>
-                    <td className="text-center">Hard</td>
+                    <td className="text-center font-bold">Hard</td>
                     <td className="text-center">12</td>
-                    <td className="text-green-400 text-center">5%</td>
+                    <td className="text-green-400 text-center font-bold">5%</td>
                   </tr>
                 </table>
 
@@ -98,17 +98,16 @@ const Stacking = () => {
                 <FormField label="" icons={[mdiAccount]}>
                   <Field name="stakTokens" placeholder="amount" />
                 </FormField>
-                <BaseButtons>
-                  <BaseButton type="submit" color="info" label="Approve" />
-                </BaseButtons>
+                <div className="flex flex-row justify-around">
+                  <BaseButtons>
+                    <BaseButton type="submit" color="info" label="Approve" />
+                  </BaseButtons>
+                  <BaseButtons>
+                    <BaseButton onClick={withdraw} color="info" label="Unlock" />
+                  </BaseButtons>
+                </div>
               </Form>
             </Formik>
-
-            <BaseDivider />
-
-            <BaseButtons>
-              <BaseButton onClick={withdraw} color="info" label="Unlock" />
-            </BaseButtons>
           </CardBox>
           <CardBox className="m-2">
             <Formik
@@ -127,26 +126,25 @@ const Stacking = () => {
                   </tr>
                   <tr>
                     <td className="text-center">MRA</td>
-                    <td className="text-center">Hard</td>
+                    <td className="text-center font-bold">Hard</td>
                     <td className="text-center">18</td>
-                    <td className="text-green-400 text-center">8%</td>
+                    <td className="text-green-400 text-center font-bold">8%</td>
                   </tr>
                 </table>
 
                 <FormField label="" icons={[mdiAccount]}>
                   <Field name="stakTokens" placeholder="amount" />
                 </FormField>
-                <BaseButtons>
-                  <BaseButton type="submit" color="info" label="Approve" />
-                </BaseButtons>
+                <div className="flex flex-row justify-around">
+                  <BaseButtons>
+                    <BaseButton type="submit" color="info" label="Approve" />
+                  </BaseButtons>
+                  <BaseButtons>
+                    <BaseButton onClick={withdraw} color="info" label="Unlock" />
+                  </BaseButtons>
+                </div>
               </Form>
             </Formik>
-
-            <BaseDivider />
-
-            <BaseButtons>
-              <BaseButton onClick={withdraw} color="info" label="Unlock" />
-            </BaseButtons>
           </CardBox>
           <CardBox className="m-2">
             <Formik
@@ -165,9 +163,9 @@ const Stacking = () => {
                   </tr>
                   <tr>
                     <td className="text-center">MRA</td>
-                    <td className="text-center">Soft</td>
+                    <td className="text-center font-bold">Soft</td>
                     <td className="text-center">6</td>
-                    <td className="text-green-400 text-center">3%</td>
+                    <td className="text-green-400 text-center font-bold">3%</td>
                   </tr>
                 </table>
 
@@ -175,17 +173,18 @@ const Stacking = () => {
                 <FormField label="" icons={[mdiAccount]}>
                   <Field name="stakTokens" placeholder="amount" />
                 </FormField>
-                <BaseButtons>
-                  <BaseButton type="submit" color="info" label="Approve" />
-                </BaseButtons>
+                <div className="flex flex-row justify-around">
+                  <BaseButtons>
+                    <BaseButton type="submit" color="info" label="Approve" />
+                  </BaseButtons>
+                  <BaseButtons>
+                    <BaseButton onClick={withdraw} color="info" label="Unlock" />
+                  </BaseButtons>
+                </div>
               </Form>
             </Formik>
 
             <BaseDivider />
-
-            <BaseButtons>
-              <BaseButton onClick={withdraw} color="info" label="Unlock" />
-            </BaseButtons>
           </CardBox>
         </div>
       </SectionMain>
