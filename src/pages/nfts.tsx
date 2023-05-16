@@ -14,7 +14,7 @@ const Nfts = () => {
         <title>{getPageTitle('Charity')}</title>
       </Head>
       <SectionMain>
-        <Image src="./images/NFTS.png" width={1100} height={250} alt="image" />
+        <Image src="./images/NFTS.png" width={1100} height={250} alt="image" className="w-full" />
         <CardBoxComponentEmpty />
       </SectionMain>
     </>
