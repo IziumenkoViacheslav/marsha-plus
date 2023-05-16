@@ -81,16 +81,16 @@ const Stacking = () => {
               <Form>
                 <table>
                   <tr>
-                    <th>Token</th>
-                    <th>Type</th>
-                    <th>Month</th>
-                    <th>APY</th>
+                    <th className="text-center">Token</th>
+                    <th className="text-center">Type</th>
+                    <th className="text-center">Month</th>
+                    <th className="text-center">APY</th>
                   </tr>
                   <tr>
-                    <td>MRA</td>
-                    <td>Hard</td>
-                    <td>12</td>
-                    <td className="text-green-400">5%</td>
+                    <td className="text-center">MRA</td>
+                    <td className="text-center">Hard</td>
+                    <td className="text-center">12</td>
+                    <td className="text-green-400 text-center">5%</td>
                   </tr>
                 </table>
 
@@ -120,16 +120,16 @@ const Stacking = () => {
               <Form>
                 <table>
                   <tr>
-                    <th>Token</th>
-                    <th>Type</th>
-                    <th>Month</th>
-                    <th>APY</th>
+                    <th className="text-center">Token</th>
+                    <th className="text-center">Type</th>
+                    <th className="text-center">Month</th>
+                    <th className="text-center">APY</th>
                   </tr>
                   <tr>
-                    <td>MRA</td>
-                    <td>Hard</td>
-                    <td>18</td>
-                    <td className="text-green-400">8%</td>
+                    <td className="text-center">MRA</td>
+                    <td className="text-center">Hard</td>
+                    <td className="text-center">18</td>
+                    <td className="text-green-400 text-center">8%</td>
                   </tr>
                 </table>
 
@@ -158,16 +158,16 @@ const Stacking = () => {
               <Form>
                 <table>
                   <tr>
-                    <th>Token</th>
-                    <th>Type</th>
-                    <th>Month</th>
-                    <th>APY</th>
+                    <th className="text-center">Token</th>
+                    <th className="text-center">Type</th>
+                    <th className="text-center">Month</th>
+                    <th className="text-center">APY</th>
                   </tr>
                   <tr>
-                    <td>MRA</td>
-                    <td>Soft</td>
-                    <td>6</td>
-                    <td className="text-green-400">3%</td>
+                    <td className="text-center">MRA</td>
+                    <td className="text-center">Soft</td>
+                    <td className="text-center">6</td>
+                    <td className="text-green-400 text-center">3%</td>
                   </tr>
                 </table>
 
