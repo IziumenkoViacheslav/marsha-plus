@@ -11,6 +11,7 @@ import FooterBar from '../components/FooterBar'
 import { setUser } from '../stores/mainSlice'
 import { useAppDispatch, useAppSelector } from '../stores/hooks'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 type Props = {
   children: ReactNode
@@ -86,7 +87,12 @@ export default function LayoutAuthenticated({ children }: Props) {
         />
         {children}
         {/* <FooterBar>MARSHA+ Foundation. All rights reserved.</FooterBar> */}
-        <div className="text-right text-sm mr-40">2023 MARSHA+ Foundation. All rights reserved</div>
+        <div className="text-center">
+          <Link href="https://marshafoundation.org" className="text-gray-400">
+            marshafoundation.org
+          </Link>
+        </div>
+        <div className="text-center text-sm text-gray-400">Marsha+ © 2023</div>
       </div>
     </div>
   )
