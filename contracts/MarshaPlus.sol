@@ -2,6 +2,7 @@
 pragma solidity ^0.8.0; // compiler version
 
 import { SafeMath } from './SafeMath.sol';
+import 'hardhat/console.sol';
 
 contract MarshaPlus {
   using SafeMath for uint256;
@@ -97,6 +98,7 @@ contract MarshaPlus {
   mapping(address => DateNumbersOfTokens) public stakingFromWalletDate;
 
   function depositTokenToStaking(uint _tokens, TypeOfStaking choice) public returns (bool) {
+    console.log('choise');
     require(balanceOf[msg.sender] >= _tokens, 'You have not enough tokens');
     require(
       !(stakingFromWalletDate[msg.sender].tokens > 0) &&
