@@ -116,6 +116,7 @@ const Stacking = () => {
                 </div>
               </Form>
             </Formik>
+            <BaseDivider />
           </CardBox>
           <CardBox className="m-2">
             <Formik
@@ -161,6 +162,7 @@ const Stacking = () => {
                 </div>
               </Form>
             </Formik>
+            <BaseDivider />
           </CardBox>
           <CardBox className="m-2">
             <Formik
