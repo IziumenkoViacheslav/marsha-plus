@@ -56,22 +56,43 @@ const Stacking = () => {
       </Head>
 
       <SectionMain>
-        <Image src="./images/Staking.png" width={999} height={250} alt="image" className="w-full" />
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <Image
+          src="./images/Staking.png"
+          width={999}
+          height={250}
+          alt="image"
+          className="w-full rounded-2xl"
+        />
+        {/* <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           <div className="flex flex-col justify-between">
             {transactions.map((transaction: Transaction) => (
               <CardBoxTransaction key={transaction.id} transaction={transaction} />
             ))}
           </div>
-          <div className="flex flex-col justify-between">
+          <div className="flex flex-col flex-wrap">
             {clientsListed.map((client: Client) => (
               <CardBoxClient key={client.id} client={client} />
             ))}
           </div>
-        </div>
+        </div> */}
 
-        <div className="flex sm:flex-row flex-col">
+        {/* <div className="flex sm:flex-row flex-col"> */}
+        <div className="flex flex-row flex-wrap justify-around">
           <CardBox className="m-2">
+            <table>
+              <tr className=" flex justify-around md:flex-none">
+                <th>Token</th>
+                <th>Type</th>
+                <th>Month</th>
+                <th>APY</th>
+              </tr>
+              <tr className="flex justify-around md:flex-none">
+                <td className="">MRA</td>
+                <td className=" font-bold border-none">Hard</td>
+                <td className=" border-none">12</td>
+                <td className="text-green-400  font-bold border-none">5%</td>
+              </tr>
+            </table>
             <Formik
               initialValues={{
                 tokens: '',
@@ -79,21 +100,6 @@ const Stacking = () => {
               onSubmit={(values) => staking(Number(values.tokens))}
             >
               <Form>
-                <table>
-                  <tr>
-                    <th className="text-center">Token</th>
-                    <th className="text-center">Type</th>
-                    <th className="text-center">Month</th>
-                    <th className="text-center">APY</th>
-                  </tr>
-                  <tr>
-                    <td className="text-center">MRA</td>
-                    <td className="text-center font-bold">Hard</td>
-                    <td className="text-center">12</td>
-                    <td className="text-green-400 text-center font-bold">5%</td>
-                  </tr>
-                </table>
-
                 {/* <FormField label="MRA 18 Months Staking" icons={[mdiAccount]}> */}
                 <FormField label="" icons={[mdiAccount]}>
                   <Field name="stakTokens" placeholder="amount" />
@@ -119,6 +125,20 @@ const Stacking = () => {
             <BaseDivider />
           </CardBox>
           <CardBox className="m-2">
+            <table>
+              <tr className=" flex justify-around md:flex-none">
+                <th className="text-center">Token</th>
+                <th className="text-center">Type</th>
+                <th className="text-center">Month</th>
+                <th className="text-center">APY</th>
+              </tr>
+              <tr className="flex justify-around md:flex-none">
+                <td className="text-center">MRA</td>
+                <td className="text-center font-bold border-none">Hard</td>
+                <td className="text-center border-none">18</td>
+                <td className="text-green-400 text-center font-bold border-none">8%</td>
+              </tr>
+            </table>
             <Formik
               initialValues={{
                 tokens: '',
@@ -126,21 +146,6 @@ const Stacking = () => {
               onSubmit={(values) => staking(Number(values.tokens))}
             >
               <Form>
-                <table>
-                  <tr>
-                    <th className="text-center">Token</th>
-                    <th className="text-center">Type</th>
-                    <th className="text-center">Month</th>
-                    <th className="text-center">APY</th>
-                  </tr>
-                  <tr>
-                    <td className="text-center">MRA</td>
-                    <td className="text-center font-bold">Hard</td>
-                    <td className="text-center">18</td>
-                    <td className="text-green-400 text-center font-bold">8%</td>
-                  </tr>
-                </table>
-
                 <FormField label="" icons={[mdiAccount]}>
                   <Field name="stakTokens" placeholder="amount" />
                 </FormField>
@@ -165,6 +170,21 @@ const Stacking = () => {
             <BaseDivider />
           </CardBox>
           <CardBox className="m-2">
+            <table>
+              <tr className=" flex justify-around md:flex-none">
+                <th className="text-center">Token</th>
+                <th className="text-center">Type</th>
+                <th className="text-center">Month</th>
+                <th className="text-center">APY</th>
+              </tr>
+              <tr className="flex justify-around md:flex-none">
+                <td className="text-center">MRA</td>
+                <td className="text-center font-bold border-none">Soft</td>
+                <td className="text-center border-none">6</td>
+                <td className="text-green-400 text-center font-bold border-none">3%</td>
+              </tr>
+            </table>
+
             <Formik
               initialValues={{
                 tokens: '',
@@ -172,21 +192,6 @@ const Stacking = () => {
               onSubmit={(values) => staking(Number(values.tokens))}
             >
               <Form>
-                <table>
-                  <tr>
-                    <th className="text-center">Token</th>
-                    <th className="text-center">Type</th>
-                    <th className="text-center">Month</th>
-                    <th className="text-center">APY</th>
-                  </tr>
-                  <tr>
-                    <td className="text-center">MRA</td>
-                    <td className="text-center font-bold">Soft</td>
-                    <td className="text-center">6</td>
-                    <td className="text-green-400 text-center font-bold">3%</td>
-                  </tr>
-                </table>
-
                 {/* <FormField label="MRA 18 Months Staking" icons={[mdiAccount]}> */}
                 <FormField label="" icons={[mdiAccount]}>
                   <Field name="stakTokens" placeholder="amount" />
