@@ -107,11 +107,12 @@ const Stacking = () => {
                   </BaseButtons>
                 </div>
                 <div className="text-sm mt-4">
-                  <p>. Lock-up period: 12 months</p>
-                  <p>. Staking deposit withdrawal: 365 days after</p>
-                  <p>. Staking is made Reward</p>
-                  <p>. Withdrawal: Any time</p>
-                  <p>. Reward level: 5% APY</p>
+                  <ul className="list-disc">
+                    <li>Lock-up period: 12 months</li>
+                    <li>Staking deposit withdrawal: 365 days after</li>
+                    <li>Reward Withdrawal: Any time</li>
+                    <li>Reward level: 5% APY</li>
+                  </ul>
                 </div>
               </Form>
             </Formik>
@@ -151,11 +152,12 @@ const Stacking = () => {
                   </BaseButtons>
                 </div>
                 <div className="text-sm mt-4">
-                  <p>. Lock-up period: 18 months</p>
-                  <p>. Staking deposit withdrawal: 548 days after</p>
-                  <p>. Staking is made Reward </p>
-                  <p>. Withdrawal: Any time</p>
-                  <p>. Reward level: 8% APY</p>
+                  <ul className="list-disc">
+                    <li>Lock-up period: 18 months</li>
+                    <li>Staking deposit withdrawal: 548 days after</li>
+                    <li>Reward Withdrawal: Any time</li>
+                    <li>Reward level: 8% APY</li>
+                  </ul>
                 </div>
               </Form>
             </Formik>
