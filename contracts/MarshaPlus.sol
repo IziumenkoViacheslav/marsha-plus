@@ -80,20 +80,31 @@ contract MarshaPlus {
     return true;
   }
 
+  enum TypeOfStaking {
+    HALF_YEAR,
+    YEAR,
+    YEAR_AND_HALF
+  }
+
   // struct {date: numbersForTokents}
   struct DateNumbersOfTokens {
-    uint date;
-    uint tokens;
+    uint256 date;
+    uint256 tokens;
+    TypeOfStaking typeOfStaking;
   }
   DateNumbersOfTokens dateNumbersOfTokens;
 
   mapping(address => DateNumbersOfTokens) public stakingFromWalletDate;
 
-  function depositTokenToStaking(uint _tokens) public returns (bool) {
+  function depositTokenToStaking(uint _tokens, TypeOfStaking choice) public returns (bool) {
     require(balanceOf[msg.sender] >= _tokens, 'You have not enough tokens');
-    require(!(stakingFromWalletDate[msg.sender].tokens > 0), 'You already have staking');
+    require(
+      !(stakingFromWalletDate[msg.sender].tokens > 0) &&
+        !(stakingFromWalletDate[msg.sender].typeOfStaking == choice),
+      'You already have staking'
+    );
     balanceOf[msg.sender] = balanceOf[msg.sender].sub(_tokens);
-    stakingFromWalletDate[msg.sender] = DateNumbersOfTokens(block.timestamp, _tokens);
+    stakingFromWalletDate[msg.sender] = DateNumbersOfTokens(block.timestamp, _tokens, choice);
     balanceOf[community] = balanceOf[community].add(_tokens);
     return true;
   }
