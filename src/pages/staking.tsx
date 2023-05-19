@@ -52,7 +52,7 @@ const Stacking = () => {
   return (
     <>
       <Head>
-        <title>{getPageTitle('Crypto')}</title>
+        <title>{getPageTitle('Staking')}</title>
       </Head>
 
       <SectionMain>
