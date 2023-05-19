@@ -61,7 +61,7 @@ const Stacking = () => {
           width={999}
           height={250}
           alt="image"
-          className="w-full rounded-2xl"
+          className="w-full rounded-2xl mb-4"
         />
         {/* <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           <div className="flex flex-col justify-between">
