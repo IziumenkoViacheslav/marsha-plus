@@ -196,11 +196,12 @@ const Stacking = () => {
                   </BaseButtons>
                 </div>
                 <div className="text-sm mt-4">
-                  <p>. Lock-up period: No Lock-up period</p>
-                  <p>. Staking deposit withdrawal: 182 days after</p>
-                  <p>. Staking is made Soft</p>
-                  <p>. Withdrawal: Any time</p>
-                  <p>. Reward level: 3% APY</p>
+                  <ul className="list-disc">
+                    <li>Lock-up period: No lock-up period</li>
+                    <li>Staking deposit withdrawal: Any Time</li>
+                    <li>Reward withdrawal: Every 30 days</li>
+                    <li>Reward level: 3% APY</li>
+                  </ul>
                 </div>
               </Form>
             </Formik>
