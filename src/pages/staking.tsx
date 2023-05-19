@@ -106,7 +106,7 @@ const Stacking = () => {
                     <BaseButton onClick={withdraw} color="info" label="Unlock" />
                   </BaseButtons>
                 </div>
-                <div className="text-sm mt-4">
+                <div className="text-sm mt-4 ml-4">
                   <ul className="list-disc">
                     <li>Lock-up period: 12 months</li>
                     <li>Staking deposit withdrawal: 365 days after</li>
@@ -151,7 +151,7 @@ const Stacking = () => {
                     <BaseButton onClick={withdraw} color="info" label="Unlock" />
                   </BaseButtons>
                 </div>
-                <div className="text-sm mt-4">
+                <div className="text-sm mt-4 ml-4">
                   <ul className="list-disc">
                     <li>Lock-up period: 18 months</li>
                     <li>Staking deposit withdrawal: 548 days after</li>
@@ -197,7 +197,7 @@ const Stacking = () => {
                     <BaseButton onClick={withdraw} color="info" label="Unlock" />
                   </BaseButtons>
                 </div>
-                <div className="text-sm mt-4">
+                <div className="text-sm mt-4 ml-4">
                   <ul className="list-disc">
                     <li>Lock-up period: No lock-up period</li>
                     <li>Staking deposit withdrawal: Any Time</li>
