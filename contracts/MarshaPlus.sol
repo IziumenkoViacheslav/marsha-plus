@@ -81,53 +81,54 @@ contract MarshaPlus {
     return true;
   }
 
-  enum TypeOfStaking {
-    HALF_YEAR,
-    YEAR,
-    YEAR_AND_HALF
-  }
-
-  // struct {date: numbersForTokents}
   struct DateNumbersOfTokens {
     uint256 date;
     uint256 tokens;
-    TypeOfStaking typeOfStaking;
   }
   DateNumbersOfTokens dateNumbersOfTokens;
 
-  mapping(address => DateNumbersOfTokens) public stakingFromWalletDate;
+  mapping(address => mapping(string => DateNumbersOfTokens)) public stakingByPeriod;
 
-  function depositTokenToStaking(uint _tokens, TypeOfStaking period) public returns (bool) {
-    console.log('choise');
+  function depositTokenToStaking(uint _tokens, string memory period) public returns (bool) {
     require(balanceOf[msg.sender] >= _tokens, 'You have not enough tokens');
     require(
-      !(stakingFromWalletDate[msg.sender].tokens > 0) &&
-        !(stakingFromWalletDate[msg.sender].typeOfStaking == period),
-      'You already have staking'
+      !(stakingByPeriod[msg.sender][period].tokens > 0),
+      'You already have staking on that period'
     );
+
     balanceOf[msg.sender] = balanceOf[msg.sender].sub(_tokens);
-    stakingFromWalletDate[msg.sender] = DateNumbersOfTokens(block.timestamp, _tokens, period);
+    stakingByPeriod[msg.sender][period] = DateNumbersOfTokens(block.timestamp, _tokens);
     balanceOf[community] = balanceOf[community].add(_tokens);
     return true;
   }
 
-  function withdrawTokenFromStaking() public returns (bool) {
+  function withdrawTokenFromStaking(string memory period) public returns (bool) {
     uint8 stakingPersentage = 7;
-    uint256 stakingSumm = stakingFromWalletDate[msg.sender].tokens.mul(stakingPersentage).div(100);
+    uint256 stakingSumm = stakingByPeriod[msg.sender][period].tokens.mul(stakingPersentage).div(
+      100
+    );
     // TODO unkoment before prod!!!
     // require((block.timestamp > stakingFromWalletDate[msg.sender].date.add(365 days), 'Not enough time pass for withdraw staking');
     require(
-      block.timestamp > stakingFromWalletDate[msg.sender].date.add(10 seconds),
+      block.timestamp > stakingByPeriod[msg.sender][period].date.add(10 seconds),
       'Not enough time pass for withdraw staking'
     );
-    balanceOf[community] = balanceOf[community].sub(stakingFromWalletDate[msg.sender].tokens).sub(
+    balanceOf[community] = balanceOf[community].sub(stakingByPeriod[msg.sender][period].tokens).sub(
       stakingSumm
     );
-    balanceOf[msg.sender] = balanceOf[msg.sender].add(stakingFromWalletDate[msg.sender].tokens).add(
-      stakingSumm
-    );
+    balanceOf[msg.sender] = balanceOf[msg.sender]
+      .add(stakingByPeriod[msg.sender][period].tokens)
+      .add(stakingSumm);
 
-    delete stakingFromWalletDate[msg.sender];
+    delete stakingByPeriod[msg.sender][period];
     return true;
   }
 }
+
+// {
+//   address: {
+//     YEAR: {date: 17.07.2023, amount: 1},
+//     HALF_YEAR: {date: 17.07.2023, amount: 1},
+//     YEAR_AND_HALF: {date: 17.07.2023, amount: 1}
+//   }
+// }
