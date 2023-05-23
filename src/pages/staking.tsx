@@ -5,10 +5,6 @@ import type { ReactElement } from 'react'
 import BaseButton from '../components/BaseButton'
 import LayoutAuthenticated from '../layouts/Authenticated'
 import SectionMain from '../components/SectionMain'
-import { useSampleClients, useSampleTransactions } from '../hooks/sampleData'
-import CardBoxTransaction from '../components/CardBoxTransaction'
-import { Client, Transaction } from '../interfaces'
-import CardBoxClient from '../components/CardBoxClient'
 import CardBox from '../components/CardBox'
 import { getPageTitle } from '../config'
 import { Formik, Form, Field } from 'formik'
@@ -21,9 +17,6 @@ import { MarshaPlus } from '../../typechain-types/MarshaPlus'
 import Image from 'next/image'
 
 const Stacking = () => {
-  const { clients } = useSampleClients()
-  const { transactions } = useSampleTransactions()
-  const clientsListed = clients.slice(0, 4)
   const contract: MarshaPlus = useAppSelector((state) => state.crypto.contract)
 
   async function transferToWallet(contract, walletTo: string, amount: number) {
@@ -42,11 +35,11 @@ const Stacking = () => {
     })
   }
 
-  async function staking(tokens: number) {
-    const stakedTokens = await contract.depositTokenToStaking(tokens)
+  async function staking(tokens: number, period: string) {
+    const stakedTokens = await contract.depositTokenToStaking(tokens, period)
   }
-  async function withdraw() {
-    const result = await contract.withdrawTokenFromStaking()
+  async function withdraw(period: string) {
+    const result = await contract.withdrawTokenFromStaking(period)
   }
 
   return (
@@ -97,7 +90,7 @@ const Stacking = () => {
               initialValues={{
                 tokens: '',
               }}
-              onSubmit={(values) => staking(Number(values.tokens))}
+              onSubmit={(values) => staking(Number(values.tokens), 'YEAR')}
             >
               <Form>
                 {/* <FormField label="MRA 18 Months Staking" icons={[mdiAccount]}> */}
@@ -106,10 +99,10 @@ const Stacking = () => {
                 </FormField>
                 <div className="flex flex-row justify-around">
                   <BaseButtons>
-                    <BaseButton type="submit" color="info" label="Approve" />
+                    <BaseButton type="submit" color="info" label="Stake" />
                   </BaseButtons>
                   <BaseButtons>
-                    <BaseButton onClick={withdraw} color="info" label="Unlock" />
+                    <BaseButton onClick={() => withdraw('YEAR')} color="info" label="Reward" />
                   </BaseButtons>
                 </div>
                 <div className="text-sm mt-4 ml-4">
@@ -143,7 +136,7 @@ const Stacking = () => {
               initialValues={{
                 tokens: '',
               }}
-              onSubmit={(values) => staking(Number(values.tokens))}
+              onSubmit={(values) => staking(Number(values.tokens), 'YEAR_AND_HALF')}
             >
               <Form>
                 <FormField label="" icons={[mdiAccount]}>
@@ -151,10 +144,14 @@ const Stacking = () => {
                 </FormField>
                 <div className="flex flex-row justify-around">
                   <BaseButtons>
-                    <BaseButton type="submit" color="info" label="Approve" />
+                    <BaseButton type="submit" color="info" label="Stake" />
                   </BaseButtons>
                   <BaseButtons>
-                    <BaseButton onClick={withdraw} color="info" label="Unlock" />
+                    <BaseButton
+                      onClick={() => withdraw('YEAR_AND_HALF')}
+                      color="info"
+                      label="Reward"
+                    />
                   </BaseButtons>
                 </div>
                 <div className="text-sm mt-4 ml-4">
@@ -189,7 +186,7 @@ const Stacking = () => {
               initialValues={{
                 tokens: '',
               }}
-              onSubmit={(values) => staking(Number(values.tokens))}
+              onSubmit={(values) => staking(Number(values.tokens), 'HALF_YEAR')}
             >
               <Form>
                 {/* <FormField label="MRA 18 Months Staking" icons={[mdiAccount]}> */}
@@ -198,10 +195,10 @@ const Stacking = () => {
                 </FormField>
                 <div className="flex flex-row justify-around">
                   <BaseButtons>
-                    <BaseButton type="submit" color="info" label="Approve" />
+                    <BaseButton type="submit" color="info" label="Stake" />
                   </BaseButtons>
                   <BaseButtons>
-                    <BaseButton onClick={withdraw} color="info" label="Unlock" />
+                    <BaseButton onClick={() => withdraw} color="info" label="Reward" />
                   </BaseButtons>
                 </div>
                 <div className="text-sm mt-4 ml-4">
