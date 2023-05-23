@@ -36,10 +36,20 @@ const Stacking = () => {
   }
 
   async function staking(tokens: number, period: string) {
+    console.log('staking start')
+    console.log({ tokens })
+    console.log({ period })
+
     const stakedTokens = await contract.depositTokenToStaking(tokens, period)
+    console.log({ stakedTokens })
+    const resTrans = await stakedTokens.wait()
+    console.log({ resTrans })
   }
   async function withdraw(period: string) {
     const result = await contract.withdrawTokenFromStaking(period)
+    console.log({ result })
+    const resTrans = await result.wait()
+    console.log({ resTrans })
   }
 
   return (
@@ -56,20 +66,7 @@ const Stacking = () => {
           alt="image"
           className="w-full rounded-2xl mb-4"
         />
-        {/* <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-          <div className="flex flex-col justify-between">
-            {transactions.map((transaction: Transaction) => (
-              <CardBoxTransaction key={transaction.id} transaction={transaction} />
-            ))}
-          </div>
-          <div className="flex flex-col flex-wrap">
-            {clientsListed.map((client: Client) => (
-              <CardBoxClient key={client.id} client={client} />
-            ))}
-          </div>
-        </div> */}
 
-        {/* <div className="flex sm:flex-row flex-col"> */}
         <div className="flex flex-row flex-wrap justify-around">
           <CardBox className="m-2">
             <table>
@@ -198,7 +195,7 @@ const Stacking = () => {
                     <BaseButton type="submit" color="info" label="Stake" />
                   </BaseButtons>
                   <BaseButtons>
-                    <BaseButton onClick={() => withdraw} color="info" label="Reward" />
+                    <BaseButton onClick={() => withdraw('HALF_YEAR')} color="info" label="Reward" />
                   </BaseButtons>
                 </div>
                 <div className="text-sm mt-4 ml-4">
