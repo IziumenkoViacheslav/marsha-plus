@@ -23,7 +23,6 @@ export default function NavBar({ menu, className = '', children }: Props) {
   const dispatch = useAppDispatch()
   const [isMenuNavBarActive, setIsMenuNavBarActive] = useState(false)
   const [connectedToMetamask, setConnectedToMetamask] = useState(false)
-  const router = useRouter()
 
   const handleMenuNavBarToggleClick = () => {
     setIsMenuNavBarActive(!isMenuNavBarActive)
@@ -45,7 +44,6 @@ export default function NavBar({ menu, className = '', children }: Props) {
       dispatch(setContract(contract))
       toast('connected to metamask', { style: { color: 'blue' } })
       setConnectedToMetamask(true)
-      router.push('/token')
     }
   }
 
