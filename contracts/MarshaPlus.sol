@@ -53,9 +53,7 @@ contract MarshaPlus {
     require(_value >= 0, 'Value must be greater or equal to 0');
     require(senderBalance > _value, 'Not enough balance');
 
-    // balanceOf[msg.sender] = senderBalance - _value;
     balanceOf[msg.sender] = senderBalance.sub(_value);
-    // balanceOf[_to] = receiverBalance + _value;
     balanceOf[_to] = receiverBalance.add(_value);
 
     emit Transfer(msg.sender, _to, _value);
@@ -64,7 +62,6 @@ contract MarshaPlus {
   }
 
   function burn() private returns (bool success) {
-    // uint256 burnThreePersentTotalSupply = (totalSupply * 3) / 100;
     uint256 burnThreePersentTotalSupply = totalSupply.mul(3).div(100);
     if (
       // TODO: uncoment before prod!!
@@ -89,11 +86,25 @@ contract MarshaPlus {
 
   mapping(address => mapping(string => DateNumbersOfTokens)) public stakingByPeriod;
 
+  // {
+  //   address: {
+  //     YEAR: {date: 17.07.2023, amount: 1},
+  //     HALF_YEAR: {date: 17.07.2023, amount: 1},
+  //     YEAR_AND_HALF: {date: 17.07.2023, amount: 1}
+  //   }
+  // }
+
   function depositTokenToStaking(uint _tokens, string memory period) public returns (bool) {
     require(balanceOf[msg.sender] >= _tokens, 'You have not enough tokens');
     require(
       !(stakingByPeriod[msg.sender][period].tokens > 0),
       'You already have staking on that period'
+    );
+    require(
+      (keccak256(bytes(period)) == keccak256(bytes('HALF_YEAR'))) ||
+        (keccak256(bytes(period)) == keccak256(bytes('YEAR'))) ||
+        (keccak256(bytes(period)) == keccak256(bytes('YEAR_AND_HALF'))),
+      'Period must be HALF_YEAR, YEAR or YEAR_AND_HALF'
     );
 
     balanceOf[msg.sender] = balanceOf[msg.sender].sub(_tokens);
@@ -107,8 +118,14 @@ contract MarshaPlus {
     uint256 stakingSumm = stakingByPeriod[msg.sender][period].tokens.mul(stakingPersentage).div(
       100
     );
-    // TODO unkoment before prod!!!
-    // require((block.timestamp > stakingFromWalletDate[msg.sender].date.add(365 days), 'Not enough time pass for withdraw staking');
+    require(
+      (keccak256(bytes(period)) == keccak256(bytes('HALF_YEAR'))) ||
+        (keccak256(bytes(period)) == keccak256(bytes('YEAR'))) ||
+        (keccak256(bytes(period)) == keccak256(bytes('YEAR_AND_HALF'))),
+      'Period must be HALF_YEAR, YEAR or YEAR_AND_HALF'
+    );
+    //TODO uncoment before prod!!!
+    // require((block.timestamp > stakingByPeriod[msg.sender][period].date.add(365 days), 'Not enough time pass for withdraw staking');
     require(
       block.timestamp > stakingByPeriod[msg.sender][period].date.add(10 seconds),
       'Not enough time pass for withdraw staking'
@@ -124,11 +141,3 @@ contract MarshaPlus {
     return true;
   }
 }
-
-// {
-//   address: {
-//     YEAR: {date: 17.07.2023, amount: 1},
-//     HALF_YEAR: {date: 17.07.2023, amount: 1},
-//     YEAR_AND_HALF: {date: 17.07.2023, amount: 1}
-//   }
-// }
