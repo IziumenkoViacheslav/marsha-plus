@@ -42,13 +42,6 @@ const Transfer = () => {
     })
   }
 
-  async function staking(tokens: number) {
-    const stakedTokens = await contract.depositTokenToStaking(tokens)
-  }
-  async function withdraw() {
-    const result = await contract.withdrawTokenFromStaking()
-  }
-
   return (
     <>
       <Head>
