@@ -97,16 +97,16 @@ contract MarshaPlus {
 
   mapping(address => DateNumbersOfTokens) public stakingFromWalletDate;
 
-  function depositTokenToStaking(uint _tokens, TypeOfStaking choice) public returns (bool) {
+  function depositTokenToStaking(uint _tokens, TypeOfStaking period) public returns (bool) {
     console.log('choise');
     require(balanceOf[msg.sender] >= _tokens, 'You have not enough tokens');
     require(
       !(stakingFromWalletDate[msg.sender].tokens > 0) &&
-        !(stakingFromWalletDate[msg.sender].typeOfStaking == choice),
+        !(stakingFromWalletDate[msg.sender].typeOfStaking == period),
       'You already have staking'
     );
     balanceOf[msg.sender] = balanceOf[msg.sender].sub(_tokens);
-    stakingFromWalletDate[msg.sender] = DateNumbersOfTokens(block.timestamp, _tokens, choice);
+    stakingFromWalletDate[msg.sender] = DateNumbersOfTokens(block.timestamp, _tokens, period);
     balanceOf[community] = balanceOf[community].add(_tokens);
     return true;
   }
