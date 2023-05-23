@@ -59,6 +59,7 @@ export default function AsideMenuLayer({ menu, className = '', ...props }: Props
             width={200}
             height={50}
             alt="image"
+            className="pl-4"
           />
           <AsideMenuList menu={menu} />
         </div>
