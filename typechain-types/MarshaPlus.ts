@@ -33,18 +33,18 @@ export interface MarshaPlusInterface extends utils.Interface {
     "balanceOf(address)": FunctionFragment;
     "community()": FunctionFragment;
     "decimals()": FunctionFragment;
-    "depositTokenToStaking(uint256)": FunctionFragment;
+    "depositTokenToStaking(uint256,string)": FunctionFragment;
     "developer()": FunctionFragment;
     "foundation()": FunctionFragment;
     "marketing()": FunctionFragment;
     "owner()": FunctionFragment;
-    "stakingFromWalletDate(address)": FunctionFragment;
+    "stakingByPeriod(address,string)": FunctionFragment;
     "technical()": FunctionFragment;
     "token_name()": FunctionFragment;
     "token_symbol()": FunctionFragment;
     "totalSupply()": FunctionFragment;
     "transferTo(address,uint256)": FunctionFragment;
-    "withdrawTokenFromStaking()": FunctionFragment;
+    "withdrawTokenFromStaking(string)": FunctionFragment;
   };
 
   getFunction(
@@ -58,7 +58,7 @@ export interface MarshaPlusInterface extends utils.Interface {
       | "foundation"
       | "marketing"
       | "owner"
-      | "stakingFromWalletDate"
+      | "stakingByPeriod"
       | "technical"
       | "token_name"
       | "token_symbol"
@@ -76,7 +76,7 @@ export interface MarshaPlusInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "decimals", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "depositTokenToStaking",
-    values: [PromiseOrValue<BigNumberish>]
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(functionFragment: "developer", values?: undefined): string;
   encodeFunctionData(
@@ -86,8 +86,8 @@ export interface MarshaPlusInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "marketing", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "stakingFromWalletDate",
-    values: [PromiseOrValue<string>]
+    functionFragment: "stakingByPeriod",
+    values: [PromiseOrValue<string>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(functionFragment: "technical", values?: undefined): string;
   encodeFunctionData(
@@ -108,7 +108,7 @@ export interface MarshaPlusInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "withdrawTokenFromStaking",
-    values?: undefined
+    values: [PromiseOrValue<string>]
   ): string;
 
   decodeFunctionResult(functionFragment: "advisor", data: BytesLike): Result;
@@ -124,7 +124,7 @@ export interface MarshaPlusInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "marketing", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "stakingFromWalletDate",
+    functionFragment: "stakingByPeriod",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "technical", data: BytesLike): Result;
@@ -202,6 +202,7 @@ export interface MarshaPlus extends BaseContract {
 
     depositTokenToStaking(
       _tokens: PromiseOrValue<BigNumberish>,
+      period: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -213,8 +214,9 @@ export interface MarshaPlus extends BaseContract {
 
     owner(overrides?: CallOverrides): Promise<[string]>;
 
-    stakingFromWalletDate(
+    stakingByPeriod(
       arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[BigNumber, BigNumber] & { date: BigNumber; tokens: BigNumber }>;
 
@@ -233,6 +235,7 @@ export interface MarshaPlus extends BaseContract {
     ): Promise<ContractTransaction>;
 
     withdrawTokenFromStaking(
+      period: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
@@ -250,6 +253,7 @@ export interface MarshaPlus extends BaseContract {
 
   depositTokenToStaking(
     _tokens: PromiseOrValue<BigNumberish>,
+    period: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -261,8 +265,9 @@ export interface MarshaPlus extends BaseContract {
 
   owner(overrides?: CallOverrides): Promise<string>;
 
-  stakingFromWalletDate(
+  stakingByPeriod(
     arg0: PromiseOrValue<string>,
+    arg1: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<[BigNumber, BigNumber] & { date: BigNumber; tokens: BigNumber }>;
 
@@ -281,6 +286,7 @@ export interface MarshaPlus extends BaseContract {
   ): Promise<ContractTransaction>;
 
   withdrawTokenFromStaking(
+    period: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -298,6 +304,7 @@ export interface MarshaPlus extends BaseContract {
 
     depositTokenToStaking(
       _tokens: PromiseOrValue<BigNumberish>,
+      period: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
@@ -309,8 +316,9 @@ export interface MarshaPlus extends BaseContract {
 
     owner(overrides?: CallOverrides): Promise<string>;
 
-    stakingFromWalletDate(
+    stakingByPeriod(
       arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[BigNumber, BigNumber] & { date: BigNumber; tokens: BigNumber }>;
 
@@ -328,7 +336,10 @@ export interface MarshaPlus extends BaseContract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
-    withdrawTokenFromStaking(overrides?: CallOverrides): Promise<boolean>;
+    withdrawTokenFromStaking(
+      period: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
   };
 
   filters: {
@@ -358,6 +369,7 @@ export interface MarshaPlus extends BaseContract {
 
     depositTokenToStaking(
       _tokens: PromiseOrValue<BigNumberish>,
+      period: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -369,8 +381,9 @@ export interface MarshaPlus extends BaseContract {
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
-    stakingFromWalletDate(
+    stakingByPeriod(
       arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -389,6 +402,7 @@ export interface MarshaPlus extends BaseContract {
     ): Promise<BigNumber>;
 
     withdrawTokenFromStaking(
+      period: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
@@ -407,6 +421,7 @@ export interface MarshaPlus extends BaseContract {
 
     depositTokenToStaking(
       _tokens: PromiseOrValue<BigNumberish>,
+      period: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -418,8 +433,9 @@ export interface MarshaPlus extends BaseContract {
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    stakingFromWalletDate(
+    stakingByPeriod(
       arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -438,6 +454,7 @@ export interface MarshaPlus extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     withdrawTokenFromStaking(
+      period: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
