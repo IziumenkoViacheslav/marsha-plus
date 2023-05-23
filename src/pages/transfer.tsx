@@ -19,6 +19,7 @@ import { toast } from 'react-hot-toast'
 import { useAppSelector } from '../stores/hooks'
 import { MarshaPlus } from '../../typechain-types/MarshaPlus'
 import Image from 'next/image'
+import walletTransferImg from '../../public/images/WalletTransfer.png'
 
 const Transfer = () => {
   const { clients } = useSampleClients()
@@ -48,13 +49,7 @@ const Transfer = () => {
         <title>{getPageTitle('Crypto')}</title>
       </Head>
       <SectionMain>
-        <Image
-          src="./images/Wallet Transfer.png"
-          width={1100}
-          height={250}
-          alt="image"
-          className="w-full"
-        />
+        <Image src={walletTransferImg} alt="image" className="w-full rounded-2xl" />
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           <div className="flex flex-col justify-between">
             {transactions.map((transaction: Transaction) => (
