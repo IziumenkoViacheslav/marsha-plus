@@ -30,20 +30,36 @@ const Stacking = () => {
     }
     const transaction = contract && (await contract.transferTo(walletTo, amount))
     const res = await transaction.wait()
+    console.log({ res })
+
     toast(`Congratulation, you successfuly transfered ${amount} Marsha+ tokens!`, {
       style: { color: 'green', width: '3xl' },
     })
   }
 
-  async function staking(tokens: number, period: string) {
-    console.log('staking start')
-    console.log({ tokens })
-    console.log({ period })
+  async function staking(amount: number, period: string) {
+    if (!amount) {
+      toast('amount must be greather then 0!', { style: { color: 'red' } })
+      return null
+    }
+    if (!contract) {
+      toast('connected to metamask', { style: { color: 'blue' } })
+    }
 
-    const stakedTokens = await contract.depositTokenToStaking(tokens, period)
-    console.log({ stakedTokens })
-    const resTrans = await stakedTokens.wait()
-    console.log({ resTrans })
+    console.log({ amount })
+    console.log({ period })
+    try {
+      const stakedTokens = await contract.depositTokenToStaking(amount, period)
+      console.log({ stakedTokens })
+      const resTrans = await stakedTokens.wait()
+      console.log({ resTrans })
+      const signerAdress = await contract.signer.getAddress()
+      console.log({ signerAdress })
+
+      console.log(await contract.stakingByPeriod.call(signerAdress, 'YEAR'))
+    } catch (error) {
+      console.log({ error })
+    }
   }
   async function withdraw(period: string) {
     const result = await contract.withdrawTokenFromStaking(period)
@@ -85,14 +101,17 @@ const Stacking = () => {
             </table>
             <Formik
               initialValues={{
-                tokens: '',
+                amount: 0,
               }}
-              onSubmit={(values) => staking(Number(values.tokens), 'YEAR')}
+              onSubmit={(values) => {
+                console.log({ values })
+                staking(Number(values.amount), 'YEAR')
+              }}
             >
               <Form>
                 {/* <FormField label="MRA 18 Months Staking" icons={[mdiAccount]}> */}
                 <FormField label="" icons={[mdiAccount]}>
-                  <Field name="stakTokens" placeholder="amount" />
+                  <Field name="amount" placeholder="amount" />
                 </FormField>
                 <div className="flex flex-row justify-around">
                   <BaseButtons>
@@ -131,13 +150,13 @@ const Stacking = () => {
             </table>
             <Formik
               initialValues={{
-                tokens: '',
+                amount: 0,
               }}
-              onSubmit={(values) => staking(Number(values.tokens), 'YEAR_AND_HALF')}
+              onSubmit={(values) => staking(Number(values.amount), 'YEAR_AND_HALF')}
             >
               <Form>
                 <FormField label="" icons={[mdiAccount]}>
-                  <Field name="stakTokens" placeholder="amount" />
+                  <Field name="amount" placeholder="amount" />
                 </FormField>
                 <div className="flex flex-row justify-around">
                   <BaseButtons>
@@ -181,14 +200,14 @@ const Stacking = () => {
 
             <Formik
               initialValues={{
-                tokens: '',
+                amount: 0,
               }}
-              onSubmit={(values) => staking(Number(values.tokens), 'HALF_YEAR')}
+              onSubmit={(values) => staking(Number(values.amount), 'HALF_YEAR')}
             >
               <Form>
                 {/* <FormField label="MRA 18 Months Staking" icons={[mdiAccount]}> */}
                 <FormField label="" icons={[mdiAccount]}>
-                  <Field name="stakTokens" placeholder="amount" />
+                  <Field name="amount" placeholder="amount" />
                 </FormField>
                 <div className="flex flex-row justify-around">
                   <BaseButtons>
