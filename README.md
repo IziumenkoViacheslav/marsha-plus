@@ -15,3 +15,4 @@ npx hardhat run scripts/deploy.ts
 npx hardhat node
 npx hardhat run ./scripts/deploy.ts --network local
 npx hardhat clean
+npx hardhat compile
