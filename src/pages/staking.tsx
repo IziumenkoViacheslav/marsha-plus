@@ -58,7 +58,7 @@ const Stacking = () => {
       const stakingMap = await contract.stakingByPeriod(signerAdress, 'YEAR')
       console.log({ stakingMap })
       const dateStart = stakingMap.date.toNumber()
-      console.log(new Date(dateStart))
+      console.log(new Date(dateStart).toDateString())
       const tokensStaked = stakingMap.tokens.toNumber()
       console.log({ tokensStaked })
     } catch (error) {
