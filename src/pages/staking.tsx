@@ -19,24 +19,6 @@ import Image from 'next/image'
 const Stacking = () => {
   const contract: MarshaPlus = useAppSelector((state) => state.crypto.contract)
 
-  async function transferToWallet(contract, walletTo: string, amount: number) {
-    if (!contract) {
-      toast('Connect to metamask first and try again', { style: { color: 'red' } })
-      return null
-    }
-    if (!amount) {
-      toast('amount must be greather then 0!', { style: { color: 'red' } })
-      return null
-    }
-    const transaction = contract && (await contract.transferTo(walletTo, amount))
-    const res = await transaction.wait()
-    console.log({ res })
-
-    toast(`Congratulation, you successfuly transfered ${amount} Marsha+ tokens!`, {
-      style: { color: 'green', width: '3xl' },
-    })
-  }
-
   async function staking(amount: number, period: string) {
     if (!amount) {
       toast('amount must be greather then 0!', { style: { color: 'red' } })
