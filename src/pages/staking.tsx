@@ -50,14 +50,19 @@ const Stacking = () => {
     console.log({ period })
     try {
       const stakedTokens = await contract.depositTokenToStaking(amount, period)
-      console.log({ stakedTokens })
       const resTrans = await stakedTokens.wait()
       console.log({ resTrans })
       const signerAdress = await contract.signer.getAddress()
       console.log({ signerAdress })
 
-      console.log(await contract.stakingByPeriod.call(signerAdress, 'YEAR'))
+      const stakingMap = await contract.stakingByPeriod(signerAdress, 'YEAR')
+      console.log({ stakingMap })
+      const dateStart = stakingMap.date.toNumber()
+      console.log(new Date(dateStart))
+      const tokensStaked = stakingMap.tokens.toNumber()
+      console.log({ tokensStaked })
     } catch (error) {
+      console.log(error?.data?.message)
       console.log({ error })
     }
   }
