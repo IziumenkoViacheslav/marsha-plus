@@ -201,8 +201,8 @@ export interface MarshaPlus extends BaseContract {
     decimals(overrides?: CallOverrides): Promise<[number]>;
 
     depositTokenToStaking(
-      _tokens: PromiseOrValue<BigNumberish>,
-      period: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _period: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -252,8 +252,8 @@ export interface MarshaPlus extends BaseContract {
   decimals(overrides?: CallOverrides): Promise<number>;
 
   depositTokenToStaking(
-    _tokens: PromiseOrValue<BigNumberish>,
-    period: PromiseOrValue<string>,
+    _amount: PromiseOrValue<BigNumberish>,
+    _period: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -303,8 +303,8 @@ export interface MarshaPlus extends BaseContract {
     decimals(overrides?: CallOverrides): Promise<number>;
 
     depositTokenToStaking(
-      _tokens: PromiseOrValue<BigNumberish>,
-      period: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _period: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
@@ -368,8 +368,8 @@ export interface MarshaPlus extends BaseContract {
     decimals(overrides?: CallOverrides): Promise<BigNumber>;
 
     depositTokenToStaking(
-      _tokens: PromiseOrValue<BigNumberish>,
-      period: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _period: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -420,8 +420,8 @@ export interface MarshaPlus extends BaseContract {
     decimals(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     depositTokenToStaking(
-      _tokens: PromiseOrValue<BigNumberish>,
-      period: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _period: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

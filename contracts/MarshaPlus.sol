@@ -94,22 +94,22 @@ contract MarshaPlus {
   //   }
   // }
 
-  function depositTokenToStaking(uint _tokens, string memory period) public returns (bool) {
-    require(balanceOf[msg.sender] >= _tokens, 'You have not enough tokens');
+  function depositTokenToStaking(uint _amount, string memory _period) public returns (bool) {
+    require(balanceOf[msg.sender] >= _amount, 'You have not enough tokens');
     require(
-      !(stakingByPeriod[msg.sender][period].tokens > 0),
-      'You already have staking on that period'
+      !(stakingByPeriod[msg.sender][_period].tokens > 0),
+      'You already have staking on that _period'
     );
     require(
-      (keccak256(bytes(period)) == keccak256(bytes('HALF_YEAR'))) ||
-        (keccak256(bytes(period)) == keccak256(bytes('YEAR'))) ||
-        (keccak256(bytes(period)) == keccak256(bytes('YEAR_AND_HALF'))),
+      (keccak256(bytes(_period)) == keccak256(bytes('HALF_YEAR'))) ||
+        (keccak256(bytes(_period)) == keccak256(bytes('YEAR'))) ||
+        (keccak256(bytes(_period)) == keccak256(bytes('YEAR_AND_HALF'))),
       'Period must be HALF_YEAR, YEAR or YEAR_AND_HALF'
     );
 
-    balanceOf[msg.sender] = balanceOf[msg.sender].sub(_tokens);
-    stakingByPeriod[msg.sender][period] = DateNumbersOfTokens(block.timestamp, _tokens);
-    balanceOf[community] = balanceOf[community].add(_tokens);
+    balanceOf[msg.sender] = balanceOf[msg.sender].sub(_amount);
+    stakingByPeriod[msg.sender][_period] = DateNumbersOfTokens(block.timestamp, _amount);
+    balanceOf[community] = balanceOf[community].add(_amount);
     return true;
   }
 
