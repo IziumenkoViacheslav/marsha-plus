@@ -44,8 +44,13 @@ const Stacking = () => {
       const tokensStaked = stakingMap.tokens.toNumber()
       console.log({ tokensStaked })
     } catch (error) {
-      console.log(error?.data?.message)
       console.log({ error })
+      console.log(error?.data?.message)
+      if (error?.data?.message) {
+        toast(error?.data?.message, { style: { color: 'red' } })
+      } else {
+        toast(error?.message, { style: { color: 'red' } })
+      }
     }
   }
   async function withdraw(period: string) {
