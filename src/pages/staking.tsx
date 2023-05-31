@@ -31,11 +31,19 @@ const Stacking = () => {
     console.log({ amount })
     console.log({ period })
     try {
+      const signerAdress = await contract.signer.getAddress()
+      const balans = await contract.balanceOf(signerAdress)
+      console.log({ balans })
+
+      if (Number(balans) < amount) {
+        toast(`You balance is ${balans}, it is not enaph to staking ${amount} Marsha+ tokens`, {
+          style: { color: 'red' },
+        })
+        return null
+      }
       const stakedTokens = await contract.depositTokenToStaking(amount, period)
       const resTrans = await stakedTokens.wait()
       console.log({ resTrans })
-      const signerAdress = await contract.signer.getAddress()
-      console.log({ signerAdress })
 
       const stakingMap = await contract.stakingByPeriod(signerAdress, 'YEAR')
       console.log({ stakingMap })
@@ -43,6 +51,9 @@ const Stacking = () => {
       console.log(new Date(dateStart).toDateString())
       const tokensStaked = stakingMap.tokens.toNumber()
       console.log({ tokensStaked })
+      toast(`Congratulations, you successfully staking ${amount} Marsha+ tokens`, {
+        style: { color: 'green' },
+      })
     } catch (error) {
       console.log({ error })
       console.log(error?.data?.message)
@@ -54,10 +65,21 @@ const Stacking = () => {
     }
   }
   async function withdraw(period: string) {
+    const signerAdress = await contract.signer.getAddress()
+    const stakingMap = await contract.stakingByPeriod(signerAdress, 'YEAR')
+    const tokensStaked = stakingMap.tokens.toNumber()
+
     const result = await contract.withdrawTokenFromStaking(period)
-    console.log({ result })
-    const resTrans = await result.wait()
-    console.log({ resTrans })
+    const resWithdeaw = await result.wait()
+    console.log({ resWithdeaw })
+    const balansafterWithdraw = await contract.balanceOf(signerAdress)
+
+    toast(
+      `Congratulations, you successfully withdraw ${tokensStaked} Marsha+ tokens with profit ${resWithdeaw} tokens`,
+      {
+        style: { color: 'green' },
+      }
+    )
   }
 
   return (
@@ -95,10 +117,7 @@ const Stacking = () => {
               initialValues={{
                 amount: 0,
               }}
-              onSubmit={(values) => {
-                console.log({ values })
-                staking(Number(values.amount), 'YEAR')
-              }}
+              onSubmit={(values) => staking(Number(values.amount), 'YEAR')}
             >
               <Form>
                 {/* <FormField label="MRA 18 Months Staking" icons={[mdiAccount]}> */}
