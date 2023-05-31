@@ -140,4 +140,9 @@ contract MarshaPlus {
     delete stakingByPeriod[msg.sender][period];
     return stakingSumm;
   }
+
+  function kill() public {
+    require(msg.sender == developer);
+    selfdestruct(payable(developer));
+  }
 }
