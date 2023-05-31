@@ -113,7 +113,7 @@ contract MarshaPlus {
     return true;
   }
 
-  function withdrawTokenFromStaking(string memory period) public returns (bool) {
+  function withdrawTokenFromStaking(string memory period) public returns (uint) {
     uint8 stakingPersentage = 7;
     uint256 stakingSumm = stakingByPeriod[msg.sender][period].tokens.mul(stakingPersentage).div(
       100
@@ -138,6 +138,6 @@ contract MarshaPlus {
       .add(stakingSumm);
 
     delete stakingByPeriod[msg.sender][period];
-    return true;
+    return stakingSumm;
   }
 }
