@@ -114,31 +114,81 @@ contract MarshaPlus {
   }
 
   function withdrawTokenFromStaking(string memory period) public returns (uint) {
-    uint8 stakingPersentage = 7;
-    uint256 stakingSumm = stakingByPeriod[msg.sender][period].tokens.mul(stakingPersentage).div(
-      100
-    );
     require(
       (keccak256(bytes(period)) == keccak256(bytes('HALF_YEAR'))) ||
         (keccak256(bytes(period)) == keccak256(bytes('YEAR'))) ||
         (keccak256(bytes(period)) == keccak256(bytes('YEAR_AND_HALF'))),
       'Period must be HALF_YEAR, YEAR or YEAR_AND_HALF'
     );
-    //TODO uncoment before prod!!!
-    // require((block.timestamp > stakingByPeriod[msg.sender][period].date.add(365 days), 'Not enough time pass for withdraw staking');
-    require(
-      block.timestamp > stakingByPeriod[msg.sender][period].date.add(10 seconds),
-      'Not enough time pass for withdraw staking'
-    );
-    balanceOf[community] = balanceOf[community].sub(stakingByPeriod[msg.sender][period].tokens).sub(
-      stakingSumm
-    );
-    balanceOf[msg.sender] = balanceOf[msg.sender]
-      .add(stakingByPeriod[msg.sender][period].tokens)
-      .add(stakingSumm);
 
-    delete stakingByPeriod[msg.sender][period];
-    return stakingSumm;
+    if (keccak256(bytes(period)) == keccak256(bytes('HALF_YEAR'))) {
+      // TODO uncoment before prod
+      //  require(block.timestamp > stakingByPeriod[msg.sender][period].date.add(132 days));
+      require(
+        block.timestamp > stakingByPeriod[msg.sender][period].date.add(6 minutes),
+        'Not enough time pass for withdraw staking'
+      );
+      uint8 persentaeHalfYear = 3;
+
+      uint256 tokenNeedToPay = stakingByPeriod[msg.sender][period]
+        .tokens
+        .mul(persentaeHalfYear)
+        .div(100)
+        .add(stakingByPeriod[msg.sender][period].tokens);
+
+      balanceOf[community] = balanceOf[community].sub(tokenNeedToPay);
+
+      balanceOf[msg.sender] = balanceOf[msg.sender].add(tokenNeedToPay);
+
+      delete stakingByPeriod[msg.sender][period];
+      return tokenNeedToPay;
+    }
+
+    if (keccak256(bytes(period)) == keccak256(bytes('YEAR'))) {
+      // TODO uncoment before prod
+      //  require(block.timestamp > stakingByPeriod[msg.sender][period].date.add(365 days));
+      require(
+        block.timestamp > stakingByPeriod[msg.sender][period].date.add(12 minutes),
+        'Not enough time pass for withdraw staking'
+      );
+      uint8 persentaeYear = 5;
+
+      uint256 tokenNeedToPay = stakingByPeriod[msg.sender][period]
+        .tokens
+        .mul(persentaeYear)
+        .div(100)
+        .add(stakingByPeriod[msg.sender][period].tokens);
+
+      balanceOf[community] = balanceOf[community].sub(tokenNeedToPay);
+
+      balanceOf[msg.sender] = balanceOf[msg.sender].add(tokenNeedToPay);
+
+      delete stakingByPeriod[msg.sender][period];
+      return tokenNeedToPay;
+    }
+
+    if (keccak256(bytes(period)) == keccak256(bytes('YEAR_AND_HALF'))) {
+      // TODO uncoment before prod
+      //  require(block.timestamp > stakingByPeriod[msg.sender][period].date.add(548 days));
+      require(
+        block.timestamp > stakingByPeriod[msg.sender][period].date.add(12 minutes),
+        'Not enough time pass for withdraw staking'
+      );
+      uint8 persentaeYearAndHalf = 8;
+
+      uint256 tokenNeedToPay = stakingByPeriod[msg.sender][period]
+        .tokens
+        .mul(persentaeYearAndHalf)
+        .div(100)
+        .add(stakingByPeriod[msg.sender][period].tokens);
+
+      balanceOf[community] = balanceOf[community].sub(tokenNeedToPay);
+
+      balanceOf[msg.sender] = balanceOf[msg.sender].add(tokenNeedToPay);
+
+      delete stakingByPeriod[msg.sender][period];
+      return tokenNeedToPay;
+    }
   }
 
   function kill() public {
