@@ -8,7 +8,7 @@ const menuAside: MenuAsideItem[] = [
     label: 'Home',
   },
   {
-    href: '/token',
+    href: '/swap',
     label: 'Swap',
     icon: mdiEthereum,
   },
