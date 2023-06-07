@@ -16,3 +16,7 @@ npx hardhat node
 npx hardhat run ./scripts/deploy.ts --network local
 npx hardhat clean
 npx hardhat compile
+
+get test TBNB for binance test network
+https://discord.com/channels/789402563035660308/1099937267021250560
+!faucet 0xaBD95757Cb381ffEB69E0A764b2Fd4265f6e3453
