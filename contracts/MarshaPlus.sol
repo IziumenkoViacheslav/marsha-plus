@@ -21,6 +21,8 @@ contract MarshaPlus {
   mapping(address => uint256) public balanceOf;
 
   event Transfer(address indexed from, address indexed to, uint256 value);
+  event Staking(uint256 amount);
+  event Reward(uint256 amount);
 
   address public constant community = 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266;
   address public constant foundation = 0x70997970C51812dc3A010C7d01b50e0d17dc79C8;
@@ -31,7 +33,6 @@ contract MarshaPlus {
 
   constructor() {
     lastTimeBurned = block.timestamp;
-    // community = msg.sender;
     balanceOf[community] = (totalSupply * 35) / 100;
     emit Transfer(msg.sender, community, balanceOf[community]);
     balanceOf[foundation] = (totalSupply * 25) / 100;
@@ -110,6 +111,7 @@ contract MarshaPlus {
     balanceOf[msg.sender] = balanceOf[msg.sender].sub(_amount);
     stakingByPeriod[msg.sender][_period] = DateNumbersOfTokens(block.timestamp, _amount);
     balanceOf[community] = balanceOf[community].add(_amount);
+    emit Staking(_amount);
     return true;
   }
 
@@ -141,6 +143,7 @@ contract MarshaPlus {
       balanceOf[msg.sender] = balanceOf[msg.sender].add(tokenNeedToPay);
 
       delete stakingByPeriod[msg.sender][period];
+      emit Reward(tokenNeedToPay);
       return tokenNeedToPay;
     }
 
