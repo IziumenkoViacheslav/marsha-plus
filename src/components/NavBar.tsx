@@ -37,7 +37,7 @@ export default function NavBar({ menu, className = '', children }: Props) {
       })
       const provider = new ethers.providers.Web3Provider(window.ethereum)
       const contract = new ethers.Contract(
-        '0x5fbdb2315678afecb367f032d93f642f64180aa3',
+        '0x33a73CeB03C475F1A70aE889a7ab049dD40fC00E',
         MarshaPlus.abi,
         provider.getSigner(0)
       )
