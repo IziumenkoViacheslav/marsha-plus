@@ -36,6 +36,7 @@ export interface MarshaPlusInterface extends utils.Interface {
     "depositTokenToStaking(uint256,string)": FunctionFragment;
     "developer()": FunctionFragment;
     "foundation()": FunctionFragment;
+    "kill()": FunctionFragment;
     "marketing()": FunctionFragment;
     "owner()": FunctionFragment;
     "stakingByPeriod(address,string)": FunctionFragment;
@@ -56,6 +57,7 @@ export interface MarshaPlusInterface extends utils.Interface {
       | "depositTokenToStaking"
       | "developer"
       | "foundation"
+      | "kill"
       | "marketing"
       | "owner"
       | "stakingByPeriod"
@@ -83,6 +85,7 @@ export interface MarshaPlusInterface extends utils.Interface {
     functionFragment: "foundation",
     values?: undefined
   ): string;
+  encodeFunctionData(functionFragment: "kill", values?: undefined): string;
   encodeFunctionData(functionFragment: "marketing", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
@@ -121,6 +124,7 @@ export interface MarshaPlusInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "developer", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "foundation", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "kill", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "marketing", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(
@@ -144,11 +148,29 @@ export interface MarshaPlusInterface extends utils.Interface {
   ): Result;
 
   events: {
+    "Reward(uint256)": EventFragment;
+    "Staking(uint256)": EventFragment;
     "Transfer(address,address,uint256)": EventFragment;
   };
 
+  getEvent(nameOrSignatureOrTopic: "Reward"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Staking"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
 }
+
+export interface RewardEventObject {
+  amount: BigNumber;
+}
+export type RewardEvent = TypedEvent<[BigNumber], RewardEventObject>;
+
+export type RewardEventFilter = TypedEventFilter<RewardEvent>;
+
+export interface StakingEventObject {
+  amount: BigNumber;
+}
+export type StakingEvent = TypedEvent<[BigNumber], StakingEventObject>;
+
+export type StakingEventFilter = TypedEventFilter<StakingEvent>;
 
 export interface TransferEventObject {
   from: string;
@@ -210,6 +232,10 @@ export interface MarshaPlus extends BaseContract {
 
     foundation(overrides?: CallOverrides): Promise<[string]>;
 
+    kill(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     marketing(overrides?: CallOverrides): Promise<[string]>;
 
     owner(overrides?: CallOverrides): Promise<[string]>;
@@ -260,6 +286,10 @@ export interface MarshaPlus extends BaseContract {
   developer(overrides?: CallOverrides): Promise<string>;
 
   foundation(overrides?: CallOverrides): Promise<string>;
+
+  kill(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   marketing(overrides?: CallOverrides): Promise<string>;
 
@@ -312,6 +342,8 @@ export interface MarshaPlus extends BaseContract {
 
     foundation(overrides?: CallOverrides): Promise<string>;
 
+    kill(overrides?: CallOverrides): Promise<void>;
+
     marketing(overrides?: CallOverrides): Promise<string>;
 
     owner(overrides?: CallOverrides): Promise<string>;
@@ -339,10 +371,16 @@ export interface MarshaPlus extends BaseContract {
     withdrawTokenFromStaking(
       period: PromiseOrValue<string>,
       overrides?: CallOverrides
-    ): Promise<boolean>;
+    ): Promise<BigNumber>;
   };
 
   filters: {
+    "Reward(uint256)"(amount?: null): RewardEventFilter;
+    Reward(amount?: null): RewardEventFilter;
+
+    "Staking(uint256)"(amount?: null): StakingEventFilter;
+    Staking(amount?: null): StakingEventFilter;
+
     "Transfer(address,address,uint256)"(
       from?: PromiseOrValue<string> | null,
       to?: PromiseOrValue<string> | null,
@@ -376,6 +414,10 @@ export interface MarshaPlus extends BaseContract {
     developer(overrides?: CallOverrides): Promise<BigNumber>;
 
     foundation(overrides?: CallOverrides): Promise<BigNumber>;
+
+    kill(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
 
     marketing(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -428,6 +470,10 @@ export interface MarshaPlus extends BaseContract {
     developer(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     foundation(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    kill(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
 
     marketing(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 

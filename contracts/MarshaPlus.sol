@@ -25,11 +25,11 @@ contract MarshaPlus {
   event Staking(uint256 amount);
   event Reward(uint256 amount);
 
-  address public constant community = 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266;
-  address public constant foundation = 0x70997970C51812dc3A010C7d01b50e0d17dc79C8;
+  address public constant community = 0x9586c9E43E74c6964aBbaE74B5C665b73C82BCc7;
+  address public constant foundation = 0xf5aD63cD9a7a49Dd11e3704f8322Be656415BC72;
   address public constant marketing = 0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC;
   address public constant advisor = 0x90F79bf6EB2c4f870365E785982E1f101E93b906;
-  address public constant developer = 0x70997970C51812dc3A010C7d01b50e0d17dc79C8;
+  address public constant developer = 0xaBD95757Cb381ffEB69E0A764b2Fd4265f6e3453;
   address public constant technical = 0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc;
 
   constructor() {
