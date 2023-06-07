@@ -10,9 +10,10 @@ contract MarshaPlus {
   // uint256 public totalSupply = 8000000000; // 8 billion tokens
   string public token_name = 'MARSHA+'; // token name - human - readable
   string public token_symbol = 'MRA';
-  // uint256 public totalSupply = 80000000000000 * 10 ** 18; TODO uncoment before pord!!!
-  uint256 public totalSupply = 100; // for developing and testing, delete before deploy in prod
   uint8 public decimals = 18; // will set the divisibility of your token
+  // TODO uncoment before pord!!!
+  uint256 public totalSupply = 80000000000 * 10 ** decimals;
+  // uint256 public totalSupply = 100; // for developing and testing, delete before deploy in prod
 
   address payable public owner; // Holds the owner of the token
 
@@ -115,7 +116,7 @@ contract MarshaPlus {
     return true;
   }
 
-  function withdrawTokenFromStaking(string memory period) public returns (uint) {
+  function withdrawTokenFromStaking(string memory period) public returns (uint tokens) {
     require(
       (keccak256(bytes(period)) == keccak256(bytes('HALF_YEAR'))) ||
         (keccak256(bytes(period)) == keccak256(bytes('YEAR'))) ||
