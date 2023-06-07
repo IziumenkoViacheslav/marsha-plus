@@ -131,11 +131,11 @@ contract MarshaPlus {
         block.timestamp > stakingByPeriod[msg.sender][period].date.add(6 minutes),
         'Not enough time pass for withdraw staking'
       );
-      uint8 persentaeHalfYear = 3;
+      uint8 persentageHalfYear = 3;
 
       uint256 tokenNeedToPay = stakingByPeriod[msg.sender][period]
         .tokens
-        .mul(persentaeHalfYear)
+        .mul(persentageHalfYear)
         .div(100)
         .add(stakingByPeriod[msg.sender][period].tokens);
 
