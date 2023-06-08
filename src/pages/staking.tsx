@@ -20,12 +20,13 @@ const Stacking = () => {
   const contract: MarshaPlus = useAppSelector((state) => state.crypto.contract)
 
   async function staking(amount: number, period: string) {
+    if (!contract) {
+      toast('connected to metamask', { style: { color: 'blue' } })
+      return
+    }
     if (!amount) {
       toast('amount must be greather then 0!', { style: { color: 'red' } })
       return null
-    }
-    if (!contract) {
-      toast('connected to metamask', { style: { color: 'blue' } })
     }
 
     console.log({ amount })
