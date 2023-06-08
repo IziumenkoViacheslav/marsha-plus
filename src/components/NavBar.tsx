@@ -3,10 +3,8 @@ import { mdiClose, mdiDotsVertical } from '@mdi/js'
 import { containerMaxW } from '../config'
 import BaseIcon from './BaseIcon'
 import NavBarItemPlain from './NavBarItemPlain'
-import NavBarMenuList from './NavBarMenuList'
 import { MenuNavBarItem } from '../interfaces'
 import Image from 'next/image'
-import { useRouter } from 'next/router'
 import { toast } from 'react-hot-toast'
 import { ethers } from 'ethers'
 import MarshaPlus from '../../artifacts/contracts/MarshaPlus.sol/MarshaPlus.json'
@@ -63,9 +61,10 @@ export default function NavBar({ menu, className = '', children }: Props) {
             isMenuNavBarActive ? 'block' : 'hidden'
           } max-h-screen-menu overflow-y-auto lg:overflow-visible absolute w-screen top-14 left-0 bg-gray-50 shadow-lg lg:w-auto lg:flex lg:static lg:shadow-none dark:bg-slate-800`}
         >
-          {/* <NavBarMenuList menu={menu} /> */}
           {!connectedToMetamask ? (
-            <p className="p-4">Connect to metamask </p>
+            <p className="p-4 cursor-pointer hover:underline" onClick={connectToMetamask}>
+              Connect to metamask{' '}
+            </p>
           ) : (
             <p className="p-4"> You already connected to metamask! :)</p>
           )}
