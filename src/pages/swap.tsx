@@ -132,17 +132,6 @@ const Swap = () => {
                   <BaseButtons>
                     <BaseButton type="submit" color="info" label="Stake" />
                   </BaseButtons>
-                  <BaseButtons>
-                    <BaseButton onClick={() => withdraw('YEAR')} color="info" label="Reward" />
-                  </BaseButtons>
-                </div>
-                <div className="text-sm mt-4 ml-4">
-                  <ul className="list-disc">
-                    <li>Lock-up period: 12 months</li>
-                    <li>Staking deposit withdrawal: 365 days after</li>
-                    <li>Reward Withdrawal: Any time</li>
-                    <li>Reward level: 5% APY</li>
-                  </ul>
                 </div>
               </Form>
             </Formik>
