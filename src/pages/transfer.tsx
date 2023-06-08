@@ -31,6 +31,10 @@ const Transfer = () => {
       toast('Connect to metamask first and try again', { style: { color: 'red' } })
       return null
     }
+    if (!walletTo) {
+      toast('walletTo required!', { style: { color: 'red' } })
+      return null
+    }
     if (!amount) {
       toast('amount must be greather then 0!', { style: { color: 'red' } })
       return null
