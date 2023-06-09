@@ -19,7 +19,7 @@ const Charity = () => {
           width={1100}
           height={250}
           alt="image"
-          className="w-full"
+          className="w-full rounded-2xl"
         />
         <CardBoxComponentEmpty />
       </SectionMain>

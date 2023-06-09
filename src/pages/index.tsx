@@ -44,7 +44,13 @@ const Dashboard = () => {
       </Head>
       <SectionMain>
         <div className="text-center w-full m-4">
-          <Image className="m-auto" src="./images/Home.png" width={1100} height={250} alt="image" />
+          <Image
+            className="m-auto rounded-2xl"
+            src="./images/Home.png"
+            width={1100}
+            height={250}
+            alt="image"
+          />
         </div>
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 mb-6">
           <CardBoxWidget

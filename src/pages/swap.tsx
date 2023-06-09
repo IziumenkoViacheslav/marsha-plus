@@ -1,4 +1,4 @@
-import { mdiAccount } from '@mdi/js'
+import { mdiAccount, mdiEthereum } from '@mdi/js'
 import Head from 'next/head'
 import React from 'react'
 import type { ReactElement } from 'react'
@@ -64,23 +64,6 @@ const Swap = () => {
       }
     }
   }
-  async function withdraw(period: string) {
-    const signerAdress = await contract.signer.getAddress()
-    const stakingMap = await contract.stakingByPeriod(signerAdress, 'YEAR')
-    const tokensStaked = stakingMap.tokens.toNumber()
-
-    const result = await contract.withdrawTokenFromStaking(period)
-    const resWithdeaw = await result.wait()
-    console.log({ resWithdeaw })
-    const balansafterWithdraw = await contract.balanceOf(signerAdress)
-
-    toast(
-      `Congratulations, you successfully withdraw ${tokensStaked} Marsha+ tokens with profit ${resWithdeaw} tokens`,
-      {
-        style: { color: 'green' },
-      }
-    )
-  }
 
   return (
     <>
@@ -109,7 +92,7 @@ const Swap = () => {
                 <FormField label="You have" icons={[mdiAccount]}>
                   <Field name="amount" placeholder="amount" />
                 </FormField>
-                <FormField label="" icons={[mdiAccount]}>
+                <FormField label="" icons={[mdiEthereum]}>
                   <Field as="select" name="coinIn" className="text-black">
                     <option value="marsha+">marsha+</option>
                     <option value="usdt">usdt</option>
@@ -120,7 +103,7 @@ const Swap = () => {
                 <FormField label="You want to achive" icons={[mdiAccount]}>
                   <Field name="amount" placeholder="amount" />
                 </FormField>
-                <FormField label="" icons={[mdiAccount]}>
+                <FormField label="" icons={[mdiEthereum]}>
                   <Field as="select" name="coinOut" className="text-black">
                     <option value="usdt">usdt</option>
                     <option value="ether">ether</option>
