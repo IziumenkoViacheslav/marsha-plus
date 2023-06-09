@@ -108,6 +108,7 @@ const Swap = () => {
                     <option value="usdt">usdt</option>
                     <option value="ether">ether</option>
                     <option value="btc">btc</option>
+                    <option value="marsha+">marsha+</option>
                   </Field>
                 </FormField>
 
