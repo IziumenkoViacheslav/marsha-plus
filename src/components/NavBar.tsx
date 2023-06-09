@@ -30,15 +30,17 @@ export default function NavBar({ menu, className = '', children }: Props) {
       toast('Install metamask!', { style: { color: 'red' } })
     }
     if (window.ethereum) {
-      const accounts = await window.ethereum.request({
-        method: 'eth_requestAccounts',
-      })
+      // const accounts = await window.ethereum.request({
+      //   method: 'eth_requestAccounts',
+      // })
       const provider = new ethers.providers.Web3Provider(window.ethereum)
-      const contract = new ethers.Contract(
-        '0x33a73CeB03C475F1A70aE889a7ab049dD40fC00E',
-        MarshaPlus.abi,
-        provider.getSigner(0)
-      )
+      const contractAddress =
+        process.env.NODE_ENV === 'development'
+          ? '0x5fbdb2315678afecb367f032d93f642f64180aa3' // hardhat
+          : '0x33a73CeB03C475F1A70aE889a7ab049dD40fC00E' // binance test network
+      console.log({ contractAddress })
+
+      const contract = new ethers.Contract(contractAddress, MarshaPlus.abi, provider.getSigner(0))
       dispatch(setContract(contract))
       toast('connected to metamask', { style: { color: 'blue' } })
       setConnectedToMetamask(true)
