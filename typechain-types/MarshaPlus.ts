@@ -40,6 +40,7 @@ export interface MarshaPlusInterface extends utils.Interface {
     "marketing()": FunctionFragment;
     "owner()": FunctionFragment;
     "stakingByPeriod(address,string)": FunctionFragment;
+    "swaping(uint256,uint256)": FunctionFragment;
     "technical()": FunctionFragment;
     "token_name()": FunctionFragment;
     "token_symbol()": FunctionFragment;
@@ -61,6 +62,7 @@ export interface MarshaPlusInterface extends utils.Interface {
       | "marketing"
       | "owner"
       | "stakingByPeriod"
+      | "swaping"
       | "technical"
       | "token_name"
       | "token_symbol"
@@ -91,6 +93,10 @@ export interface MarshaPlusInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "stakingByPeriod",
     values: [PromiseOrValue<string>, PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "swaping",
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(functionFragment: "technical", values?: undefined): string;
   encodeFunctionData(
@@ -131,6 +137,7 @@ export interface MarshaPlusInterface extends utils.Interface {
     functionFragment: "stakingByPeriod",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "swaping", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "technical", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "token_name", data: BytesLike): Result;
   decodeFunctionResult(
@@ -246,6 +253,12 @@ export interface MarshaPlus extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber, BigNumber] & { date: BigNumber; tokens: BigNumber }>;
 
+    swaping(
+      _amount1: PromiseOrValue<BigNumberish>,
+      _amount2: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     technical(overrides?: CallOverrides): Promise<[string]>;
 
     token_name(overrides?: CallOverrides): Promise<[string]>;
@@ -301,6 +314,12 @@ export interface MarshaPlus extends BaseContract {
     overrides?: CallOverrides
   ): Promise<[BigNumber, BigNumber] & { date: BigNumber; tokens: BigNumber }>;
 
+  swaping(
+    _amount1: PromiseOrValue<BigNumberish>,
+    _amount2: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   technical(overrides?: CallOverrides): Promise<string>;
 
   token_name(overrides?: CallOverrides): Promise<string>;
@@ -353,6 +372,12 @@ export interface MarshaPlus extends BaseContract {
       arg1: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[BigNumber, BigNumber] & { date: BigNumber; tokens: BigNumber }>;
+
+    swaping(
+      _amount1: PromiseOrValue<BigNumberish>,
+      _amount2: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
     technical(overrides?: CallOverrides): Promise<string>;
 
@@ -429,6 +454,12 @@ export interface MarshaPlus extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    swaping(
+      _amount1: PromiseOrValue<BigNumberish>,
+      _amount2: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     technical(overrides?: CallOverrides): Promise<BigNumber>;
 
     token_name(overrides?: CallOverrides): Promise<BigNumber>;
@@ -483,6 +514,12 @@ export interface MarshaPlus extends BaseContract {
       arg0: PromiseOrValue<string>,
       arg1: PromiseOrValue<string>,
       overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    swaping(
+      _amount1: PromiseOrValue<BigNumberish>,
+      _amount2: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     technical(overrides?: CallOverrides): Promise<PopulatedTransaction>;

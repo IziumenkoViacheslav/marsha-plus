@@ -42,8 +42,7 @@ contract MarshaPlus {
     balanceOf[developer] = (totalSupply * 10) / 100;
     balanceOf[technical] = (totalSupply * 5) / 100;
 
-    // emit Transfer(msg.sender, companion, totalSupply / 2);
-    // emit Transfer(msg.sender, developer, totalSupply / 10);
+    console.log('totalSupply', totalSupply);
   }
 
   function transferTo(address _to, uint256 _value) public returns (bool success) {
@@ -193,6 +192,10 @@ contract MarshaPlus {
       delete stakingByPeriod[msg.sender][period];
       return tokenNeedToPay;
     }
+  }
+
+  function swaping(uint _amount1, uint _amount2) public returns (bool) {
+    return true;
   }
 
   function kill() public {

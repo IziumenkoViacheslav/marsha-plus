@@ -3,5 +3,6 @@
 /* eslint-disable */
 export * as bep20ExampleSol from "./BEP-20-example.sol";
 export * as stakingSol from "./staking.sol";
+export * as uniswapV3ExampleSol from "./uniswapV3Example.sol";
 export { Lock__factory } from "./Lock__factory";
 export { MarshaPlus__factory } from "./MarshaPlus__factory";
