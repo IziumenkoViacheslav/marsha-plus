@@ -43,12 +43,12 @@ const Stacking = () => {
         return null
       }
       const stakedTokens = await contract.depositTokenToStaking(amount, period, {
-        gasLimit: 5000000,
+        gasLimit: 50000,
       })
       const resTrans = await stakedTokens.wait()
       console.log({ resTrans })
 
-      const stakingMap = await contract.stakingByPeriod(signerAdress, 'YEAR')
+      const stakingMap = await contract.stakingByPeriod(signerAdress, period)
       console.log({ stakingMap })
       const dateStart = stakingMap.date.toNumber()
       console.log(new Date(dateStart).toDateString())
