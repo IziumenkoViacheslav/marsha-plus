@@ -42,7 +42,9 @@ const Stacking = () => {
         })
         return null
       }
-      const stakedTokens = await contract.depositTokenToStaking(amount, period)
+      const stakedTokens = await contract.depositTokenToStaking(amount, period, {
+        gasLimit: 5000000,
+      })
       const resTrans = await stakedTokens.wait()
       console.log({ resTrans })
 
