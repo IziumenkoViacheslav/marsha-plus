@@ -69,7 +69,7 @@ const Stacking = () => {
   }
   async function withdraw(period: string) {
     const signerAdress = await contract.signer.getAddress()
-    const stakingMap = await contract.stakingByPeriod(signerAdress, 'YEAR')
+    const stakingMap = await contract.stakingByPeriod(signerAdress, period)
     const tokensStaked = stakingMap.tokens.toNumber()
 
     const result = await contract.withdrawTokenFromStaking(period)
