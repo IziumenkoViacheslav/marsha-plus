@@ -17,6 +17,9 @@ import { MarshaPlus } from '../../typechain-types/MarshaPlus'
 import Image from 'next/image'
 
 const Stacking = () => {
+  console.log('process.env.NODE_ENV', process.env.NODE_ENV)
+  console.log('process.env.NEXT_PUBLIC_NODE_ENV', process.env.NEXT_PUBLIC_NODE_ENV)
+
   const contract: MarshaPlus = useAppSelector((state) => state.crypto.contract)
 
   async function staking(amount: number, period: string) {
@@ -76,6 +79,7 @@ const Stacking = () => {
     const resWithdeaw = await result.wait()
     console.log({ resWithdeaw })
     const balansafterWithdraw = await contract.balanceOf(signerAdress)
+    console.log('balansafterWithdraw', Number(balansafterWithdraw))
 
     toast(
       `Congratulations, you successfully withdraw ${tokensStaked} Marsha+ tokens with profit ${resWithdeaw} tokens`,
