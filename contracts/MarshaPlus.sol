@@ -79,6 +79,7 @@ contract MarshaPlus {
     return true;
   }
 
+  // -------------------------------------staking start-------------------------------------
   struct DateNumbersOfTokens {
     uint256 date;
     uint256 tokens;
@@ -193,6 +194,8 @@ contract MarshaPlus {
       return tokenNeedToPay;
     }
   }
+
+  // -------------------------------------staking end-------------------------------------
 
   function swaping(uint _amount1, uint _amount2) public returns (bool) {
     return true;
