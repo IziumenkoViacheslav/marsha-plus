@@ -20,3 +20,6 @@ npx hardhat compile
 get test TBNB for binance test network
 https://discord.com/channels/789402563035660308/1099937267021250560
 !faucet 0xaBD95757Cb381ffEB69E0A764b2Fd4265f6e3453
+
+https://chainlist.org/?testnets=true&search=binance
+for checking working or not test network
