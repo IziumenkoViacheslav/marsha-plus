@@ -36,18 +36,22 @@ export const styleSlice = createSlice({
   initialState,
   reducers: {
     setDarkMode: (state, action: PayloadAction<boolean | null>) => {
-      state.darkMode = action.payload !== null ? action.payload : !state.darkMode
+      state.darkMode = true
+      // state.darkMode = action.payload !== null ? action.payload : !state.darkMode
 
       if (typeof localStorage !== 'undefined') {
-        localStorage.setItem(localStorageDarkModeKey, state.darkMode ? '1' : '0')
+        // localStorage.setItem(localStorageDarkModeKey, state.darkMode ? '1' : '0')
+        localStorage.setItem(localStorageDarkModeKey, '1')
       }
 
       if (typeof document !== 'undefined') {
-        document.body.classList[state.darkMode ? 'add' : 'remove']('dark-scrollbars')
+        // document.body.classList[state.darkMode ? 'add' : 'remove']('dark-scrollbars')
+        document.body.classList['add']('dark-scrollbars')
 
-        document.documentElement.classList[state.darkMode ? 'add' : 'remove'](
-          'dark-scrollbars-compat'
-        )
+        // document.documentElement.classList[state.darkMode ? 'add' : 'remove'](
+        //   'dark-scrollbars-compat'
+        // )
+        document.documentElement.classList['add']('dark-scrollbars-compat')
       }
     },
 
