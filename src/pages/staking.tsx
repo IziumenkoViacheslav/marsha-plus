@@ -36,7 +36,7 @@ const Stacking = () => {
     console.log({ period })
     try {
       const signerAdress = await contract.signer.getAddress()
-      const balans = await contract.balanceOf(signerAdress)
+      const balans = Number(await contract.balanceOf(signerAdress))
       console.log({ balans })
 
       if (Number(balans) < amount) {
@@ -46,7 +46,7 @@ const Stacking = () => {
         return null
       }
       const stakedTokens = await contract.depositTokenToStaking(amount, period, {
-        gasLimit: 50000,
+        gasLimit: 3000000,
       })
       const resTrans = await stakedTokens.wait()
       console.log({ resTrans })
