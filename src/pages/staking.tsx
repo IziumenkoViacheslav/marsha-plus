@@ -75,7 +75,7 @@ const Stacking = () => {
     const stakingMap = await contract.stakingByPeriod(signerAdress, period)
     const tokensStaked = stakingMap.tokens.toNumber()
 
-    const result = await contract.withdrawTokenFromStaking(period)
+    const result = await contract.withdrawTokenFromStaking(period, { gasLimit: 3000000 })
     const resWithdeaw = await result.wait()
     console.log({ resWithdeaw })
     const balansafterWithdraw = await contract.balanceOf(signerAdress)
