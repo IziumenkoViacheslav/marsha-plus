@@ -105,12 +105,12 @@ const Stacking = () => {
     console.log({ dateOfRevard })
     const daysLeft = Math.floor((Date.now() - dateOfRevard) / (24 * 60 * 60 * 1000))
     console.log({ daysLeft })
-    if (dateOfRevard < Date.now()) {
-      toast(`Not enouph time pass to revard, it is left ${daysLeft} days`, {
-        style: { color: 'red' },
-      })
-      return null
-    }
+    // if (dateOfRevard < Date.now()) {
+    //   toast(`Not enouph time pass to revard, it is left ${daysLeft} days`, {
+    //     style: { color: 'red' },
+    //   })
+    //   return null
+    // }
 
     const result = await contract.withdrawTokenFromStaking(period, { gasLimit: 3000000 })
     const resWithdeaw = await result.wait()
