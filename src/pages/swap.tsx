@@ -73,7 +73,7 @@ const Swap = () => {
 
       <SectionMain>
         <Image
-          src="./images/Staking.png"
+          src="./images/Swap.png"
           width={999}
           height={250}
           alt="image"
