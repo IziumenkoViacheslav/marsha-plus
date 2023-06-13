@@ -1,6 +1,6 @@
 import { mdiAccount } from '@mdi/js'
 import Head from 'next/head'
-import React from 'react'
+import React, { useState } from 'react'
 import type { ReactElement } from 'react'
 import BaseButton from '../components/BaseButton'
 import LayoutAuthenticated from '../layouts/Authenticated'
@@ -15,12 +15,13 @@ import { toast } from 'react-hot-toast'
 import { useAppSelector } from '../stores/hooks'
 import { MarshaPlus } from '../../typechain-types/MarshaPlus'
 import Image from 'next/image'
+import CardBoxModal from '../components/CardBoxModal'
 
 const Stacking = () => {
-  console.log('process.env.NODE_ENV', process.env.NODE_ENV)
-  console.log('process.env.NEXT_PUBLIC_NODE_ENV', process.env.NEXT_PUBLIC_NODE_ENV)
-
   const contract: MarshaPlus = useAppSelector((state) => state.crypto.contract)
+  const [isModalInfoActive, setIsModalInfoActive] = useState(false)
+  const [amount, setAmount] = useState<number>(null)
+  const [period, setPeriod] = useState<string>('')
 
   async function staking(amount: number, period: string) {
     if (!contract) {
@@ -31,9 +32,6 @@ const Stacking = () => {
       toast('amount must be greather then 0!', { style: { color: 'red' } })
       return null
     }
-
-    console.log({ amount })
-    console.log({ period })
     try {
       const signerAdress = await contract.signer.getAddress()
       const balans = Number(await contract.balanceOf(signerAdress))
@@ -128,7 +126,11 @@ const Stacking = () => {
               initialValues={{
                 amount: 0,
               }}
-              onSubmit={(values) => staking(Number(values.amount), 'YEAR')}
+              onSubmit={(values) => {
+                setIsModalInfoActive(true)
+                setAmount(Number(values.amount))
+                setPeriod('YEAR')
+              }}
             >
               <Form>
                 {/* <FormField label="MRA 18 Months Staking" icons={[mdiAccount]}> */}
@@ -174,7 +176,11 @@ const Stacking = () => {
               initialValues={{
                 amount: 0,
               }}
-              onSubmit={(values) => staking(Number(values.amount), 'YEAR_AND_HALF')}
+              onSubmit={(values) => {
+                setIsModalInfoActive(true)
+                setAmount(Number(values.amount))
+                setPeriod('YEAR_AND_HALF')
+              }}
             >
               <Form>
                 <FormField label="" icons={[mdiAccount]}>
@@ -224,7 +230,11 @@ const Stacking = () => {
               initialValues={{
                 amount: 0,
               }}
-              onSubmit={(values) => staking(Number(values.amount), 'HALF_YEAR')}
+              onSubmit={(values) => {
+                setIsModalInfoActive(true)
+                setAmount(Number(values.amount))
+                setPeriod('HALF_YEAR')
+              }}
             >
               <Form>
                 {/* <FormField label="MRA 18 Months Staking" icons={[mdiAccount]}> */}
@@ -252,6 +262,21 @@ const Stacking = () => {
 
             <BaseDivider />
           </CardBox>
+          <CardBoxModal
+            title="Please confirm action"
+            buttonColor="info"
+            buttonLabel="Confirm"
+            isActive={isModalInfoActive}
+            onConfirm={() => {
+              staking(amount, period)
+              setIsModalInfoActive(false)
+            }}
+            onCancel={() => {
+              setIsModalInfoActive(false)
+            }}
+          >
+            {`Confirm staking ${amount} tokens for ${period} period`}
+          </CardBoxModal>
         </div>
       </SectionMain>
     </>
