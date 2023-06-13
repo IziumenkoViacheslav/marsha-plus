@@ -65,7 +65,7 @@ export default function NavBar({ menu, className = '', children }: Props) {
         >
           {!connectedToMetamask ? (
             <p className="p-4 cursor-pointer hover:underline" onClick={connectToMetamask}>
-              Connect to metamask{' '}
+              Connect to metamask
             </p>
           ) : (
             <p className="p-4"> You already connected to metamask! :)</p>
