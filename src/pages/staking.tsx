@@ -103,7 +103,7 @@ const Stacking = () => {
     console.log({ dateOfStaked })
     const dateOfRevard = dateOfStaked + periodInDays[period] * 24 * 60 * 60 * 1000
     console.log({ dateOfRevard })
-    const daysLeft = Math.floor((dateOfRevard - Date.now()) / (24 * 60 * 60 * 1000))
+    const daysLeft = Math.floor((Date.now() - dateOfRevard) / (24 * 60 * 60 * 1000))
     console.log({ daysLeft })
     if (dateOfRevard < Date.now()) {
       toast(`Not enouph time pass to revard, it is left ${daysLeft} days`, {
