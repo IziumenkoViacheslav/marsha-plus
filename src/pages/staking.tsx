@@ -17,11 +17,32 @@ import { MarshaPlus } from '../../typechain-types/MarshaPlus'
 import Image from 'next/image'
 import CardBoxModal from '../components/CardBoxModal'
 
+enum PERIOD {
+  halfYear = 'HALF_YEAR',
+  year = 'YEAR',
+  yearAndHalf = 'YEAR_AND_HALF',
+}
+const periodInDays = { [PERIOD.halfYear]: 183, [PERIOD.year]: 365, [PERIOD.yearAndHalf]: 548 }
+
 const Stacking = () => {
   const contract: MarshaPlus = useAppSelector((state) => state.crypto.contract)
   const [isModalInfoActive, setIsModalInfoActive] = useState(false)
   const [amount, setAmount] = useState<number>(null)
   const [period, setPeriod] = useState<string>('')
+
+  async function handleStakingButton(amount: string, period: string) {
+    if (!contract) {
+      toast('Connect to metamask first and try again', { style: { color: 'red' } })
+      return null
+    }
+    if (!amount) {
+      toast('amount must be greather then 0!', { style: { color: 'red' } })
+      return null
+    }
+    setAmount(Number(amount))
+    setPeriod(period)
+    setIsModalInfoActive(true)
+  }
 
   async function staking(amount: number, period: string) {
     if (!contract) {
@@ -34,6 +55,7 @@ const Stacking = () => {
     }
     try {
       const signerAdress = await contract.signer.getAddress()
+      console.log({ signerAdress })
       const balans = Number(await contract.balanceOf(signerAdress))
       console.log({ balans })
 
@@ -76,12 +98,25 @@ const Stacking = () => {
     const signerAdress = await contract.signer.getAddress()
     const stakingMap = await contract.stakingByPeriod(signerAdress, period)
     const tokensStaked = stakingMap.tokens.toNumber()
+    console.log('stakingMap.date', Number(stakingMap.date))
+    const dateOfStaked = stakingMap.date.toNumber()
+    console.log({ dateOfStaked })
+    const dateOfRevard = dateOfStaked + periodInDays[period] * 24 * 60 * 60 * 1000
+    console.log({ dateOfRevard })
+    const daysLeft = Math.floor((dateOfRevard - Date.now()) / (24 * 60 * 60 * 1000))
+    console.log({ daysLeft })
+    if (dateOfRevard < Date.now()) {
+      toast(`Not enouph time pass to revard, it is left ${daysLeft} days`, {
+        style: { color: 'red' },
+      })
+      return null
+    }
 
     const result = await contract.withdrawTokenFromStaking(period, { gasLimit: 3000000 })
     const resWithdeaw = await result.wait()
     console.log({ resWithdeaw })
-    const balansafterWithdraw = await contract.balanceOf(signerAdress)
-    console.log('balansafterWithdraw', Number(balansafterWithdraw))
+    const balansAfterWithdraw = await contract.balanceOf(signerAdress)
+    console.log('balansafterWithdraw', Number(balansAfterWithdraw))
 
     toast(
       `Congratulations, you successfully withdraw ${tokensStaked} Marsha+ tokens with profit ${resWithdeaw} tokens`,
@@ -124,12 +159,10 @@ const Stacking = () => {
             </table>
             <Formik
               initialValues={{
-                amount: 0,
+                amount: '',
               }}
               onSubmit={(values) => {
-                setIsModalInfoActive(true)
-                setAmount(Number(values.amount))
-                setPeriod('YEAR')
+                handleStakingButton(values.amount, PERIOD.year)
               }}
             >
               <Form>
@@ -174,12 +207,10 @@ const Stacking = () => {
             </table>
             <Formik
               initialValues={{
-                amount: 0,
+                amount: '',
               }}
               onSubmit={(values) => {
-                setIsModalInfoActive(true)
-                setAmount(Number(values.amount))
-                setPeriod('YEAR_AND_HALF')
+                handleStakingButton(values.amount, PERIOD.yearAndHalf)
               }}
             >
               <Form>
@@ -228,12 +259,10 @@ const Stacking = () => {
 
             <Formik
               initialValues={{
-                amount: 0,
+                amount: '',
               }}
               onSubmit={(values) => {
-                setIsModalInfoActive(true)
-                setAmount(Number(values.amount))
-                setPeriod('HALF_YEAR')
+                handleStakingButton(values.amount, PERIOD.halfYear)
               }}
             >
               <Form>
