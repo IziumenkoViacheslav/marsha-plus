@@ -166,8 +166,13 @@ const Stacking = () => {
               initialValues={{
                 amount: '',
               }}
-              onSubmit={(values) => {
+              onSubmit={(values, actions) => {
                 handleStakingButton(values.amount, PERIOD.year)
+                actions.resetForm({
+                  values: {
+                    amount: '',
+                  },
+                })
               }}
             >
               <Form>
@@ -214,8 +219,13 @@ const Stacking = () => {
               initialValues={{
                 amount: '',
               }}
-              onSubmit={(values) => {
+              onSubmit={(values, actions) => {
                 handleStakingButton(values.amount, PERIOD.yearAndHalf)
+                actions.resetForm({
+                  values: {
+                    amount: '',
+                  },
+                })
               }}
             >
               <Form>
@@ -266,8 +276,13 @@ const Stacking = () => {
               initialValues={{
                 amount: '',
               }}
-              onSubmit={(values) => {
+              onSubmit={(values, actions) => {
                 handleStakingButton(values.amount, PERIOD.halfYear)
+                actions.resetForm({
+                  values: {
+                    amount: '',
+                  },
+                })
               }}
             >
               <Form>
