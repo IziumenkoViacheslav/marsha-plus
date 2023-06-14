@@ -1,4 +1,4 @@
-import { mdiAccount, mdiEthereum } from '@mdi/js'
+import { mdiAccount, mdiCurrencyBtc, mdiEthereum } from '@mdi/js'
 import Head from 'next/head'
 import React from 'react'
 import type { ReactElement } from 'react'
@@ -18,52 +18,6 @@ import Image from 'next/image'
 
 const Swap = () => {
   const contract: MarshaPlus = useAppSelector((state) => state.crypto.contract)
-
-  async function staking(amount: number, period: string) {
-    if (!amount) {
-      toast('amount must be greather then 0!', { style: { color: 'red' } })
-      return null
-    }
-    if (!contract) {
-      toast('connected to metamask', { style: { color: 'blue' } })
-    }
-
-    console.log({ amount })
-    console.log({ period })
-    try {
-      const signerAdress = await contract.signer.getAddress()
-      const balans = await contract.balanceOf(signerAdress)
-      console.log({ balans })
-
-      if (Number(balans) < amount) {
-        toast(`You balance is ${balans}, it is not enaph to staking ${amount} Marsha+ tokens`, {
-          style: { color: 'red' },
-        })
-        return null
-      }
-      const stakedTokens = await contract.depositTokenToStaking(amount, period)
-      const resTrans = await stakedTokens.wait()
-      console.log({ resTrans })
-
-      const stakingMap = await contract.stakingByPeriod(signerAdress, 'YEAR')
-      console.log({ stakingMap })
-      const dateStart = stakingMap.date.toNumber()
-      console.log(new Date(dateStart).toDateString())
-      const tokensStaked = stakingMap.tokens.toNumber()
-      console.log({ tokensStaked })
-      toast(`Congratulations, you successfully staking ${amount} Marsha+ tokens`, {
-        style: { color: 'green' },
-      })
-    } catch (error) {
-      console.log({ error })
-      console.log(error?.data?.message)
-      if (error?.data?.message) {
-        toast(error?.data?.message, { style: { color: 'red' } })
-      } else {
-        toast(error?.message, { style: { color: 'red' } })
-      }
-    }
-  }
 
   return (
     <>
@@ -93,7 +47,7 @@ const Swap = () => {
                 <FormField label="You have" icons={[mdiAccount]}>
                   <Field name="amount" placeholder="amount" />
                 </FormField>
-                <FormField label="" icons={[mdiEthereum]}>
+                <FormField label="" icons={[mdiCurrencyBtc]}>
                   <Field as="select" name="coinIn" className="text-black">
                     <option value="marsha+">marsha+</option>
                     <option value="usdt">usdt</option>
