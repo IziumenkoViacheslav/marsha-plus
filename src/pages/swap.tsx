@@ -80,13 +80,14 @@ const Swap = () => {
           className="w-full rounded-2xl mb-4"
         />
 
-        <div className="flex flex-row flex-wrap justify-around">
+        {/* <div className="flex flex-row flex-wrap justify-around"> */}
+        <div className="">
           <CardBox className="m-2">
             <Formik
               initialValues={{
                 amount: 0,
               }}
-              onSubmit={(values) => staking(Number(values.amount), 'YEAR')}
+              onSubmit={(values) => console.log({ values })}
             >
               <Form>
                 <FormField label="You have" icons={[mdiAccount]}>
