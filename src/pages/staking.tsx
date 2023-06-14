@@ -111,7 +111,7 @@ const Stacking = () => {
       toast(`Not enouph time pass to revard, it is left ${daysLeft} days`, {
         style: { color: 'red' },
       })
-      return null
+      // return null
     }
 
     const result = await contract.withdrawTokenFromStaking(period, { gasLimit: 3000000 })
