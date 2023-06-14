@@ -99,18 +99,20 @@ const Stacking = () => {
     const stakingMap = await contract.stakingByPeriod(signerAdress, period)
     const tokensStaked = stakingMap.tokens.toNumber()
     console.log('stakingMap.date', Number(stakingMap.date))
-    const dateOfStaked = stakingMap.date.toNumber() // in seconds
-    console.log({ dateOfStaked })
-    const dateOfRevard = dateOfStaked + periodInDays[period] * 24 * 60 * 60
-    console.log({ dateOfRevard })
-    const daysLeft = Math.floor((dateOfRevard - Date.now() / 1000) / (24 * 60 * 60))
+    const timeOfStakedInSeconds = stakingMap.date.toNumber() // in seconds
+    console.log({ timeOfStakedInSeconds })
+    // TODO uncoment before prod, now for testing using minutes insted of days!!!
+    // const timeOfRevardInSeconds = timeOfStakedInSeconds + periodInDays[period] * 24 * 60 * 60
+    const timeOfRevardInSeconds = timeOfStakedInSeconds + periodInDays[period] * 60
+    console.log({ timeOfRevardInSeconds })
+    const daysLeft = Math.floor((timeOfRevardInSeconds - Date.now() / 1000) / (24 * 60 * 60))
     console.log({ daysLeft })
-    // if (dateOfRevard < Date.now()) {
-    //   toast(`Not enouph time pass to revard, it is left ${daysLeft} days`, {
-    //     style: { color: 'red' },
-    //   })
-    //   return null
-    // }
+    if (timeOfRevardInSeconds * 1000 < Date.now()) {
+      toast(`Not enouph time pass to revard, it is left ${daysLeft} days`, {
+        style: { color: 'red' },
+      })
+      return null
+    }
 
     const result = await contract.withdrawTokenFromStaking(period, { gasLimit: 3000000 })
     const resWithdeaw = await result.wait()
