@@ -67,7 +67,7 @@ const Swap = () => {
                   </Field>
                 </FormField>
 
-                <div className="flex flex-row justify-around p-2">
+                <div className="flex justify-center">
                   <BaseButtons>
                     <BaseButton type="submit" color="info" label="Stake" />
                   </BaseButtons>
