@@ -103,7 +103,7 @@ const Stacking = () => {
     console.log({ timeOfStakedInSeconds })
     // TODO uncoment before prod, now for testing using minutes insted of days!!!
     // const timeOfRevardInSeconds = timeOfStakedInSeconds + periodInDays[period] * 24 * 60 * 60
-    const timeOfRevardInSeconds = timeOfStakedInSeconds + periodInDays[period] * 60
+    const timeOfRevardInSeconds = timeOfStakedInSeconds + 6 * 60 // 6 minutes for testing
     console.log({ timeOfRevardInSeconds })
     const daysLeft = Math.floor((timeOfRevardInSeconds - Date.now() / 1000) / (24 * 60 * 60))
     console.log({ daysLeft })
@@ -111,7 +111,7 @@ const Stacking = () => {
       toast(`Not enouph time pass to revard, it is left ${daysLeft} days`, {
         style: { color: 'red' },
       })
-      // return null
+      return null
     }
 
     const result = await contract.withdrawTokenFromStaking(period, { gasLimit: 3000000 })
