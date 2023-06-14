@@ -99,11 +99,11 @@ const Stacking = () => {
     const stakingMap = await contract.stakingByPeriod(signerAdress, period)
     const tokensStaked = stakingMap.tokens.toNumber()
     console.log('stakingMap.date', Number(stakingMap.date))
-    const dateOfStaked = stakingMap.date.toNumber()
+    const dateOfStaked = stakingMap.date.toNumber() // in seconds
     console.log({ dateOfStaked })
-    const dateOfRevard = dateOfStaked + periodInDays[period] * 24 * 60 * 60 * 1000
+    const dateOfRevard = dateOfStaked + periodInDays[period] * 24 * 60 * 60
     console.log({ dateOfRevard })
-    const daysLeft = Math.floor((Date.now() - dateOfRevard) / (24 * 60 * 60 * 1000))
+    const daysLeft = Math.floor((Date.now() / 1000 - dateOfRevard) / (24 * 60 * 60))
     console.log({ daysLeft })
     // if (dateOfRevard < Date.now()) {
     //   toast(`Not enouph time pass to revard, it is left ${daysLeft} days`, {
