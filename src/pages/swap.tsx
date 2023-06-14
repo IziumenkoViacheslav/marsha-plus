@@ -85,7 +85,7 @@ const Swap = () => {
           <CardBox className="m-2">
             <Formik
               initialValues={{
-                amount: 0,
+                amount: '',
               }}
               onSubmit={(values) => console.log({ values })}
             >
