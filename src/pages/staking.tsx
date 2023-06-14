@@ -110,7 +110,7 @@ const Stacking = () => {
     console.log('timeOfRevardInSeconds * 1000', timeOfRevardInSeconds * 1000)
     console.log('Date.now()', Date.now())
 
-    if (timeOfRevardInSeconds * 1000 < Date.now()) {
+    if (Date.now() < timeOfRevardInSeconds * 1000) {
       toast(`Not enouph time pass to revard, it is left ${daysLeft} days`, {
         style: { color: 'red' },
       })
