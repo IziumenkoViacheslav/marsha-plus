@@ -44,30 +44,35 @@ const Swap = () => {
               onSubmit={(values) => console.log({ values })}
             >
               <Form>
-                <FormField label="You have" icons={[mdiAccount]}>
-                  <Field name="amount" placeholder="amount" />
-                </FormField>
-                <FormField label="" icons={[mdiCurrencyBtc]}>
-                  <Field as="select" name="coinIn" className="text-black">
-                    <option value="marsha+">marsha+</option>
-                    <option value="usdt">usdt</option>
-                    <option value="ether">ether</option>
-                    <option value="btc">btc</option>
-                  </Field>
-                </FormField>
-                <FormField label="You want to achive" icons={[mdiAccount]}>
-                  <Field name="amount" placeholder="amount" />
-                </FormField>
-                <FormField label="" icons={[mdiEthereum]}>
-                  <Field as="select" name="coinOut" className="text-black">
-                    <option value="usdt">usdt</option>
-                    <option value="ether">ether</option>
-                    <option value="btc">btc</option>
-                    <option value="marsha+">marsha+</option>
-                  </Field>
-                </FormField>
-
-                <div className="flex justify-center">
+                <div className="md:flex md:flex-row">
+                  <div className="md:w-[50%] p-4">
+                    <FormField label="You have" icons={[mdiAccount]}>
+                      <Field name="amount" placeholder="amount" />
+                    </FormField>
+                    <FormField label="" icons={[mdiCurrencyBtc]}>
+                      <Field as="select" name="coinIn" className="text-black">
+                        <option value="marsha+">marsha+</option>
+                        <option value="usdt">usdt</option>
+                        <option value="ether">ether</option>
+                        <option value="btc">btc</option>
+                      </Field>
+                    </FormField>
+                  </div>
+                  <div className="md:w-[50%] p-4">
+                    <FormField label="You want to achive" icons={[mdiAccount]}>
+                      <Field name="amount" placeholder="amount" />
+                    </FormField>
+                    <FormField label="" icons={[mdiEthereum]}>
+                      <Field as="select" name="coinOut" className="text-black">
+                        <option value="usdt">usdt</option>
+                        <option value="ether">ether</option>
+                        <option value="btc">btc</option>
+                        <option value="marsha+">marsha+</option>
+                      </Field>
+                    </FormField>
+                  </div>
+                </div>
+                <div className="flex justify-center m-4">
                   <BaseButtons>
                     <BaseButton type="submit" color="info" label="Stake" />
                   </BaseButtons>
