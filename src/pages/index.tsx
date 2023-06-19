@@ -43,7 +43,7 @@ const Dashboard = () => {
         <title>{getPageTitle('Home')}</title>
       </Head>
       <SectionMain>
-        <div className="text-center w-full m-4">
+        <div className="text-center w-full mb-4">
           <Image
             className="m-auto rounded-2xl"
             src="./images/Home.png"
