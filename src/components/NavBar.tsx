@@ -32,29 +32,41 @@ export default function NavBar({ menu, className = '', children }: Props) {
       toast('Install metamask!', { style: { color: 'red' } })
     }
     if (window.ethereum) {
-      const accounts = await window.ethereum.request({
-        method: 'eth_requestAccounts',
-      })
-      console.log({ accounts })
+      try {
+        const accounts = await window.ethereum.request({
+          method: 'eth_requestAccounts',
+        })
+        setWallet(accounts[0])
+        const provider = new ethers.providers.Web3Provider(window.ethereum)
+        const { name: networkName, chainId } = await provider.getNetwork()
+        console.log({ networkName })
+        console.log({ chainId })
+        if (process.env.NODE_ENV === 'development' && chainId !== 31337) {
+          toast('switch your network to localhost', { style: { color: 'red' } })
+        }
+        if (process.env.NODE_ENV !== 'development' && chainId !== 97) {
+          toast('switch your network to binance network', { style: { color: 'red' } })
+        }
 
-      setWallet(accounts[0])
-      const provider = new ethers.providers.Web3Provider(window.ethereum)
-      const contractAddress =
-        process.env.NODE_ENV === 'development'
-          ? '0x5fbdb2315678afecb367f032d93f642f64180aa3' // hardhat
-          : '0x33a73CeB03C475F1A70aE889a7ab049dD40fC00E' // binance test network
-      console.log({ contractAddress })
+        const contractAddress =
+          process.env.NODE_ENV === 'development'
+            ? '0x5fbdb2315678afecb367f032d93f642f64180aa3' // hardhat
+            : '0x33a73CeB03C475F1A70aE889a7ab049dD40fC00E' // binance test network
+        console.log({ contractAddress })
 
-      const contract = new ethers.Contract(contractAddress, MarshaPlus.abi, provider.getSigner(0))
-      dispatch(setContract(contract))
+        const contract = new ethers.Contract(contractAddress, MarshaPlus.abi, provider.getSigner(0))
+        dispatch(setContract(contract))
 
-      const walletBalance = (await contract?.balanceOf(wallet))?.toString()
-      console.log({ walletBalance })
+        const walletBalance = (await contract?.balanceOf(wallet))?.toString()
+        console.log({ walletBalance })
 
-      setBalance(walletBalance)
+        setBalance(walletBalance)
 
-      toast('connected to metamask', { style: { color: 'blue' } })
-      setConnectedToMetamask(true)
+        toast('connected to metamask', { style: { color: 'blue' } })
+        setConnectedToMetamask(true)
+      } catch (error) {
+        toast(error.message)
+      }
     }
   }
 
@@ -94,7 +106,7 @@ export default function NavBar({ menu, className = '', children }: Props) {
               <p className="pl-7 text-xs lg:p-4 lg:text-base">Wallet: </p>
               <p className="pl-7 text-xs lg:p-4 lg:text-base text-green-500">{`${wallet}`}</p>
               <p className="pl-7 text-xs lg:p-4 lg:text-base">balance: </p>
-              <p className="pl-7 text-xs lg:p-4 lg:text-base text-green-500 pb-4">{` ${balance} MRA`}</p>
+              <p className="pl-7 text-xs lg:p-4 lg:text-base text-green-500 mb-4">{` ${balance} MRA`}</p>
             </div>
           )}
         </div>
