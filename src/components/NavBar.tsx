@@ -21,6 +21,8 @@ export default function NavBar({ menu, className = '', children }: Props) {
   const dispatch = useAppDispatch()
   const [isMenuNavBarActive, setIsMenuNavBarActive] = useState(false)
   const [connectedToMetamask, setConnectedToMetamask] = useState(false)
+  const [wallet, setWallet] = useState('')
+  const [balance, setBalance] = useState<number>()
 
   const handleMenuNavBarToggleClick = () => {
     setIsMenuNavBarActive(!isMenuNavBarActive)
@@ -30,9 +32,12 @@ export default function NavBar({ menu, className = '', children }: Props) {
       toast('Install metamask!', { style: { color: 'red' } })
     }
     if (window.ethereum) {
-      // const accounts = await window.ethereum.request({
-      //   method: 'eth_requestAccounts',
-      // })
+      const accounts = await window.ethereum.request({
+        method: 'eth_requestAccounts',
+      })
+      console.log({ accounts })
+
+      setWallet(accounts[0])
       const provider = new ethers.providers.Web3Provider(window.ethereum)
       const contractAddress =
         process.env.NODE_ENV === 'development'
@@ -42,6 +47,12 @@ export default function NavBar({ menu, className = '', children }: Props) {
 
       const contract = new ethers.Contract(contractAddress, MarshaPlus.abi, provider.getSigner(0))
       dispatch(setContract(contract))
+
+      const walletBalance = (await contract?.balanceOf(wallet))?.toString()
+      console.log({ walletBalance })
+
+      setBalance(walletBalance)
+
       toast('connected to metamask', { style: { color: 'blue' } })
       setConnectedToMetamask(true)
     }
@@ -68,7 +79,13 @@ export default function NavBar({ menu, className = '', children }: Props) {
               Connect to metamask
             </p>
           ) : (
-            <p className="p-4"> You already connected to metamask! :)</p>
+            <div className="flex flex-row">
+              {/* <p className="p-4"> You already connected to metamask! :)</p> */}
+              <p className="p-4">Wallet: </p>
+              <p className="p-4 text-green-500">{`${wallet}`}</p>
+              <p className="p-4">balance: </p>
+              <p className="p-4 text-green-500">{` ${balance} MRA`}</p>
+            </div>
           )}
           <Image
             alt={'metamask'}
