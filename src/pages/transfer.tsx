@@ -55,7 +55,7 @@ const Transfer = () => {
           width={999}
           height={200}
           alt="image"
-          className="w-full rounded-2xl"
+          className="w-full rounded-2xl mb-4"
         />
         <CardBox>
           <Formik
