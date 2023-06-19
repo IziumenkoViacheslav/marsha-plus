@@ -91,10 +91,10 @@ export default function NavBar({ menu, className = '', children }: Props) {
           ) : (
             <div className="flex flex-col lg:flex-row">
               {/* <p className="p-4"> You already connected to metamask! :)</p> */}
-              <p className="pl-7 sm:text-xs lg:p-4 lg:text-base">Wallet: </p>
-              <p className="pl-7 sm:text-xs lg:p-4 lg:text-base text-green-500">{`${wallet}`}</p>
-              <p className="pl-7 sm:text-xs lg:p-4 lg:text-base">balance: </p>
-              <p className="pl-7 pb-4 text-xs lg:p-4 lg:text-base text-green-500">{` ${balance} MRA`}</p>
+              <p className="pl-7 text-xs lg:p-4 lg:text-base">Wallet: </p>
+              <p className="pl-7 text-xs lg:p-4 lg:text-base text-green-500">{`${wallet}`}</p>
+              <p className="pl-7 text-xs lg:p-4 lg:text-base">balance: </p>
+              <p className="pl-7 text-xs lg:p-4 lg:text-base text-green-500 pb-4">{` ${balance} MRA`}</p>
             </div>
           )}
         </div>
