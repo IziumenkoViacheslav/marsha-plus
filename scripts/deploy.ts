@@ -7,7 +7,7 @@ async function main() {
 
   // const lockedAmount = ethers.utils.parseEther('0.001')
 
-  const MarshaPlus = await ethers.getContractFactory('MarshaPlus')
+  const MarshaPlus = await ethers.getContractFactory('UniswapV3SwapExamples')
   const gasPrice = await MarshaPlus.signer.getGasPrice()
   console.log(`Current gas price: ${gasPrice}`)
 
