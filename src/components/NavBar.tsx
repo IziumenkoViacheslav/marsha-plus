@@ -75,26 +75,28 @@ export default function NavBar({ menu, className = '', children }: Props) {
           } max-h-screen-menu overflow-y-auto lg:overflow-visible absolute w-screen top-14 left-0 bg-gray-50 shadow-lg lg:w-auto lg:flex lg:static lg:shadow-none dark:bg-slate-800`}
         >
           {!connectedToMetamask ? (
-            <p className="p-4 cursor-pointer hover:underline" onClick={connectToMetamask}>
-              Connect to metamask
-            </p>
-          ) : (
             <div className="flex flex-row">
+              <p className="p-4 cursor-pointer hover:underline" onClick={connectToMetamask}>
+                Connect to metamask
+              </p>
+              <Image
+                alt={'metamask'}
+                width={44}
+                height={22}
+                src={'./images/MetaMask_Fox.svg'}
+                onClick={connectToMetamask}
+                className="cursor-pointer"
+              />
+            </div>
+          ) : (
+            <div className="flex flex-col lg:flex-row">
               {/* <p className="p-4"> You already connected to metamask! :)</p> */}
-              <p className="p-4">Wallet: </p>
-              <p className="p-4 text-green-500">{`${wallet}`}</p>
-              <p className="p-4">balance: </p>
-              <p className="p-4 text-green-500">{` ${balance} MRA`}</p>
+              <p className="pl-7 sm:text-xs lg:p-4 lg:text-base">Wallet: </p>
+              <p className="pl-7 sm:text-xs lg:p-4 lg:text-base text-green-500">{`${wallet}`}</p>
+              <p className="pl-7 sm:text-xs lg:p-4 lg:text-base">balance: </p>
+              <p className="pl-7 pb-4 text-xs lg:p-4 lg:text-base text-green-500">{` ${balance} MRA`}</p>
             </div>
           )}
-          <Image
-            alt={'metamask'}
-            width={44}
-            height={22}
-            src={'./images/MetaMask_Fox.svg'}
-            onClick={connectToMetamask}
-            className="cursor-pointer"
-          />
         </div>
       </div>
     </nav>
