@@ -75,7 +75,7 @@ export default function NavBar({ menu, className = '', children }: Props) {
           } max-h-screen-menu overflow-y-auto lg:overflow-visible absolute w-screen top-14 left-0 bg-gray-50 shadow-lg lg:w-auto lg:flex lg:static lg:shadow-none dark:bg-slate-800`}
         >
           {!connectedToMetamask ? (
-            <div className="flex flex-row">
+            <div className="flex flex-row justify-center">
               <p className="p-4 cursor-pointer hover:underline" onClick={connectToMetamask}>
                 Connect to metamask
               </p>
