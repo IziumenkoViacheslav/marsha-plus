@@ -22,7 +22,7 @@ export default function NavBar({ menu, className = '', children }: Props) {
   const [isMenuNavBarActive, setIsMenuNavBarActive] = useState(false)
   const [connectedToMetamask, setConnectedToMetamask] = useState(false)
   const [wallet, setWallet] = useState('')
-  const [balance, setBalance] = useState<number>()
+  const [balance, setBalance] = useState<string>()
 
   const handleMenuNavBarToggleClick = () => {
     setIsMenuNavBarActive(!isMenuNavBarActive)
@@ -57,12 +57,17 @@ export default function NavBar({ menu, className = '', children }: Props) {
         const contract = new ethers.Contract(contractAddress, MarshaPlus.abi, provider.getSigner(0))
         dispatch(setContract(contract))
 
-        const walletBalance = (await contract?.balanceOf(wallet))?.toString()
-        console.log({ walletBalance })
-        const bal = ethers.utils.formatEther(walletBalance)
-        console.log({ bal })
+        const walletBalanceInWei = (await contract?.balanceOf(wallet))?.toString()
+        console.log({ walletBalanceInWei })
+        const walletBalanceInEth = ethers.utils.formatEther(walletBalanceInWei)
 
-        setBalance(walletBalance)
+        const walletBalanceInEthRounded = walletBalanceInEth.match(/[0-9]{1,}.[0-9]{2}/)
+        console.log({ walletBalanceInEthRounded })
+        if (!walletBalanceInEthRounded.length) {
+          toast('cannot get balance of wallet', { style: { color: 'red' } })
+        }
+
+        setBalance(walletBalanceInEthRounded[0])
 
         toast('connected to metamask', { style: { color: 'blue' } })
         setConnectedToMetamask(true)
