@@ -59,6 +59,8 @@ export default function NavBar({ menu, className = '', children }: Props) {
 
         const walletBalance = (await contract?.balanceOf(wallet))?.toString()
         console.log({ walletBalance })
+        const bal = ethers.utils.formatEther(walletBalance)
+        console.log({ bal })
 
         setBalance(walletBalance)
 
