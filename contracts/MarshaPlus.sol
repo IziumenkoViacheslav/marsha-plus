@@ -9,7 +9,7 @@ contract MarshaPlus {
 
   // uint256 public totalSupply = 8000000000; // 8 billion tokens
   string public token_name = 'MARSHA+'; // token name - human - readable
-  string public token_symbol = 'MRA';
+  string public token_symbol = 'MSA';
   uint8 public decimals = 18; // will set the divisibility of your token
   // TODO uncoment before pord!!!
   uint256 public totalSupply = 80000000000 * 10 ** decimals;
