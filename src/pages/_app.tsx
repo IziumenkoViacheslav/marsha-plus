@@ -21,17 +21,17 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   // Use the layout defined at the page level, if available
   const getLayout = Component.getLayout || ((page) => page)
 
-  const title = `Admin One React Tailwind free`
+  const title = `Marsha+`
 
-  const description = 'Admin One - free React Next Tailwind dashboard with TypeScript and dark mode'
+  const description = 'Marsha+ best token for LGBT+ community'
 
-  const url = 'https://justboil.github.io/admin-one-react-tailwind/'
+  const url = 'https://admin.marshafoundation.org//'
 
-  const image = `https://static.justboil.me/templates/one/repo-tailwind-react.png`
+  const image = `https://admin.marshafoundation.org/images/Home.png`
 
-  const imageWidth = '1920'
+  const imageWidth = '719'
 
-  const imageHeight = '960'
+  const imageHeight = '179'
 
   return (
     <Provider store={store}>
