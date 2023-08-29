@@ -16,7 +16,7 @@ import { useAppSelector } from '../stores/hooks'
 import { MarshaPlus } from '../../typechain-types/MarshaPlus'
 import Image from 'next/image'
 
-const Swap = () => {
+const Invest = () => {
   const contract: MarshaPlus = useAppSelector((state) => state.crypto.contract)
 
   return (
@@ -46,28 +46,28 @@ const Swap = () => {
               <Form>
                 <div className="md:flex md:flex-row">
                   <div className="md:w-[50%] p-4">
-                    <FormField label="You have" icons={[mdiAccount]}>
+                    <FormField label="You want to invest" icons={[mdiAccount]}>
                       <Field name="amount" placeholder="amount" />
                     </FormField>
                     <FormField label="" icons={[mdiCurrencyBtc]}>
                       <Field as="select" name="coinIn" className="text-black">
-                        <option value="marsha+">marsha+</option>
                         <option value="usdt">usdt</option>
+                        <option value="marsha+">marsha+</option>
                         <option value="ether">ether</option>
                         <option value="btc">btc</option>
                       </Field>
                     </FormField>
                   </div>
                   <div className="md:w-[50%] p-4">
-                    <FormField label="You want to achive" icons={[mdiAccount]}>
+                    <FormField label="You will achive" icons={[mdiAccount]}>
                       <Field name="amount" placeholder="amount" />
                     </FormField>
                     <FormField label="" icons={[mdiEthereum]}>
                       <Field as="select" name="coinOut" className="text-black">
+                        <option value="marsha+">marsha+</option>
                         <option value="usdt">usdt</option>
                         <option value="ether">ether</option>
                         <option value="btc">btc</option>
-                        <option value="marsha+">marsha+</option>
                       </Field>
                     </FormField>
                   </div>
@@ -87,8 +87,8 @@ const Swap = () => {
   )
 }
 
-Swap.getLayout = function getLayout(page: ReactElement) {
+Invest.getLayout = function getLayout(page: ReactElement) {
   return <LayoutAuthenticated>{page}</LayoutAuthenticated>
 }
 
-export default Swap
+export default Invest
