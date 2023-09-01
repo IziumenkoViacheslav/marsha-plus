@@ -10,6 +10,10 @@ contract MarshaToken is ERC20, Ownable {
 
   uint256 public lastBurnTimestamp;
 
+  // event Transfer(address indexed from, address indexed to, uint256 value);
+  event Staking(uint256 amount);
+  event Reward(uint256 amount);
+
   constructor() ERC20('MARSHA+ Token', 'MSA') {
     _mint(msg.sender, INITIAL_SUPPLY);
     lastBurnTimestamp = block.timestamp;
