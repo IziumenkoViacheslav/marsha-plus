@@ -16,14 +16,14 @@ contract MarshaToken is ERC20, Ownable {
   // event Staking(uint256 amount);
   // event Reward(uint256 amount);
 
-  address public constant community = 0x9586c9E43E74c6964aBbaE74B5C665b73C82BCc7;
-  address public constant charity = 0x9586c9E43E74c6964aBbaE74B5C665b73C82BCc7;
-  address public constant foundation = 0xf5aD63cD9a7a49Dd11e3704f8322Be656415BC72;
-  address public constant development = 0xaBD95757Cb381ffEB69E0A764b2Fd4265f6e3453;
-  address public constant marketing = 0xaBD95757Cb381ffEB69E0A764b2Fd4265f6e3453;
-  address public constant investors = 0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc;
-  address public constant legal = 0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc;
-  address public constant expansion = 0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc;
+  address public constant community = 0xf1A3a5fd1DAEab3Df9da1B59361898f1E6C934AA;
+  address public constant charity = 0x045a08a1C3d49cb80F6E37BD9B82eda7776e70BB;
+  address public constant foundation = 0xBbB9dBC0E769E5934Da69f9e5EEA0526155fB5da;
+  address public constant development = 0xFB22B7409EA071243fD1F98D05A11807DE0d002c;
+  address public constant marketing = 0x94aDA1fA5F86124607bF2D860EA055b33588D65B;
+  address public constant investors = 0x70d5155c8aEB6a0D6eA1F7dF13A73b44ce577aEB;
+  address public constant legal = 0x2AFD6c9b1ee109614773E5f4ACe498564256b703;
+  address public constant expansion = 0x2901a3cAb9A64e40BE94A2f2118C8ADb32710646;
 
   constructor() ERC20('MARSHA+', 'MSA') {
     // lastBurnTimestamp = block.timestamp;
