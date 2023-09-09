@@ -5,7 +5,8 @@ import '@openzeppelin/contracts/token/ERC20/ERC20.sol';
 import '@openzeppelin/contracts/access/Ownable.sol';
 
 contract MarshaToken is ERC20, Ownable {
-  uint256 public constant INITIAL_SUPPLY = 80000000000 * 10 ** 18; // 80 billion tokens
+  // 80 billion tokens in wei
+  uint256 public constant INITIAL_SUPPLY = 80000000000 * 10 ** 18;
   // uint256 public constant ANNUAL_BURN_RATE = 3; // 3% annual burn rate
 
   // uint256 public lastBurnTimestamp;
