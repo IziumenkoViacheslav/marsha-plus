@@ -51,7 +51,7 @@ export default function NavBar({ menu, className = '', children }: Props) {
         const contractAddress =
           process.env.NODE_ENV === 'development'
             ? '0x5fbdb2315678afecb367f032d93f642f64180aa3' // hardhat
-            : '0x33a73CeB03C475F1A70aE889a7ab049dD40fC00E' // binance test network
+            : '0x1a6E420cA1aBC5DC12A677382ACebE906161A8EF' // binance test network
         console.log({ contractAddress })
 
         const contract = new ethers.Contract(contractAddress, MarshaPlus.abi, provider.getSigner(0))

@@ -20,6 +20,9 @@ npx hardhat compile
 contract on test binance network
 https://testnet.bscscan.com/address/0x33a73ceb03c475f1a70ae889a7ab049dd40fc00e
 
+contract on test binance network v2 with 3 minutes to revard (in prod it will be 3 years = 1095 days)
+https://testnet.bscscan.com/address/0x1a6E420cA1aBC5DC12A677382ACebE906161A8EF
+
 get test TBNB for binance test network
 https://discord.com/channels/789402563035660308/1099937267021250560
 !faucet 0xaBD95757Cb381ffEB69E0A764b2Fd4265f6e3453
