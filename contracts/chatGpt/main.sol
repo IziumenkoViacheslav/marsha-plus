@@ -9,7 +9,7 @@ contract MarshaToken is ERC20, Ownable {
   uint256 public constant INITIAL_SUPPLY = 80000000000 * 10 ** 18;
   // uint256 public constant ANNUAL_BURN_RATE = 3; // 3% annual burn rate
 
-  // uint256 public lastBurnTimestamp;
+  uint256 public lastBurnTimestamp;
   uint256 public timeOfContractCreation;
 
   // event Transfer(address indexed from, address indexed to, uint256 value);
@@ -26,7 +26,7 @@ contract MarshaToken is ERC20, Ownable {
   address public constant expansion = 0x2901a3cAb9A64e40BE94A2f2118C8ADb32710646;
 
   constructor() ERC20('MARSHA+', 'MSA') {
-    // lastBurnTimestamp = block.timestamp;
+    lastBurnTimestamp = block.timestamp;
     timeOfContractCreation = block.timestamp;
 
     _mint(address(this), INITIAL_SUPPLY);
@@ -67,19 +67,19 @@ contract MarshaToken is ERC20, Ownable {
   }
 
   // Function to burn a percentage of total supply annually if needed
-  // function burnIfNeeded() internal {
-  //   if (block.timestamp >= lastBurnTimestamp + 365 days) {
-  //     uint256 totalSupplyBeforeBurn = totalSupply();
-  //     uint256 tokensToBurn = (totalSupplyBeforeBurn * ANNUAL_BURN_RATE) / 100;
+  function burnIfNeeded() internal {
+    if (block.timestamp >= lastBurnTimestamp + 365 days) {
+      uint256 totalSupplyBeforeBurn = totalSupply();
+      uint256 tokensToBurn = (totalSupplyBeforeBurn * ANNUAL_BURN_RATE) / 100;
 
-  //     _burn(msg.sender, tokensToBurn);
-  //     lastBurnTimestamp = block.timestamp;
-  //   }
-  // }
+      _burn(community, tokensToBurn);
+      lastBurnTimestamp = block.timestamp;
+    }
+  }
 
   // Override the ERC20 transfer function to perform burn check
   function transfer(address recipient, uint256 amount) public override returns (bool) {
-    // burnIfNeeded();
+    burnIfNeeded();
     teamRevardAfter3Years();
     super.transfer(recipient, amount);
     return true;
@@ -91,7 +91,7 @@ contract MarshaToken is ERC20, Ownable {
     address recipient,
     uint256 amount
   ) public override returns (bool) {
-    // burnIfNeeded();
+    burnIfNeeded();
     teamRevardAfter3Years();
     super.transferFrom(sender, recipient, amount);
     return true;
@@ -99,7 +99,7 @@ contract MarshaToken is ERC20, Ownable {
 
   // Function to manually trigger a burn
   function manualTimeTrigger() external onlyOwner {
-    // burnIfNeeded();
+    burnIfNeeded();
     teamRevardAfter3Years();
   }
 }
