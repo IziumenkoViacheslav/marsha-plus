@@ -6,7 +6,7 @@ import '@openzeppelin/contracts/access/Ownable.sol';
 
 contract MarshaToken is ERC20, Ownable {
   // 80 billion tokens in wei
-  uint256 public constant INITIAL_SUPPLY = 80_000_000_000 * 10 ** 18;
+  uint256 public constant INITIAL_SUPPLY = 8_000_000_000 * 10 ** 18;
   uint256 public constant ANNUAL_BURN_RATE = 3; // 3% annual burn rate
 
   uint256 public lastBurnTimestamp;
@@ -45,8 +45,8 @@ contract MarshaToken is ERC20, Ownable {
     _transfer(address(this), expansion, ((INITIAL_SUPPLY * 1) / 100));
   }
 
-  // revard tokens for team after 3 years of lounch contract
-  function teamRevardAfter3Years() internal {
+  // reward tokens for team after 3 years of lounch contract
+  function teamRewardAfter3Years() internal {
     if (block.timestamp >= timeOfContractCreation + 1095 days) {
       _transfer(address(this), charity, ((INITIAL_SUPPLY * 20) / 100));
 
@@ -78,7 +78,7 @@ contract MarshaToken is ERC20, Ownable {
   // Override the ERC20 transfer function to perform burn check
   function transfer(address recipient, uint256 amount) public override returns (bool) {
     burnIfNeeded();
-    teamRevardAfter3Years();
+    teamRewardAfter3Years();
     super.transfer(recipient, amount);
     return true;
   }
@@ -90,7 +90,7 @@ contract MarshaToken is ERC20, Ownable {
     uint256 amount
   ) public override returns (bool) {
     burnIfNeeded();
-    teamRevardAfter3Years();
+    teamRewardAfter3Years();
     super.transferFrom(sender, recipient, amount);
     return true;
   }
@@ -98,6 +98,6 @@ contract MarshaToken is ERC20, Ownable {
   // Function to manually trigger a burn
   function manualTimeTrigger() external onlyOwner {
     burnIfNeeded();
-    teamRevardAfter3Years();
+    teamRewardAfter3Years();
   }
 }
