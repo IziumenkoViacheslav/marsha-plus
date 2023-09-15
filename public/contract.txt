@@ -21,6 +21,8 @@ contract MarshaToken is ERC20, Ownable {
   address public constant legal = 0x2AFD6c9b1ee109614773E5f4ACe498564256b703;
   address public constant expansion = 0x2901a3cAb9A64e40BE94A2f2118C8ADb32710646;
 
+  uint256 halfCommunityInitialTokens;
+
   constructor() ERC20('MARSHA+', 'MSA') {
     lastBurnTimestamp = block.timestamp;
     timeOfContractCreation = block.timestamp;
@@ -30,6 +32,7 @@ contract MarshaToken is ERC20, Ownable {
     // community 35% all tokens are free
     _transfer(address(this), community, ((INITIAL_SUPPLY * 35) / 100));
     // Charity: 25% (20% locked, 5% free)
+    halfCommunityInitialTokens = balanceOf(community) / 2;
     _transfer(address(this), charity, ((INITIAL_SUPPLY * 5) / 100));
     // Foundation: 10% (5% locked, 5% free)
     _transfer(address(this), foundation, ((INITIAL_SUPPLY * 5) / 100));
@@ -68,7 +71,8 @@ contract MarshaToken is ERC20, Ownable {
       uint256 totalSupplyBeforeBurn = totalSupply();
       uint256 tokensToBurn = (totalSupplyBeforeBurn * ANNUAL_BURN_RATE) / 100;
 
-      if (balanceOf(community) > tokensToBurn) {
+      // if (balanceOf(community) > tokensToBurn) {
+      if (balanceOf(community) > halfCommunityInitialTokens) {
         _burn(community, tokensToBurn);
       }
       lastBurnTimestamp = block.timestamp;
@@ -93,11 +97,5 @@ contract MarshaToken is ERC20, Ownable {
     teamRewardAfter3Years();
     super.transferFrom(sender, recipient, amount);
     return true;
-  }
-
-  // Function to manually trigger a burn
-  function manualTimeTrigger() external onlyOwner {
-    burnIfNeeded();
-    teamRewardAfter3Years();
   }
 }
