@@ -70,8 +70,7 @@ contract MarshaToken is ERC20, Ownable {
     if (block.timestamp >= lastBurnTimestamp + 365 days) {
       uint256 totalSupplyBeforeBurn = totalSupply();
       uint256 tokensToBurn = (totalSupplyBeforeBurn * ANNUAL_BURN_RATE) / 100;
-
-      // if (balanceOf(community) > tokensToBurn) {
+      // stop burning if burned more than half of cummunity
       if (balanceOf(community) > halfCommunityInitialTokens) {
         _burn(community, tokensToBurn);
       }
