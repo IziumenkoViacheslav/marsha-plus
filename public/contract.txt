@@ -31,8 +31,8 @@ contract MarshaToken is ERC20, Ownable {
 
     // community 35% all tokens are free
     _transfer(address(this), community, ((INITIAL_SUPPLY * 35) / 100));
-    // Charity: 25% (20% locked, 5% free)
     halfCommunityInitialTokens = balanceOf(community) / 2;
+    // Charity: 25% (20% locked, 5% free)
     _transfer(address(this), charity, ((INITIAL_SUPPLY * 5) / 100));
     // Foundation: 10% (5% locked, 5% free)
     _transfer(address(this), foundation, ((INITIAL_SUPPLY * 5) / 100));
