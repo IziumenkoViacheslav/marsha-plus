@@ -26,6 +26,9 @@ const config: HardhatUserConfig = {
     //   accounts: { mnemonic: mnemonic },
     // },
   },
+  paths: {
+    tests: "./contracts/test",
+  }
 }
 
 export default config
