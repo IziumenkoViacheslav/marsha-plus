@@ -2,9 +2,10 @@
 pragma solidity ^0.8.0;
 
 import '@openzeppelin/contracts/token/ERC20/ERC20.sol';
-import '@openzeppelin/contracts/access/Ownable.sol';
 
-contract MarshaToken is ERC20, Ownable {
+// import '@openzeppelin/contracts/access/Ownable.sol';
+
+contract MarshaToken is ERC20 {
   // 8 billion tokens in wei
   uint256 public constant INITIAL_SUPPLY = 8_000_000_000 * 10 ** 18;
   uint256 public constant ANNUAL_BURN_RATE = 3; // 3% annual burn rate
@@ -12,18 +13,44 @@ contract MarshaToken is ERC20, Ownable {
   uint256 public lastBurnTimestamp;
   uint256 public timeOfContractCreation;
 
-  address public constant community = 0xf1A3a5fd1DAEab3Df9da1B59361898f1E6C934AA;
-  address public constant charity = 0x045a08a1C3d49cb80F6E37BD9B82eda7776e70BB;
-  address public constant foundation = 0xBbB9dBC0E769E5934Da69f9e5EEA0526155fB5da;
-  address public constant development = 0xFB22B7409EA071243fD1F98D05A11807DE0d002c;
-  address public constant marketing = 0x94aDA1fA5F86124607bF2D860EA055b33588D65B;
-  address public constant investors = 0x70d5155c8aEB6a0D6eA1F7dF13A73b44ce577aEB;
-  address public constant legal = 0x2AFD6c9b1ee109614773E5f4ACe498564256b703;
-  address public constant expansion = 0x2901a3cAb9A64e40BE94A2f2118C8ADb32710646;
+  address public community;
+  address public charity;
+  address public foundation;
+  address public development;
+  address public marketing;
+  address public investors;
+  address public legal;
+  address public expansion;
+  // address public constant community = 0xf1A3a5fd1DAEab3Df9da1B59361898f1E6C934AA;
+  // address public constant charity = 0x045a08a1C3d49cb80F6E37BD9B82eda7776e70BB;
+  // address public constant foundation = 0xBbB9dBC0E769E5934Da69f9e5EEA0526155fB5da;
+  // address public constant development = 0xFB22B7409EA071243fD1F98D05A11807DE0d002c;
+  // address public constant marketing = 0x94aDA1fA5F86124607bF2D860EA055b33588D65B;
+  // address public constant investors = 0x70d5155c8aEB6a0D6eA1F7dF13A73b44ce577aEB;
+  // address public constant legal = 0x2AFD6c9b1ee109614773E5f4ACe498564256b703;
+  // address public constant expansion = 0x2901a3cAb9A64e40BE94A2f2118C8ADb32710646;
 
   uint256 halfCommunityInitialTokens;
 
-  constructor() ERC20('MARSHA+', 'MSA') {
+  constructor(
+    address _community,
+    address _charity,
+    address _foundation,
+    address _development,
+    address _marketing,
+    address _investors,
+    address _legal,
+    address _expansion
+  ) ERC20('MARSHA+', 'MSA') {
+    community = _community;
+    charity = _charity;
+    foundation = _foundation;
+    development = _development;
+    marketing = _marketing;
+    investors = _investors;
+    legal = _legal;
+    expansion = _expansion;
+
     lastBurnTimestamp = block.timestamp;
     timeOfContractCreation = block.timestamp;
 
