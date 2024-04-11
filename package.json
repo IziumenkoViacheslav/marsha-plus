@@ -7,7 +7,7 @@
     "start": "next start",
     "lint": "next lint",
     "format": "prettier '{components,pages,src,interfaces,hooks}/**/*.{tsx,ts,js}' --write",
-    "test": "npx hardhat test ./contracts/test/example.test.ts"
+    "test": "npx hardhat test"
   },
   "dependencies": {
     "@mdi/js": "^7.0.96",
