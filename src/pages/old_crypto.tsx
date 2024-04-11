@@ -1,7 +1,7 @@
 import { ethers } from 'ethers'
 import { useState } from 'react'
 import { toast } from 'react-hot-toast'
-import MarshaPlus from '../../artifacts/contracts/MarshaPlus.sol/MarshaPlus.json'
+import MarshaPlus from '../../artifacts/contracts/MarshaPlus.sol/MarshaToken.json'
 
 declare global {
   interface Window {
