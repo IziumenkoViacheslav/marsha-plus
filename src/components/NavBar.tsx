@@ -7,7 +7,7 @@ import { MenuNavBarItem } from '../interfaces'
 import Image from 'next/image'
 import { toast } from 'react-hot-toast'
 import { ethers } from 'ethers'
-import MarshaPlus from '../../artifacts/contracts/MarshaPlus.sol/MarshaPlus.json'
+import MarshaPlus from '../../artifacts/contracts/MarshaPlus.sol/MarshaToken.json'
 import { useAppDispatch } from '../stores/hooks'
 import { setContract } from '../stores/cryptoSlice'
 
